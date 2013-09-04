@@ -8,7 +8,7 @@
     <ProjectGuid>{42FE290D-7A80-451B-AC4F-A7B34B3B3D3B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>YourDomain</RootNamespace>
+    <RootNamespace>MBAC</RootNamespace>
     <AssemblyName>YourDomain</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -41,10 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Something\Exceptions.cs" />
-    <Compile Include="Something\MakeSomethingHappen.cs" />
-    <Compile Include="Something\SomethingAggregate.cs" />
-    <Compile Include="Something\SomethingCommandHandlers.cs" />
+    <Compile Include="Bowler\Exceptions.cs" />
+    <Compile Include="Bowler\CreateBowler.cs" />
+    <Compile Include="Bowler\BowlerAggregate.cs" />
+    <Compile Include="Bowler\BowlerCommandHandlers.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Edument.CQRS\Edument.CQRS.csproj">
