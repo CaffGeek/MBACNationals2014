@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MBAC
+namespace MBAC.Bowler
 {
     public class BowlerAlreadyExists : Exception
     {

@@ -1,6 +1,6 @@
 ﻿using Edument.CQRS;
 using Events.Bowler;
-using MBAC;
+using MBAC.Bowler;
 using NUnit.Framework;
 using System;
 

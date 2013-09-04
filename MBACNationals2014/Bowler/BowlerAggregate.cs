@@ -5,7 +5,7 @@ using System.Text;
 using Edument.CQRS;
 using Events.Bowler;
 
-namespace MBAC
+namespace MBAC.Bowler
 {
     public class BowlerAggregate : Aggregate,
         IApplyEvent<BowlerCreated>

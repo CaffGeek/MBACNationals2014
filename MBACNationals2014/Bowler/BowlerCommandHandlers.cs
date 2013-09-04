@@ -3,7 +3,7 @@ using Edument.CQRS;
 using System.Collections;
 using Events.Bowler;
 
-namespace MBAC
+namespace MBAC.Bowler
 {
     public class BowlerCommandHandlers :
         IHandleCommand<CreateBowler, BowlerAggregate>
