@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Edument.CQRS;
-//using MBAC.ReadModels;
-using MBAC.Bowler;
+//using MBACNationals.ReadModels;
+using MBACNationals.Participant;
 
 namespace WebFrontend
 {

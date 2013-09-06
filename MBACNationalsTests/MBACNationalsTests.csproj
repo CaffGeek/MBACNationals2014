@@ -8,8 +8,8 @@
     <ProjectGuid>{4306B621-323B-4574-BFBF-2D002491AE1E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MBACNationals2014Tests</RootNamespace>
-    <AssemblyName>YourDomainTests</AssemblyName>
+    <RootNamespace>MBACNationalsTests</RootNamespace>
+    <AssemblyName>MBACNationalsTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BowlerTests.cs" />
+    <Compile Include="ParticipantTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Edument.CQRS\Edument.CQRS.csproj">
@@ -53,9 +53,9 @@
       <Project>{B195F4C7-41EF-403C-AA05-0018B9DF25F8}</Project>
       <Name>Events</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MBACNationals2014\MBACNationals2014.csproj">
-      <Project>{42FE290D-7A80-451B-AC4F-A7B34B3B3D3B}</Project>
-      <Name>YourDomain</Name>
+    <ProjectReference Include="..\MBACNationals\MBACNationals.csproj">
+      <Project>{42fe290d-7a80-451b-ac4f-a7b34b3b3d3b}</Project>
+      <Name>MBACNationals</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

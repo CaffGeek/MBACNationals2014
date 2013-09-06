@@ -1,13 +1,13 @@
 ﻿using Edument.CQRS;
-using Events.Bowler;
-using MBAC.Bowler;
+using Events.Participant;
+using MBACNationals.Participant;
 using NUnit.Framework;
 using System;
 
-namespace MBACNationals2014Tests
+namespace MBACNationalsTests
 {
     [TestFixture]
-    public class BowlerTests : BDDTest<BowlerCommandHandlers, BowlerAggregate>
+    public class ParticipantTests : BDDTest<ParticipantCommandHandlers, ParticipantAggregate>
     {
         private Guid testId;
         private string firstName;
@@ -20,16 +20,16 @@ namespace MBACNationals2014Tests
         }
 
         [Test]
-        public void CanCreateBowler()
+        public void CanCreateParticipant()
         {
             Test(
                 Given(),
-                When(new CreateBowler
+                When(new CreateParticipant
                 {
                     Id = testId,
                     FirstName = firstName
                 }),
-                Then(new BowlerCreated
+                Then(new ParticipantCreated
                 {
                     Id = testId,
                     FirstName = firstName
@@ -37,20 +37,20 @@ namespace MBACNationals2014Tests
         }
 
         [Test]
-        public void CanCreateBowlerOnlyOnce()
+        public void CanCreateParticipantOnlyOnce()
         {
             Test(
-                Given(new BowlerCreated
+                Given(new ParticipantCreated
                 {
                     Id = testId,
                     FirstName = firstName
                 }),
-                When(new CreateBowler
+                When(new CreateParticipant
                 {
                     Id = testId,
                     FirstName = firstName
                 }),
-                ThenFailWith<BowlerAlreadyExists>());
+                ThenFailWith<ParticipantAlreadyExists>());
         }
     }
 }

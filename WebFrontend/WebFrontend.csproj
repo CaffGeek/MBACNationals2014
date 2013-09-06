@@ -261,9 +261,9 @@
       <Project>{d2bab57d-225d-4f4c-9410-ed39495a8fe0}</Project>
       <Name>Edument.CQRS</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MBACNationals2014\MBACNationals2014.csproj">
+    <ProjectReference Include="..\MBACNationals\MBACNationals.csproj">
       <Project>{42fe290d-7a80-451b-ac4f-a7b34b3b3d3b}</Project>
-      <Name>MBACNationals2014</Name>
+      <Name>MBACNationals</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
