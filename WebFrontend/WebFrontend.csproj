@@ -250,6 +250,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Participant\Index.cshtml" />
+    <Content Include="Views\Participant\_CreateParticipant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -262,6 +263,10 @@
     <ProjectReference Include="..\Edument.CQRS\Edument.CQRS.csproj">
       <Project>{d2bab57d-225d-4f4c-9410-ed39495a8fe0}</Project>
       <Name>Edument.CQRS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MBACNationalsReadModels\MBACNationalsReadModels.csproj">
+      <Project>{146a4004-73d9-4015-899b-83cbbbd2ffee}</Project>
+      <Name>MBACNationalsReadModels</Name>
     </ProjectReference>
     <ProjectReference Include="..\MBACNationals\MBACNationals.csproj">
       <Project>{42fe290d-7a80-451b-ac4f-a7b34b3b3d3b}</Project>
@@ -284,7 +289,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>65019</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:60827/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

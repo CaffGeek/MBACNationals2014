@@ -1,6 +1,18 @@
-﻿@{
+﻿@model List<MBACNationals.ReadModels.Participants.Participant>
+
+@{
     ViewBag.Title = "Index";
 }
 
 <h2>Participants</h2>
 
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            @item.FirstName @item.LastName
+        </li>
+    }
+</li>
+
+@Html.Partial("_CreateParticipant", new MBACNationals.ReadModels.Participants.Participant())
