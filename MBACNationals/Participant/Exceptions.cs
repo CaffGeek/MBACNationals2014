@@ -2,7 +2,8 @@
 
 namespace MBACNationals.Participant
 {
-    public class ParticipantAlreadyExists : Exception
-    {
-    }
+    //TODO: Add Exceptions
+    //public class ParticipantAlreadyExists : Exception
+    //{
+    //}
 }

@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Gender.cs" />
+    <Compile Include="Participant\ParticipantRenamed.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Participant\ParticipantCreated.cs" />
   </ItemGroup>

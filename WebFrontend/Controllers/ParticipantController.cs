@@ -1,4 +1,5 @@
 ﻿using MBACNationals.Participant;
+using System;
 using System.Web.Mvc;
 
 namespace WebFrontend.Controllers
@@ -11,11 +12,13 @@ namespace WebFrontend.Controllers
         }
         
         [HttpPost]
-        public void Create(CreateParticipant command)
+        public ActionResult Create(CreateParticipant command)
         {
-            //TODO: This doesn't work because I'm passed two strings, not a createparticipant command...
-            //      What's right? changing UI to pass command, or create command here???
-            System.Diagnostics.Debugger.Break();
+            command.Id = Guid.NewGuid();
+
+            Domain.Dispatcher.SendCommand(command);
+
+            return Redirect("Index");
         }
     }
 }

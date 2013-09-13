@@ -11,12 +11,14 @@ namespace MBACNationalsTests
     {
         private Guid testId;
         private string firstName;
+        private string newFirstName;
 
         [SetUp]
         public void Setup()
         {
             testId = Guid.NewGuid();
             firstName = "John";
+            newFirstName = "David";
         }
 
         [Test]
@@ -37,7 +39,7 @@ namespace MBACNationalsTests
         }
 
         [Test]
-        public void CanCreateParticipantOnlyOnce()
+        public void CanRenameParticipant()
         {
             Test(
                 Given(new ParticipantCreated
@@ -45,12 +47,16 @@ namespace MBACNationalsTests
                     Id = testId,
                     FirstName = firstName
                 }),
-                When(new CreateParticipant
+                When(new RenameParticipant
                 {
                     Id = testId,
-                    FirstName = firstName
+                    FirstName = newFirstName
                 }),
-                ThenFailWith<ParticipantAlreadyExists>());
+                Then(new ParticipantRenamed
+                {
+                    Id = testId,
+                    FirstName = newFirstName
+                }));
         }
     }
 }

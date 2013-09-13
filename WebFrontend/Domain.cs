@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Edument.CQRS;
-using MBACNationals.ReadModels;
+﻿using Edument.CQRS;
 using MBACNationals.Participant;
+using MBACNationals.ReadModels;
+using System;
 
 namespace WebFrontend
 {
