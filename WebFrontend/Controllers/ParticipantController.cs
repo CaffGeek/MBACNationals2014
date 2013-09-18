@@ -10,6 +10,11 @@ namespace WebFrontend.Controllers
         {
             return View(Domain.ParticipantQueries.GetParticipants());
         }
+
+        public ActionResult View(Guid id)
+        {
+            return View(Domain.ParticipantQueries.GetParticipant(id));
+        }
         
         [HttpPost]
         public ActionResult Create(CreateParticipant command)
@@ -19,6 +24,20 @@ namespace WebFrontend.Controllers
             Domain.Dispatcher.SendCommand(command);
 
             return Redirect("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Rename(string id, string value)
+        {
+            var command = new RenameParticipant
+            {
+                Id = Guid.Parse(id),
+                Name = value
+            };
+
+            Domain.Dispatcher.SendCommand(command);
+
+            return Content(value);
         }
     }
 }

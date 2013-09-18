@@ -16,8 +16,7 @@ namespace MBACNationals.Participant
             yield return new ParticipantCreated
             {
                 Id = command.Id,
-                FirstName = command.FirstName,
-                LastName = command.LastName,
+                Name = command.Name,
                 Gender = command.Gender
             };
         }
@@ -29,8 +28,7 @@ namespace MBACNationals.Participant
             yield return new ParticipantRenamed
             {
                 Id = command.Id,
-                FirstName = command.FirstName,
-                LastName = command.LastName,
+                Name = command.Name,
             };
         }
     }

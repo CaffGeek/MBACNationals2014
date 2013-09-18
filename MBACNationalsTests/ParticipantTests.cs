@@ -10,15 +10,15 @@ namespace MBACNationalsTests
     public class ParticipantTests : BDDTest<ParticipantCommandHandlers, ParticipantAggregate>
     {
         private Guid testId;
-        private string firstName;
-        private string newFirstName;
+        private string name;
+        private string newName;
 
         [SetUp]
         public void Setup()
         {
             testId = Guid.NewGuid();
-            firstName = "John";
-            newFirstName = "David";
+            name = "John";
+            newName = "David";
         }
 
         [Test]
@@ -29,12 +29,12 @@ namespace MBACNationalsTests
                 When(new CreateParticipant
                 {
                     Id = testId,
-                    FirstName = firstName
+                    Name = name
                 }),
                 Then(new ParticipantCreated
                 {
                     Id = testId,
-                    FirstName = firstName
+                    Name = name
                 }));
         }
 
@@ -45,17 +45,17 @@ namespace MBACNationalsTests
                 Given(new ParticipantCreated
                 {
                     Id = testId,
-                    FirstName = firstName
+                    Name = name
                 }),
                 When(new RenameParticipant
                 {
                     Id = testId,
-                    FirstName = newFirstName
+                    Name = newName
                 }),
                 Then(new ParticipantRenamed
                 {
                     Id = testId,
-                    FirstName = newFirstName
+                    Name = newName
                 }));
         }
     }

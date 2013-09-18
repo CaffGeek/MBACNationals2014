@@ -3,6 +3,7 @@ using Events.Participant;
 using NDatabase;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace MBACNationals.ReadModels
@@ -16,8 +17,7 @@ namespace MBACNationals.ReadModels
         public class Participant
         {
             public Guid Id { get; internal set; }
-            public string FirstName { get; internal set; }
-            public string LastName { get; internal set; }
+            public string Name { get; internal set; }
             public Enums.Gender Gender { get; internal set; }
         }
 
@@ -30,7 +30,7 @@ namespace MBACNationals.ReadModels
             }
         }
 
-        private Participant getParticipant(Guid id)
+        public Participant GetParticipant(Guid id)
         {
             using (var odb = OdbFactory.Open(dbFileName))
             {
@@ -47,8 +47,7 @@ namespace MBACNationals.ReadModels
                     new Participant
                         {
                             Id = e.Id,
-                            FirstName = e.FirstName,
-                            LastName = e.LastName,
+                            Name = e.Name,
                             Gender = e.Gender
                         });
                 odb.Commit();
@@ -57,12 +56,10 @@ namespace MBACNationals.ReadModels
 
         public void Handle(ParticipantRenamed e)
         {
-            var participant = getParticipant(e.Id);
-            participant.FirstName = e.FirstName;
-            participant.LastName = e.LastName;
-
             using (var odb = OdbFactory.Open(dbFileName))
             {
+                var participant = odb.QueryAndExecute<Participant>().Where(p => p.Id.Equals(e.Id)).FirstOrDefault();
+                participant.Name = e.Name;
                 odb.Store(participant);
             }
         }

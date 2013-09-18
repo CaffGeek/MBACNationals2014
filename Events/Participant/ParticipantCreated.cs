@@ -6,8 +6,7 @@ namespace Events.Participant
     public class ParticipantCreated
     {
         public Guid Id;
-        public string FirstName;
-        public string LastName;
+        public string Name;
         public Gender Gender;
     }
 }

@@ -6,7 +6,6 @@ namespace MBACNationals.Participant
     public class RenameParticipant
     {
         public Guid Id;
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string Name { get; set; }
     }
 }
