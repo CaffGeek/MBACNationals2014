@@ -2,6 +2,7 @@
 using Edument.CQRS;
 using System.Collections;
 using Events.Participant;
+using MBACNationals.Participant.Commands;
 
 namespace MBACNationals.Participant
 {
@@ -12,6 +13,9 @@ namespace MBACNationals.Participant
         public IEnumerable Handle(Func<Guid, ParticipantAggregate> al, CreateParticipant command)
         {
             var agg = al(command.Id);
+
+            if (agg.EventsLoaded > 0)
+                throw new ParticipantAlreadyExists();
                         
             yield return new ParticipantCreated
             {

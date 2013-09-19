@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +7,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml.Serialization;
-using NUnit.Framework;
 
 namespace Edument.CQRS
 {
@@ -22,7 +22,7 @@ namespace Edument.CQRS
     {
         private TCommandHandler sut;
 
-        [SetUp]
+        [TestInitialize]
         public void BDDTestSetup()
         {
             sut = new TCommandHandler();
@@ -90,7 +90,7 @@ namespace Edument.CQRS
             return got =>
             {
                 if (got is TException)
-                    Assert.Pass("Got correct exception type");
+                { /*Assert.Pass("Got correct exception type");*/ }
                 else if (got is CommandHandlerNotDefiendException)
                     Assert.Fail((got as Exception).Message);
                 else if (got is Exception)

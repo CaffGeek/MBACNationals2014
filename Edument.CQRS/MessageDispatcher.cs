@@ -209,5 +209,11 @@ namespace Edument.CQRS
         {
             return Activator.CreateInstance(t);
         }
+
+        public void RepublishEvents()
+        {
+            foreach (var e in eventStore.LoadAllEvents())
+                PublishEvent(e);
+        }
     }
 }

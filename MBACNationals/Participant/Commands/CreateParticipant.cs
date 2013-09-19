@@ -1,11 +1,12 @@
 ﻿using MBACNationals.Enums;
 using System;
 
-namespace MBACNationals.Participant
+namespace MBACNationals.Participant.Commands
 {
-    public class RenameParticipant
+    public class CreateParticipant
     {
         public Guid Id;
         public string Name { get; set; }
+        public Gender Gender { get; set; }
     }
 }

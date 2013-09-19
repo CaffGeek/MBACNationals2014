@@ -40,10 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Participant\RenameParticipant.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Participant\Commands\RenameParticipant.cs" />
     <Compile Include="Participant\Exceptions.cs" />
-    <Compile Include="Participant\CreateParticipant.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Participant\Commands\CreateParticipant.cs" />
     <Compile Include="Participant\ParticipantAggregate.cs" />
     <Compile Include="Participant\ParticipantCommandHandlers.cs" />
   </ItemGroup>

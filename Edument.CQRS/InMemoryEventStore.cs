@@ -26,6 +26,13 @@ namespace Edument.CQRS
                 return new ArrayList();
         }
 
+        public IEnumerable LoadAllEvents()
+        {
+            foreach (var k in store)
+                foreach (var e in k.Value.Events)
+                    yield return e;
+        }
+
         public void SaveEventsFor<TAggregate>(Guid? id, int eventsLoaded, ArrayList newEvents)
         {
             // Establish the aggregate ID to save the events under and ensure they

@@ -9,6 +9,7 @@ namespace Edument.CQRS
     public interface IEventStore
     {
         IEnumerable LoadEventsFor<TAggregate>(Guid id);
+        IEnumerable LoadAllEvents();
         void SaveEventsFor<TAggregate>(Guid? id, int eventsLoaded, ArrayList newEvents);
     }
 }

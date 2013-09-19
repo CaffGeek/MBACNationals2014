@@ -18,6 +18,8 @@ namespace WebFrontend
 
             ParticipantQueries = new Participants();
             Dispatcher.ScanInstance(ParticipantQueries);
+
+            Dispatcher.RepublishEvents(); //TODO: HACK: each time the app starts, the readmodel is regenerated
         }
     }
 }

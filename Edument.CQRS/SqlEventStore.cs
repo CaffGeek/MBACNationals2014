@@ -35,9 +35,34 @@ namespace Edument.CQRS
                         SELECT [Type], [Body]
                         FROM [dbo].[Events]
                         WHERE [AggregateId] = @AggregateId
-                        ORDER BY [SequenceNumber]";
+                        ORDER BY [Timestamp], [SequenceNumber]";
                     cmd.CommandType = CommandType.Text;
                     cmd.Parameters.Add(new SqlParameter("@AggregateId", id));
+                    using (var r = cmd.ExecuteReader())
+                    {
+                        while (r.Read())
+                        {
+                            yield return DeserializeEvent(r.GetString(0), r.GetString(1));
+                        }
+                    }
+                }
+            }
+        }
+
+        public IEnumerable LoadAllEvents()
+        {
+            using (var con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                using (var cmd = new SqlCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandText = @"
+                        SELECT [Type], [Body]
+                        FROM [dbo].[Events]
+                        ORDER BY [SequenceNumber]";
+                    cmd.CommandType = CommandType.Text;
+
                     using (var r = cmd.ExecuteReader())
                     {
                         while (r.Read())

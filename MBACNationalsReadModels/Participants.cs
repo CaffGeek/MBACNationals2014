@@ -3,7 +3,6 @@ using Events.Participant;
 using NDatabase;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 
 namespace MBACNationals.ReadModels
@@ -41,6 +40,9 @@ namespace MBACNationals.ReadModels
 
         public void Handle(ParticipantCreated e)
         {
+            if (GetParticipant(e.Id) != null)
+                return; //Already created
+
             using (var odb = OdbFactory.Open(dbFileName))
             {
                 odb.Store(
@@ -50,7 +52,6 @@ namespace MBACNationals.ReadModels
                             Name = e.Name,
                             Gender = e.Gender
                         });
-                odb.Commit();
             }
         }
 
