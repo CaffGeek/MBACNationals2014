@@ -46,6 +46,11 @@
     <Compile Include="Participant\Commands\CreateParticipant.cs" />
     <Compile Include="Participant\ParticipantAggregate.cs" />
     <Compile Include="Participant\ParticipantCommandHandlers.cs" />
+    <Compile Include="Team\Commands\AssignTeamMembers.cs" />
+    <Compile Include="Team\Commands\CreateTeam.cs" />
+    <Compile Include="Team\Exceptions.cs" />
+    <Compile Include="Team\TeamAggregate.cs" />
+    <Compile Include="Team\TeamCommandHandlers.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Edument.CQRS\Edument.CQRS.csproj">
@@ -57,6 +62,7 @@
       <Name>Events</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

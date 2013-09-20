@@ -1,8 +1,8 @@
-﻿using System;
-using Edument.CQRS;
-using System.Collections;
+﻿using Edument.CQRS;
 using Events.Participant;
 using MBACNationals.Participant.Commands;
+using System;
+using System.Collections;
 
 namespace MBACNationals.Participant
 {
