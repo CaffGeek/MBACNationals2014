@@ -10,7 +10,7 @@
     @foreach (var item in Model)
     {
         <li>
-            @Html.ActionLink(item.Name, "View", new { @item.Id })
+            @Html.ActionLink(item.Name + item.TeamId, "View", new { @item.Id })
         </li>
     }
 </li>

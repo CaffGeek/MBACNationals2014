@@ -46,7 +46,7 @@
     <Compile Include="Participant\Commands\CreateParticipant.cs" />
     <Compile Include="Participant\ParticipantAggregate.cs" />
     <Compile Include="Participant\ParticipantCommandHandlers.cs" />
-    <Compile Include="Team\Commands\AssignTeamMembers.cs" />
+    <Compile Include="Participant\Commands\AddParticipantToTeam.cs" />
     <Compile Include="Team\Commands\CreateTeam.cs" />
     <Compile Include="Team\Exceptions.cs" />
     <Compile Include="Team\TeamAggregate.cs" />

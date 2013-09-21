@@ -1,24 +1,21 @@
 ﻿using Edument.CQRS;
-using Events;
 using Events.Team;
 using MBACNationals.Team;
 using MBACNationals.Team.Commands;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 
 namespace MBACNationalsTests
 {
     [TestClass]
     public class TeamTests : BDDTest<TeamCommandHandlers, TeamAggregate>
     {
-        private Guid testId;
-        private List<TeamMember> teamMembers = new List<TeamMember> { new TeamMember { ParticipantId = Guid.NewGuid() } };
+        private Guid teamId;
 
         [TestInitialize]
         public void Setup()
         {
-            testId = Guid.NewGuid();
+            teamId = Guid.NewGuid();
         }
 
         [TestMethod]
@@ -28,11 +25,11 @@ namespace MBACNationalsTests
                 Given(),
                 When(new CreateTeam
                 {
-                    Id = testId
+                    Id = teamId
                 }),
                 Then(new TeamCreated
                 {
-                    Id = testId
+                    Id = teamId
                 }));
         }
 
@@ -42,32 +39,13 @@ namespace MBACNationalsTests
             Test(
                 Given(new TeamCreated
                 {
-                    Id = testId
+                    Id = teamId
                 }),
                 When(new CreateTeam
                 {
-                    Id = testId
+                    Id = teamId
                 }),
                 ThenFailWith<TeamAlreadyExists>());
-        }
-
-        [TestMethod]
-        public void CanAssignParticipantToTeam()
-        {
-            Test(
-                Given(new TeamCreated
-                {
-                    Id = testId
-                }),
-                When(new AssignTeamMembers
-                {
-                    Id = testId,
-                    Members = teamMembers
-                }),
-                Then(new TeamMembersAssigned
-                {
-                    Members = teamMembers
-                }));
         }
     }
 }

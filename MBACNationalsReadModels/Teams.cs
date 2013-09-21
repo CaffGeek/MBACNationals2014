@@ -7,12 +7,10 @@ using System.Linq;
 
 namespace MBACNationals.ReadModels
 {
-    public class Teams : ITeamQueries,
-        ISubscribeTo<TeamCreated>,
-        ISubscribeTo<TeamMembersAssigned>
+    public class Teams : AReadModel,
+        ITeamQueries,
+        ISubscribeTo<TeamCreated>
     {
-        private string dbFileName = MBACNationalsReadModels.Properties.Settings.Default.ReadModelConnection;
-
         public class Team
         {
             public Guid Id { get; internal set; }
@@ -20,7 +18,7 @@ namespace MBACNationals.ReadModels
 
         public List<Teams.Team> GetTeams()
         {
-            using (var odb = OdbFactory.Open(dbFileName))
+            using (var odb = OdbFactory.Open(ReadModelFilePath))
             {
                 var participants = odb.QueryAndExecute<Team>();
                 return participants.ToList();
@@ -29,7 +27,7 @@ namespace MBACNationals.ReadModels
 
         public Teams.Team GetTeam(Guid id)
         {
-            using (var odb = OdbFactory.Open(dbFileName))
+            using (var odb = OdbFactory.Open(ReadModelFilePath))
             {
                 var participants = odb.QueryAndExecute<Team>().Where(p => p.Id.Equals(id));
                 return participants.FirstOrDefault();
@@ -41,7 +39,7 @@ namespace MBACNationals.ReadModels
             if (GetTeam(e.Id) != null)
                 return; //Already created
 
-            using (var odb = OdbFactory.Open(dbFileName))
+            using (var odb = OdbFactory.Open(ReadModelFilePath))
             {
                 odb.Store(
                     new Team
@@ -49,11 +47,6 @@ namespace MBACNationals.ReadModels
                         Id = e.Id,
                     });
             }
-        }
-
-        public void Handle(TeamMembersAssigned e)
-        {
-            throw new NotImplementedException();
         }
     }
 }

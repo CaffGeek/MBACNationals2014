@@ -10,14 +10,17 @@ namespace MBACNationalsTests
     [TestClass]
     public class ParticipantTests : BDDTest<ParticipantCommandHandlers, ParticipantAggregate>
     {
-        private Guid testId;
+        private Guid participantId;
+        private Guid teamId;
+
         private string name;
         private string newName;
 
         [TestInitialize]
         public void Setup()
         {
-            testId = Guid.NewGuid();
+            participantId = Guid.NewGuid();
+            teamId = Guid.NewGuid();
             name = "John";
             newName = "David";
         }
@@ -29,12 +32,12 @@ namespace MBACNationalsTests
                 Given(),
                 When(new CreateParticipant
                 {
-                    Id = testId,
+                    Id = participantId,
                     Name = name
                 }),
                 Then(new ParticipantCreated
                 {
-                    Id = testId,
+                    Id = participantId,
                     Name = name
                 }));
         }
@@ -45,12 +48,12 @@ namespace MBACNationalsTests
             Test(
                 Given(new ParticipantCreated
                 {
-                    Id = testId,
+                    Id = participantId,
                     Name = name
                 }),
                 When(new CreateParticipant
                 {
-                    Id = testId,
+                    Id = participantId,
                     Name = name
                 }),
                 ThenFailWith<ParticipantAlreadyExists>());
@@ -62,18 +65,35 @@ namespace MBACNationalsTests
             Test(
                 Given(new ParticipantCreated
                 {
-                    Id = testId,
+                    Id = participantId,
                     Name = name
                 }),
                 When(new RenameParticipant
                 {
-                    Id = testId,
+                    Id = participantId,
                     Name = newName
                 }),
                 Then(new ParticipantRenamed
                 {
-                    Id = testId,
+                    Id = participantId,
                     Name = newName
+                }));
+        }
+
+        [TestMethod]
+        public void CanAssignParticipantToTeam()
+        {
+            Test(
+                Given(),
+                When(new AddParticipantToTeam
+                {
+                    Id = participantId,
+                    TeamId = teamId
+                }),
+                Then(new ParticipantAssignedToTeam
+                {
+                    Id = participantId,
+                    TeamId = teamId
                 }));
         }
     }

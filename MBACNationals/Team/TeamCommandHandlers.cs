@@ -7,8 +7,7 @@ using System.Collections;
 namespace MBACNationals.Team
 {
     public class TeamCommandHandlers :
-        IHandleCommand<CreateTeam, TeamAggregate>,
-        IHandleCommand<AssignTeamMembers, TeamAggregate>
+        IHandleCommand<CreateTeam, TeamAggregate>
     {
         public IEnumerable Handle(Func<Guid, TeamAggregate> al, CreateTeam command)
         {
@@ -20,16 +19,6 @@ namespace MBACNationals.Team
             yield return new TeamCreated
             {
                 Id = command.Id
-            };
-        }
-
-        public IEnumerable Handle(Func<Guid, TeamAggregate> al, AssignTeamMembers command)
-        {
-            var agg = al(command.Id);
-
-            yield return new TeamMembersAssigned
-            {
-                Members = command.Members
             };
         }
     }

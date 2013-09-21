@@ -7,22 +7,23 @@ using System.Linq;
 
 namespace MBACNationals.ReadModels
 {
-    public class Participants : IParticipantQueries,
+    public class Participants : AReadModel,
+        IParticipantQueries,
         ISubscribeTo<ParticipantCreated>,
-        ISubscribeTo<ParticipantRenamed>
+        ISubscribeTo<ParticipantRenamed>,
+        ISubscribeTo<ParticipantAssignedToTeam>
     {
-        private string dbFileName = MBACNationalsReadModels.Properties.Settings.Default.ReadModelConnection;
-
         public class Participant
         {
             public Guid Id { get; internal set; }
             public string Name { get; internal set; }
             public Enums.Gender Gender { get; internal set; }
+            public Guid TeamId { get; internal set; }
         }
 
         public List<Participant> GetParticipants()
         {
-            using (var odb = OdbFactory.Open(dbFileName))
+            using (var odb = OdbFactory.Open(ReadModelFilePath))
             {
                 var participants = odb.QueryAndExecute<Participant>();
                 return participants.ToList();
@@ -31,10 +32,11 @@ namespace MBACNationals.ReadModels
 
         public Participant GetParticipant(Guid id)
         {
-            using (var odb = OdbFactory.Open(dbFileName))
+            using (var odb = OdbFactory.Open(ReadModelFilePath))
             {
-                var participants = odb.QueryAndExecute<Participant>().Where(p=>p.Id.Equals(id));
-                return participants.FirstOrDefault();
+                var participants = odb.QueryAndExecute<Participant>();
+                var q = participants.Where(p => p.Id.Equals(id));
+                return q.FirstOrDefault();
             }
         }
 
@@ -43,7 +45,7 @@ namespace MBACNationals.ReadModels
             if (GetParticipant(e.Id) != null)
                 return; //Already created
 
-            using (var odb = OdbFactory.Open(dbFileName))
+            using (var odb = OdbFactory.Open(ReadModelFilePath))
             {
                 odb.Store(
                     new Participant
@@ -57,10 +59,20 @@ namespace MBACNationals.ReadModels
 
         public void Handle(ParticipantRenamed e)
         {
-            using (var odb = OdbFactory.Open(dbFileName))
+            using (var odb = OdbFactory.Open(ReadModelFilePath))
             {
                 var participant = odb.QueryAndExecute<Participant>().Where(p => p.Id.Equals(e.Id)).FirstOrDefault();
                 participant.Name = e.Name;
+                odb.Store(participant);
+            }
+        }
+
+        public void Handle(ParticipantAssignedToTeam e)
+        {
+            using (var odb = OdbFactory.Open(ReadModelFilePath))
+            {
+                var participant = odb.QueryAndExecute<Participant>().Where(p => p.Id.Equals(e.Id)).FirstOrDefault();
+                participant.TeamId = e.TeamId;
                 odb.Store(participant);
             }
         }

@@ -8,7 +8,8 @@ namespace MBACNationals.Participant
 {
     public class ParticipantCommandHandlers :
         IHandleCommand<CreateParticipant, ParticipantAggregate>,
-        IHandleCommand<RenameParticipant, ParticipantAggregate>
+        IHandleCommand<RenameParticipant, ParticipantAggregate>,
+        IHandleCommand<AddParticipantToTeam, ParticipantAggregate>
     {
         public IEnumerable Handle(Func<Guid, ParticipantAggregate> al, CreateParticipant command)
         {
@@ -16,7 +17,7 @@ namespace MBACNationals.Participant
 
             if (agg.EventsLoaded > 0)
                 throw new ParticipantAlreadyExists();
-                        
+
             yield return new ParticipantCreated
             {
                 Id = command.Id,
@@ -34,6 +35,17 @@ namespace MBACNationals.Participant
                 Id = command.Id,
                 Name = command.Name,
             };
+        }
+
+        public IEnumerable Handle(Func<Guid, ParticipantAggregate> al, AddParticipantToTeam command)
+        {
+            var agg = al(command.Id);
+
+            yield return new ParticipantAssignedToTeam
+                {
+                    Id = command.Id,
+                    TeamId = command.TeamId
+                };
         }
     }
 }
