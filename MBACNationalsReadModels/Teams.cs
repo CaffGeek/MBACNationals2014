@@ -14,6 +14,7 @@ namespace MBACNationals.ReadModels
         public class Team
         {
             public Guid Id { get; internal set; }
+            public string Name { get; internal set; }
         }
 
         public List<Teams.Team> GetTeams()
@@ -45,6 +46,7 @@ namespace MBACNationals.ReadModels
                     new Team
                     {
                         Id = e.Id,
+                        Name = e.Id.ToString(),
                     });
             }
         }

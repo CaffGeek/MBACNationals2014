@@ -11,11 +11,13 @@ namespace MBACNationalsTests
     public class TeamTests : BDDTest<TeamCommandHandlers, TeamAggregate>
     {
         private Guid teamId;
+        private string teamName;
 
         [TestInitialize]
         public void Setup()
         {
             teamId = Guid.NewGuid();
+            teamName = "Test Team";
         }
 
         [TestMethod]
@@ -25,11 +27,13 @@ namespace MBACNationalsTests
                 Given(),
                 When(new CreateTeam
                 {
-                    Id = teamId
+                    Id = teamId,
+                    Name = teamName,
                 }),
                 Then(new TeamCreated
                 {
-                    Id = teamId
+                    Id = teamId,
+                    Name = teamName,
                 }));
         }
 
@@ -39,11 +43,13 @@ namespace MBACNationalsTests
             Test(
                 Given(new TeamCreated
                 {
-                    Id = teamId
+                    Id = teamId,
+                    Name = teamName,
                 }),
                 When(new CreateTeam
                 {
-                    Id = teamId
+                    Id = teamId,
+                    Name = teamName,
                 }),
                 ThenFailWith<TeamAlreadyExists>());
         }

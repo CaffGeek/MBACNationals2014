@@ -18,7 +18,8 @@ namespace MBACNationals.Team
 
             yield return new TeamCreated
             {
-                Id = command.Id
+                Id = command.Id,
+                Name = command.Name,
             };
         }
     }

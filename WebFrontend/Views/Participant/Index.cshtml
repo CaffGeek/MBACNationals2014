@@ -13,6 +13,8 @@
             @Html.ActionLink(item.Name + item.TeamId, "View", new { @item.Id })
         </li>
     }
-</li>
+</ul>
 
 @Html.Partial("_CreateParticipant", new MBACNationals.ReadModels.Participants.Participant())
+
+@Html.Partial("_CreateTeam", new MBACNationals.ReadModels.Teams.Team())
