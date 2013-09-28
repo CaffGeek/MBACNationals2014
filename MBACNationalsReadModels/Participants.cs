@@ -1,5 +1,6 @@
 ﻿using Edument.CQRS;
 using Events.Participant;
+using Events.Team;
 using NDatabase;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace MBACNationals.ReadModels
             public string Name { get; internal set; }
             public Enums.Gender Gender { get; internal set; }
             public Guid TeamId { get; internal set; }
+            public string TeamName { get; internal set; }
         }
 
         public List<Participant> GetParticipants()
@@ -72,7 +74,9 @@ namespace MBACNationals.ReadModels
             using (var odb = OdbFactory.Open(ReadModelFilePath))
             {
                 var participant = odb.QueryAndExecute<Participant>().Where(p => p.Id.Equals(e.Id)).FirstOrDefault();
-                participant.TeamId = e.TeamId;
+                var team = odb.QueryAndExecute<Teams.Team>().Where(t => t.Id.Equals(e.TeamId)).FirstOrDefault(); //TODO: Move the team name into the event
+                participant.TeamId = team.Id;
+                participant.TeamName = team.Name;
                 odb.Store(participant);
             }
         }

@@ -1,4 +1,4 @@
-﻿@model List<MBACNationals.ReadModels.Participants.Participant>
+﻿@model WebFrontend.Models.Participant.Index
 
 @{
     ViewBag.Title = "Index";
@@ -7,10 +7,10 @@
 <h2>Participants</h2>
 
 <ul>
-    @foreach (var item in Model)
+    @foreach (var item in Model.Participants)
     {
         <li>
-            @Html.ActionLink(item.Name + item.TeamId, "View", new { @item.Id })
+            @Html.ActionLink(item.Name + " on Team:" + item.TeamName, "View", new { @item.Id })
         </li>
     }
 </ul>

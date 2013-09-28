@@ -9,12 +9,21 @@ namespace WebFrontend.Controllers
     {
         public ActionResult Index()
         {
-            return View(Domain.ParticipantQueries.GetParticipants());
+            return View(
+                new WebFrontend.Models.Participant.Index
+                {
+                    Participants = Domain.ParticipantQueries.GetParticipants(),
+                    Teams = Domain.TeamQueries.GetTeams(),
+                });
         }
 
         public ActionResult View(Guid id)
         {
-            return View(Domain.ParticipantQueries.GetParticipant(id));
+            return View(
+                new WebFrontend.Models.Participant.View
+                {
+                    Participant = Domain.ParticipantQueries.GetParticipant(id),
+                });
         }
         
         [HttpPost]

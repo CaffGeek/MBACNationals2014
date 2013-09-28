@@ -1,4 +1,4 @@
-﻿@model MBACNationals.ReadModels.Participants.Participant
+﻿@model WebFrontend.Models.Participant.View
 
 @{
     ViewBag.Title = "View";
@@ -6,11 +6,10 @@
 
 @section scripts {
     <script type="text/javascript">
-        $('h2#@Model.Id').editable("/@ViewContext.RouteData.Values["controller"]/Rename");
+        $('h2#@Model.Participant.Id').editable("/@ViewContext.RouteData.Values["controller"]/Rename");
     </script>
 }
 
-<h2 class="edit" id="@Model.Id">@Model.Name</h2>
+<h2 class="edit" id="@Model.Participant.Id">@Model.Participant.Name</h2>
 
-TODO: Add ability to rename on this page
 TODO: Show matches, scores, average, etc

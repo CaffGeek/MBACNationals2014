@@ -13,7 +13,7 @@ namespace WebFrontend.Controllers
 
             Domain.Dispatcher.SendCommand(command);
 
-            return Redirect("Index");
+            return RedirectToAction("Index", "Participant");
         }
     }
 }
