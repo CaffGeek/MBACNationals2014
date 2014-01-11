@@ -46,7 +46,7 @@ namespace MBACNationals.ReadModels
                     new Team
                     {
                         Id = e.Id,
-                        Name = e.Id.ToString(),
+                        Name = e.Name,
                     });
             }
         }

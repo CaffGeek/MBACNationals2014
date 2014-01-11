@@ -6,6 +6,15 @@ namespace WebFrontend.Controllers
 {
     public class TeamController : Controller
     {
+        public ActionResult View(Guid id)
+        {
+            return View(
+                new WebFrontend.Models.Team.View
+                {
+                    Team = Domain.TeamQueries.GetTeam(id),
+                });
+        }
+
         [HttpPost]
         public ActionResult Create(CreateTeam command)
         {

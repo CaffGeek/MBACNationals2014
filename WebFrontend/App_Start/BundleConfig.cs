@@ -15,6 +15,10 @@ namespace WebFrontend
                 "~/Scripts/jquery.validate*",
                 "~/Scripts/jquery.jeditable.min.js"));
 
+
+            bundles.Add(new ScriptBundle("~/bundles/custom").Include(
+                "~/Scripts/Custom/*.js"));
+
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
@@ -35,6 +39,19 @@ namespace WebFrontend
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                        "~/Scripts/bootstrap.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
+                        "~/Scripts/angular.*",
+                        "~/Scripts/ui-bootstrap-tpls-0.9.0.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                        "~/App/app.js",
+                        "~/App/Controllers/controller.*",
+                        "~/App/Directives/directive.*",
+                        "~/App/Factories/factory.*"));
         }
     }
 }

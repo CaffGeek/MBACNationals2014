@@ -4,13 +4,22 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Participants</h2>
-
+<h2>Teams</h2>
 <ul>
-    @foreach (var item in Model.Participants)
+    @foreach (var team in Model.Teams)
     {
         <li>
-            @Html.ActionLink(item.Name + " on Team:" + item.TeamName, "View", new { @item.Id })
+            @Html.ActionLink(team.Name, "View", "Team", new { @team.Id }, null)
+        </li>
+    }
+</ul>
+
+<h2>Participants</h2>
+<ul>
+    @foreach (var participant in Model.Participants)
+    {
+        <li>
+            @Html.ActionLink(participant.Name, "View", new { @participant.Id })
         </li>
     }
 </ul>
