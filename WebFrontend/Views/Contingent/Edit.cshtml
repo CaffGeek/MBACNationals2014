@@ -1,6 +1,6 @@
 ﻿<div data-ng-app="app">
     <div class="container" data-ng-controller="ContingentController">
-        <h2>{{model.Province}} Contingent</h2>
+        <h2><a data-ng-click="editDivisions(model);">{{model.Province}} Contingent</a></h2>
 
         <div class="row">
             <h4>Delegates:</h4>
@@ -14,11 +14,13 @@
         <div class="row">
             <h4>Teams:</h4>
             <div class="col-xs-3" data-ng-repeat="team in model.Teams">
-                <h5>{{team.Name}}</h5>
+                <h5><a data-ng-click="editTeam(team);">{{team.Name}}</a></h5>
                 <ol>
                     <li data-ng-show="team.Coach.Name">Coach: {{team.Coach.Name}}</li>
                     <li data-ng-repeat="bowler in team.Bowlers">
-                        {{bowler.Name}}
+                        <a data-ng-click="editParticipant(bowler, team);">
+                            {{bowler.Name || 'Vacancy'}}
+                        </a>                        
                     </li>
                 </ol>
             </div>

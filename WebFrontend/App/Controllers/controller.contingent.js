@@ -7,6 +7,10 @@
         $scope.model.Province = "MB";
         $scope.model.Teams = $scope.model.Teams || [];
 
+        $scope.editDivisions = editDivisions;
+        $scope.editTeam = editTeam;
+        $scope.editParticipant = editParticipant;
+
         if (!$scope.model.Teams.length) {
             editDivisions();
         }
@@ -17,9 +21,17 @@
             modalPromise.then(function (data) {
                 var currentTeams = $scope.model.Teams;
                 var updatedTeams = data.filter(function (obj) { return obj.Selected; });
+                
                 //TODO: Properly merge teams
                 var mergedTeams = updatedTeams;
                 $scope.model.Teams = mergedTeams;
+
+                angular.forEach($scope.model.Teams, function (team) {
+                    team.Bowlers = team.Bowlers || [];
+                    while (team.Bowlers.length < team.SizeLimit) {
+                        team.Bowlers.push({ Gender: team.Gender });
+                    }
+                });
 
                 var editTeamModal = function (i) {
                     if (i >= $scope.model.Teams.length)

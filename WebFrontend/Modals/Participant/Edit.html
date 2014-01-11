@@ -11,12 +11,19 @@
         </div>
         
         <div class="form-group">
+            <label for="name" class="col-sm-3 control-label">Delegate</label>
+            <div class="col-sm-9">
+                <input type="checkbox" data-ng-model="model.participant.IsDelegate" />
+            </div>
+        </div>
+        
+        <div class="form-group">
             <label for="name" class="col-sm-3 control-label">Rookie</label>
             <div class="col-sm-9">
                 <input type="checkbox" data-ng-model="model.participant.IsRookie" />
             </div>
         </div>
-        
+
         <div class="form-group" data-ng-show="!model.participant.IsRookie">
             <label for="name" class="col-sm-3 control-label">Years</label>
             <div class="col-sm-9">

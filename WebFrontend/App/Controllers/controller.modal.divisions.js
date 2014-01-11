@@ -12,7 +12,7 @@
             { Name: 'Tournament Ladies', Selected: true, Gender: 'F', SizeLimit: 5, RequiresCoach: true },
             { Name: 'Teaching Men', Selected: true, Gender: 'M', SizeLimit: 5, RequiresCoach: true, IncludesSinglesRep: true, RequiresAverage: true },
             { Name: 'Teaching Ladies', Selected: true, Gender: 'F', SizeLimit: 5, RequiresCoach: true, IncludesSinglesRep: true, RequiresAverage: true },
-            { Name: 'Seniors', Selected: true, SizeLimit: 5, RequiresCoach: true, RequiresAverage: true, RequiresGender: true }
+            { Name: 'Seniors', Selected: true, SizeLimit: 5, RequiresCoach: true, IncludesSinglesRep: true, RequiresAverage: true, RequiresGender: true }
         ];
 
         if (divisions.length) {
