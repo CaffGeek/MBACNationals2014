@@ -4,7 +4,7 @@
     var modalParticipantController = function ($scope, $modalInstance, $http, participant, team) {
         $scope.model = {};
         
-        $scope.model.title = '{0} {1}'.format(participant.Id ? 'Edit' : 'New', team.Name);
+        $scope.model.title = team.Name;
         $scope.model.participant = participant || {};
         $scope.model.team = team || {};
 
