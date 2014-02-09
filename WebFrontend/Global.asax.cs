@@ -14,6 +14,7 @@ namespace WebFrontend
         {
             AreaRegistration.RegisterAllAreas();
 
+            AuthConfig.RegisterAuth();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
