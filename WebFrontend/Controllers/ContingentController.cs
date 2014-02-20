@@ -1,4 +1,7 @@
 ﻿using System.Web.Mvc;
+using System.ComponentModel.DataAnnotations;
+using WebFrontend.Attributes;
+
 namespace WebFrontend.Controllers
 {
     [Authorize]//TODO: Setup roles
@@ -9,10 +12,11 @@ namespace WebFrontend.Controllers
             return View();
         }
 
+        [RestrictAccessByRouteId] //Province
         public ActionResult Edit(string province)
         {
-            //TODO: Ensure access to province
             return View(province);
         }
     }
 }
+

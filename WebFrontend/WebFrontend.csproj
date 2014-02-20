@@ -166,17 +166,23 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Attributes\RestrictAccessByRouteId.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ContingentController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ParticipantController.cs" />
     <Compile Include="Domain.cs" />
-    <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Account\AccountModels.cs" />
+    <Compile Include="Models\Account\ExternalLogin.cs" />
+    <Compile Include="Models\Account\RegisterExternalLoginModel.cs" />
+    <Compile Include="Models\Account\LocalPasswordModel.cs" />
+    <Compile Include="Models\Account\RegisterModel.cs" />
+    <Compile Include="Models\Account\LoginModel.cs" />
+    <Compile Include="Models\Account\UserProfile.cs" />
+    <Compile Include="Models\Account\UsersContext.cs" />
     <Compile Include="Models\Participant\View.cs" />
     <Compile Include="Models\Participant\Index.cs" />
     <Compile Include="Models\Team\View.cs" />
