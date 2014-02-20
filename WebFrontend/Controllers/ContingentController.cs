@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 namespace WebFrontend.Controllers
 {
+    [Authorize]//TODO: Setup roles
     public class ContingentController : Controller
     {
         public ActionResult Index()
@@ -10,6 +11,7 @@ namespace WebFrontend.Controllers
 
         public ActionResult Edit(string province)
         {
+            //TODO: Ensure access to province
             return View(province);
         }
     }

@@ -17,18 +17,12 @@ namespace WebFrontend.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
-        //
-        // GET: /Account/Login
-
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
-        //
-        // POST: /Account/Login
 
         [HttpPost]
         [AllowAnonymous]
@@ -45,9 +39,6 @@ namespace WebFrontend.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOff
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
@@ -57,17 +48,11 @@ namespace WebFrontend.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //
-        // GET: /Account/Register
-
         [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
         }
-
-        //
-        // POST: /Account/Register
 
         [HttpPost]
         [AllowAnonymous]
@@ -92,9 +77,6 @@ namespace WebFrontend.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
-        //
-        // POST: /Account/Disassociate
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -122,9 +104,6 @@ namespace WebFrontend.Controllers
             return RedirectToAction("Manage", new { Message = message });
         }
 
-        //
-        // GET: /Account/Manage
-
         public ActionResult Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -136,9 +115,6 @@ namespace WebFrontend.Controllers
             ViewBag.ReturnUrl = Url.Action("Manage");
             return View();
         }
-
-        //
-        // POST: /Account/Manage
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -200,9 +176,6 @@ namespace WebFrontend.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/ExternalLogin
-
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -210,9 +183,6 @@ namespace WebFrontend.Controllers
         {
             return new ExternalLoginResult(provider, Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
         }
-
-        //
-        // GET: /Account/ExternalLoginCallback
 
         [AllowAnonymous]
         public ActionResult ExternalLoginCallback(string returnUrl)
@@ -243,9 +213,6 @@ namespace WebFrontend.Controllers
                 return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
             }
         }
-
-        //
-        // POST: /Account/ExternalLoginConfirmation
 
         [HttpPost]
         [AllowAnonymous]
@@ -290,9 +257,6 @@ namespace WebFrontend.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/ExternalLoginFailure
-
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {
@@ -328,7 +292,6 @@ namespace WebFrontend.Controllers
             return PartialView("_RemoveExternalLoginsPartial", externalLogins);
         }
 
-        #region Helpers
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
@@ -402,6 +365,5 @@ namespace WebFrontend.Controllers
                     return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
             }
         }
-        #endregion
     }
 }
