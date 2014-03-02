@@ -6,7 +6,7 @@ namespace MBACNationals.Participant.Commands
 {
     public class AddParticipantToTeam
     {
-        public Guid Id;
-        public Guid TeamId;
+        public Guid Id { get; set; }
+        public Guid TeamId { get; set; }
     }
 }

@@ -27,17 +27,18 @@ namespace WebFrontend.Controllers
         }
         
         [HttpPost]
-        public ActionResult Create(CreateParticipant command)
+        public JsonResult Create(CreateParticipant command)
         {
             command.Id = Guid.NewGuid();
 
             Domain.Dispatcher.SendCommand(command);
 
-            return Redirect("Index");
+            //return Redirect("Index"); 
+            return Json(command);
         }
 
         [HttpPost]
-        public ActionResult Rename(string id, string value)
+        public JsonResult Rename(string id, string value)
         {
             var command = new RenameParticipant
             {
@@ -47,7 +48,8 @@ namespace WebFrontend.Controllers
 
             Domain.Dispatcher.SendCommand(command);
 
-            return Content(value);
+            //return Content(value); 
+            return Json(command);
         }
     }
 }

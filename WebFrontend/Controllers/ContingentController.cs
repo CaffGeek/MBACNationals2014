@@ -1,6 +1,8 @@
 ﻿using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
 using WebFrontend.Attributes;
+using MBACNationals.Participant.Commands;
+using System;
 
 namespace WebFrontend.Controllers
 {
@@ -16,6 +18,15 @@ namespace WebFrontend.Controllers
         public ActionResult Edit(string province)
         {
             return View(province);
+        }
+
+        [HttpPost]
+        public JsonResult AssignParticipantToTeam(AddParticipantToTeam command)
+        {
+            Domain.Dispatcher.SendCommand(command);
+
+            //return RedirectToAction("Index", "Contingent"); 
+            return Json(command);
         }
     }
 }

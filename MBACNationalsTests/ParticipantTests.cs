@@ -1,5 +1,6 @@
 ﻿using Edument.CQRS;
 using Events.Participant;
+using MBACNationals.Enums;
 using MBACNationals.Participant;
 using MBACNationals.Participant.Commands;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -33,12 +34,19 @@ namespace MBACNationalsTests
                 When(new CreateParticipant
                 {
                     Id = participantId,
-                    Name = name
+                    Name = name,
+                    Gender = Gender.Male,
+                    IsDelegate = true,
+                    YearsQualifying = 10,
+
                 }),
                 Then(new ParticipantCreated
                 {
                     Id = participantId,
-                    Name = name
+                    Name = name,
+                    Gender = Gender.Male,
+                    IsDelegate = true,
+                    YearsQualifying = 10,
                 }));
         }
 

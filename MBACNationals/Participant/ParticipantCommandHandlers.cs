@@ -22,7 +22,9 @@ namespace MBACNationals.Participant
             {
                 Id = command.Id,
                 Name = command.Name,
-                Gender = command.Gender
+                Gender = command.Gender,
+                IsDelegate = command.IsDelegate,
+                YearsQualifying = command.YearsQualifying
             };
         }
 

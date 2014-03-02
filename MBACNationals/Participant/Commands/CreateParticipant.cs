@@ -8,5 +8,7 @@ namespace MBACNationals.Participant.Commands
         public Guid Id;
         public string Name { get; set; }
         public Gender Gender { get; set; }
+        public bool IsDelegate { get; set; }
+        public int YearsQualifying { get; set; }
     }
 }

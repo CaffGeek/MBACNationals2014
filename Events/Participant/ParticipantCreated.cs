@@ -8,5 +8,7 @@ namespace Events.Participant
         public Guid Id;
         public string Name;
         public Gender Gender;
+        public bool IsDelegate;
+        public int YearsQualifying;
     }
 }

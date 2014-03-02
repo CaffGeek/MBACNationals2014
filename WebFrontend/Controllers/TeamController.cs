@@ -16,13 +16,14 @@ namespace WebFrontend.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(CreateTeam command)
+        public JsonResult Create(CreateTeam command)
         {
             command.Id = Guid.NewGuid();
 
             Domain.Dispatcher.SendCommand(command);
 
-            return RedirectToAction("Index", "Participant");
+            //return RedirectToAction("Index", "Participant");
+            return Json(command);
         }
     }
 }
