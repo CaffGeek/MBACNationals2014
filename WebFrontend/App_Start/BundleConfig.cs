@@ -51,7 +51,8 @@ namespace WebFrontend
                         "~/App/app.js",
                         "~/App/Controllers/controller.*",
                         "~/App/Directives/directive.*",
-                        "~/App/Factories/factory.*"));
+                        "~/App/Factories/factory.*",
+                        "~/App/Services/service.*"));
         }
     }
 }

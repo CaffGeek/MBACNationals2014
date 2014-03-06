@@ -1,7 +1,7 @@
 ﻿(function () {
     "use strict";
 
-    var modalParticipantController = function ($scope, $modalInstance, $http, participant, team) {
+    var modalParticipantController = function ($scope, $q, $modalInstance, $http, dataService, participant, team) {
         $scope.model = {};
         
         $scope.model.title = team.Name;
@@ -9,25 +9,22 @@
         $scope.model.team = team || {};
 
         $scope.save = function () {
-            $http.post('/Team/Create', 
-                $scope.model.team
-            ).success(function (data) {
-                $scope.model.team.Id = data.Id;
+            var deferred = $q.defer();
 
-                $http.post('/Participant/Create',
-                    $scope.model.participant
-                ).success(function (data) {
-                    $scope.model.participant.Id = data.Id;
-
-                    $http.post('/Contingent/AssignParticipantToTeam', {
-                        Id: $scope.model.participant.Id,
-                        TeamId: $scope.model.team.Id
-                    }).success(function (data) {
-                        console.log(data);
-                    });
-                });
+            $q.all([
+                dataService.SaveTeam($scope.model.team).then(
+                    function (response) {
+                        $scope.model.team.Id = response.data.Id;
+                    }),
+                dataService.SaveParticipant($scope.model.participant).then(
+                    function (response) {
+                        $scope.model.participant.Id = response.data.Id;
+                    })
+            ]).then(function (response) {
+                dataService.AssignParticipantToTeam($scope.model.participant, $scope.model.team)
+            }).then(function (response) {
+                $modalInstance.close($scope.model.participant);
             });
-            $modalInstance.close($scope.model.participant);
         };
 
         $scope.cancel = function () {
