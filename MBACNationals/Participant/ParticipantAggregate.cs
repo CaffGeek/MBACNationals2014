@@ -8,18 +8,18 @@ namespace MBACNationals.Participant
         IApplyEvent<ParticipantCreated>,
         IApplyEvent<ParticipantRenamed>
     {
-        private string name;
-        private Gender gender;
+        public string Name { get; private set; }
+        public Gender Gender { get; private set; }
 
         public void Apply(ParticipantCreated e)
         {
-            name = e.Name;
-            gender = e.Gender;
+            Name = e.Name;
+            Gender = e.Gender;
         }
 
         public void Apply(ParticipantRenamed e)
         {
-            name = e.Name;
+            Name = e.Name;
         }
     }
 }

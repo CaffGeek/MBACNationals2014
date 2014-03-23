@@ -22,7 +22,6 @@ namespace WebFrontend.Controllers
 
             Domain.Dispatcher.SendCommand(command);
 
-            //return RedirectToAction("Index", "Participant");
             return Json(command);
         }
     }

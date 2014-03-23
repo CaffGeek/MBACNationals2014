@@ -43,6 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AReadModel.cs" />
+    <Compile Include="ContingentQueries.cs" />
+    <Compile Include="ContingentViewQueries.cs" />
+    <Compile Include="IContingentViewQueries.cs" />
+    <Compile Include="IContingentQueries.cs" />
     <Compile Include="ITeamQueries.cs" />
     <Compile Include="Participants.cs" />
     <Compile Include="IParticipantQueries.cs" />

@@ -11,12 +11,14 @@ namespace MBACNationalsTests
     public class TeamTests : BDDTest<TeamCommandHandlers, TeamAggregate>
     {
         private Guid teamId;
+        private Guid contingentId;
         private string teamName;
 
         [TestInitialize]
         public void Setup()
         {
             teamId = Guid.NewGuid();
+            contingentId = Guid.NewGuid();
             teamName = "Test Team";
         }
 
@@ -52,6 +54,23 @@ namespace MBACNationalsTests
                     Name = teamName,
                 }),
                 ThenFailWith<TeamAlreadyExists>());
+        }
+
+        [TestMethod]
+        public void CanAssignTeamToContingent()
+        {
+            Test(
+                Given(),
+                When(new AddTeamToContingent
+                {
+                    Id = teamId,
+                    ContingentId = contingentId
+                }),
+                Then(new TeamAssignedToContingent
+                {
+                    Id = teamId,
+                    ContingentId = contingentId
+                }));
         }
     }
 }

@@ -1,20 +1,31 @@
 ﻿(function () {
     "use strict";
 
-    var contingentController = function ($scope, $http, $q, modalFactory) {
-        $scope.model = {};
+    var contingentController = function ($scope, $http, $q, modalFactory, dataService) {
+        var province = "MB"; //TODO: load from url or something
 
-        $scope.model.Province = "MB";
-        $scope.model.Teams = $scope.model.Teams || []; //TODO: Use a Factory
+        $scope.model = {
+            Teams: []
+        };
+        //$scope.model.Province = province;
+        //$scope.model.Teams = $scope.model.Teams || []; //TODO: Use a Factory
+
+        if (province) {
+            dataService.LoadContingent(province).
+                success(function (contingent) {
+                    $scope.model = contingent;
+                    editDivisions($scope.model.Teams);
+                }); 
+        } else {
+            if (!$scope.model.Teams.length) {
+                editDivisions($scope.model.Teams);
+            }
+        }
         
         $scope.editDivisions = editDivisions;
         $scope.editTeam = editTeam;
         $scope.editParticipant = editParticipant;
         
-        if (!$scope.model.Teams.length) {
-            editDivisions($scope.model.Teams);
-        }
-
         function editDivisions(teams) {
             var modalPromise = modalFactory.Divisions(teams);
 
@@ -23,12 +34,25 @@
                 
                 $scope.model.Teams = $.extend(true, [], currentTeams, data);
 
+                //TODO: Save all the selected teams and assign them to the contingent
                 angular.forEach($scope.model.Teams, function (team) {
-                    team.Bowlers = team.Bowlers || [];
-                    while (team.Bowlers.length < team.SizeLimit) {
-                        team.Bowlers.push({ Gender: team.Gender });
-                    }
+                    if (!team.Selected || team.ContingentId)
+                        return;
+                                        
+                    dataService.SaveTeam(team).then(function (data) {
+                        team.Id = data.data.Id;
+                        dataService.AssignTeamToContingent(data.data, $scope.model);
+                    }).then(function (data) {
+                        angular.forEach($scope.model.Teams, function (team) {
+                            team.Bowlers = team.Bowlers || [];
+                            while (team.Bowlers.length < team.SizeLimit) {
+                                team.Bowlers.push({ Gender: team.Gender });
+                            }
+                        });
+                        editTeamModal(0);
+                    });
                 });
+                
 
                 var editTeamModal = function (i) {
                     if (i >= $scope.model.Teams.length)
@@ -45,7 +69,6 @@
                         editTeamModal(i + 1);
                     }
                 };
-                editTeamModal(0);
             });
         };
 

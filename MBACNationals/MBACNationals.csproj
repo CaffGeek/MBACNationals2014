@@ -40,6 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contingent\ContingentCommandHandlers.cs" />
+    <Compile Include="Contingent\ContingentAggregate.cs" />
+    <Compile Include="Contingent\Commands\CreateContingent.cs" />
+    <Compile Include="Contingent\Exceptions.cs" />
     <Compile Include="Participant\Commands\RenameParticipant.cs" />
     <Compile Include="Participant\Exceptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -47,6 +51,7 @@
     <Compile Include="Participant\ParticipantAggregate.cs" />
     <Compile Include="Participant\ParticipantCommandHandlers.cs" />
     <Compile Include="Participant\Commands\AddParticipantToTeam.cs" />
+    <Compile Include="Team\Commands\AddTeamToContingent.cs" />
     <Compile Include="Team\Commands\CreateTeam.cs" />
     <Compile Include="Team\Exceptions.cs" />
     <Compile Include="Team\TeamAggregate.cs" />

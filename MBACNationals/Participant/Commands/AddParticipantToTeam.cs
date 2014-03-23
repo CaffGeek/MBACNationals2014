@@ -1,6 +1,4 @@
-﻿using Events;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace MBACNationals.Participant.Commands
 {

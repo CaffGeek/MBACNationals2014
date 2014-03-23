@@ -5,7 +5,9 @@
         return {
             SaveTeam: saveTeam,
             SaveParticipant: saveParticipant,
-            AssignParticipantToTeam: assignParticipantToTeam
+            AssignTeamToContingent: assignTeamToContingent,
+            AssignParticipantToTeam: assignParticipantToTeam,
+            LoadContingent: loadContingent
         };
 
         function saveTeam(team) {
@@ -16,12 +18,25 @@
             return $http.post('/Participant/Create', participant);
         }
 
+        function assignTeamToContingent(team, contingent) {
+            return $http.post('/Contingent/AssignTeamToContingent', {
+                Id: team.Id,
+                ContingentId: contingent.Id
+            });
+        }
+
         function assignParticipantToTeam(participant, team) {
             return $http.post('/Contingent/AssignParticipantToTeam', {
                 Id: participant.Id,
                 TeamId: team.Id
             });
         }
+
+        function loadContingent(province) {
+            return $http.get('/Contingent', {
+                params: { province: province }
+            });
+        };
     };
 
     app.factory('dataService', ['$http', dataService]);

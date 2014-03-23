@@ -5,9 +5,7 @@
         $scope.model = {};
 
         $scope.model.title = title;
-        $scope.model.divisions = (divisions && divisions.length)
-            ? divisions 
-            : [
+        $scope.model.divisions = [
                 { Name: 'Tournament Men Single', Selected: true, Gender: 'M', SizeLimit: 1, RequiresShirtSize: true, RequiresBio: true },
                 { Name: 'Tournament Ladies Single', Selected: true, Gender: 'F', SizeLimit: 1, RequiresShirtSize: true, RequiresBio: true },
                 { Name: 'Tournament Men', Selected: true, Gender: 'M', SizeLimit: 5, RequiresCoach: true },
@@ -20,7 +18,12 @@
         if (divisions.length) {
             angular.forEach($scope.model.divisions, function (value) {
                 var division = divisions.filter(function (obj) { return obj.Name === value.Name; });
-                if (!division.length) {
+                if (division.length) {
+                    value.Selected = true;
+                    //TODO: Merge division[0] over value rather than doing this piecemeal
+                    value.Id = division[0].Id;
+                    value.ContingentId = division[0].ContingentId;
+                } else {
                     value.Selected = false;
                 }
             });
