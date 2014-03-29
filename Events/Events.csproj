@@ -46,7 +46,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Participant\ParticipantCreated.cs" />
     <Compile Include="Participant\ParticipantAssignedToTeam.cs" />
-    <Compile Include="Contingent\zzzTeamAssignedToContingent.cs" />
     <Compile Include="Contingent\TeamCreated.cs" />
   </ItemGroup>
   <ItemGroup>

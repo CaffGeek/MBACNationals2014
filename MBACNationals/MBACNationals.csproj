@@ -51,10 +51,8 @@
     <Compile Include="Participant\ParticipantAggregate.cs" />
     <Compile Include="Participant\ParticipantCommandHandlers.cs" />
     <Compile Include="Participant\Commands\AddParticipantToTeam.cs" />
-    <Compile Include="Contingent\Commands\zzzAddTeamToContingent.cs" />
     <Compile Include="Contingent\Commands\CreateTeam.cs" />
     <Compile Include="Contingent\Exceptions\TeamAlreadyExists.cs" />
-    <Compile Include="zzzTeam\zzzTeamAggregate.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Edument.CQRS\Edument.CQRS.csproj">

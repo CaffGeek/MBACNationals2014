@@ -47,7 +47,6 @@
     <Compile Include="ContingentViewQueries.cs" />
     <Compile Include="IContingentViewQueries.cs" />
     <Compile Include="IContingentQueries.cs" />
-    <Compile Include="zzzITeamQueries.cs" />
     <Compile Include="Participants.cs" />
     <Compile Include="IParticipantQueries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,7 +55,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="zzzTeams.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Edument.CQRS\Edument.CQRS.csproj">

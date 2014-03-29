@@ -169,7 +169,6 @@
     <Compile Include="Attributes\RestrictAccessByRouteId.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ContingentController.cs" />
-    <Compile Include="Controllers\zzzTeamController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ParticipantController.cs" />
     <Compile Include="Domain.cs" />
