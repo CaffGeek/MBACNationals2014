@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace MBACNationals.Team
+namespace MBACNationals.Contingent
 {
     public class TeamAlreadyExists : Exception, ISerializable
     {

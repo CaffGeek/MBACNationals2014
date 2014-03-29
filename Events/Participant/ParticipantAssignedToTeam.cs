@@ -7,5 +7,6 @@ namespace Events.Participant
     {
         public Guid Id;
         public Guid TeamId;
+        public string Name;
     }
 }

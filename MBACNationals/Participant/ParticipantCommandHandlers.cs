@@ -46,7 +46,8 @@ namespace MBACNationals.Participant
             yield return new ParticipantAssignedToTeam
                 {
                     Id = command.Id,
-                    TeamId = command.TeamId
+                    TeamId = command.TeamId,
+                    Name = agg.Name
                 };
         }
     }

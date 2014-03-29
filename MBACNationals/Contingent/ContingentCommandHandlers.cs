@@ -3,11 +3,13 @@ using Events.Contingent;
 using MBACNationals.Contingent.Commands;
 using System;
 using System.Collections;
+using System.Linq;
 
 namespace MBACNationals.Contingent
 {
     public class ContingentCommandHandlers :
-        IHandleCommand<CreateContingent, ContingentAggregate>
+        IHandleCommand<CreateContingent, ContingentAggregate>,
+        IHandleCommand<CreateTeam, ContingentAggregate>
     {
         public IEnumerable Handle(Func<Guid, ContingentAggregate> al, CreateContingent command)
         {
@@ -20,6 +22,21 @@ namespace MBACNationals.Contingent
             {
                 Id = command.Id,
                 Province = command.Province
+            };
+        }
+
+        public IEnumerable Handle(Func<Guid, ContingentAggregate> al, CreateTeam command)
+        {
+            var contingentAggregate = al(command.ContingentId);
+
+            if (contingentAggregate.Teams.Any(t => t.Name.Equals(command.Name)))
+                throw new TeamAlreadyExists();
+
+            yield return new TeamCreated
+            {
+                Id = command.ContingentId,
+                TeamId = command.TeamId,
+                Name = command.Name,
             };
         }
     }

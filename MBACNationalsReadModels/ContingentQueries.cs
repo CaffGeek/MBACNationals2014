@@ -21,27 +21,27 @@ namespace MBACNationals.ReadModels
         {
             using (var odb = OdbFactory.Open(ReadModelFilePath))
             {
-                var contingents = odb.QueryAndExecute<Contingent>();
-                return contingents.ToList();
+                return GetContingents(odb);
             }
         }
 
-        private Contingent GetContingent(Guid id)
+        private List<Contingent> GetContingents(NDatabase.Api.IOdb odb)
         {
-            using (var odb = OdbFactory.Open(ReadModelFilePath))
-            {
-                var contingents = odb.QueryAndExecute<Contingent>().Where(p => p.Id.Equals(id));
-                return contingents.FirstOrDefault();
-            }
+            return odb.QueryAndExecute<Contingent>().ToList();
+        }
+
+        private Contingent GetContingent(Guid id, NDatabase.Api.IOdb odb)
+        {
+            return odb.QueryAndExecute<Contingent>().FirstOrDefault(c => c.Id == id);
         }
 
         public void Handle(ContingentCreated e)
         {
-            if (GetContingent(e.Id) != null)
-                return; //Already created
-
             using (var odb = OdbFactory.Open(ReadModelFilePath))
             {
+                if (GetContingent(e.Id, odb) != null)
+                    return; //Already created
+
                 odb.Store(
                     new Contingent
                     {

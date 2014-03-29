@@ -39,9 +39,9 @@
                     if (!team.Selected || team.ContingentId)
                         return;
                                         
-                    dataService.SaveTeam(team).then(function (data) {
-                        team.Id = data.data.Id;
-                        dataService.AssignTeamToContingent(data.data, $scope.model);
+                    dataService.SaveTeam(team, $scope.model).then(function (data) {
+                        team.Id = data.data.TeamId;
+                        //dataService.AssignTeamToContingent(data.data, $scope.model);
                     }).then(function (data) {
                         angular.forEach($scope.model.Teams, function (team) {
                             team.Bowlers = team.Bowlers || [];

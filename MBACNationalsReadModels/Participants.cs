@@ -1,6 +1,5 @@
 ﻿using Edument.CQRS;
 using Events.Participant;
-using Events.Team;
 using NDatabase;
 using System;
 using System.Collections.Generic;
@@ -71,14 +70,14 @@ namespace MBACNationals.ReadModels
 
         public void Handle(ParticipantAssignedToTeam e)
         {
-            using (var odb = OdbFactory.Open(ReadModelFilePath))
-            {
-                var participant = odb.QueryAndExecute<Participant>().Where(p => p.Id.Equals(e.Id)).FirstOrDefault();
-                var team = odb.QueryAndExecute<Teams.Team>().Where(t => t.Id.Equals(e.TeamId)).FirstOrDefault(); //TODO: Move the team name into the event
-                participant.TeamId = team.Id;
-                participant.TeamName = team.Name;
-                odb.Store(participant);
-            }
+            //using (var odb = OdbFactory.Open(ReadModelFilePath))
+            //{
+            //    var participant = odb.QueryAndExecute<Participant>().Where(p => p.Id.Equals(e.Id)).FirstOrDefault();
+            //    var team = odb.QueryAndExecute<Teams.Team>().Where(t => t.Id.Equals(e.TeamId)).FirstOrDefault(); //TODO: Move the team name into the event
+            //    participant.TeamId = team.Id;
+            //    participant.TeamName = team.Name;
+            //    odb.Store(participant);
+            //}
         }
     }
 }

@@ -1,14 +1,14 @@
 ﻿using Edument.CQRS;
-using Events.Team;
-using MBACNationals.Team;
-using MBACNationals.Team.Commands;
+using Events.Contingent;
+using MBACNationals.Contingent;
+using MBACNationals.Contingent.Commands;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
 namespace MBACNationalsTests
 {
     [TestClass]
-    public class TeamTests : BDDTest<TeamCommandHandlers, TeamAggregate>
+    public class TeamTests : BDDTest<ContingentCommandHandlers, ContingentAggregate>
     {
         private Guid teamId;
         private Guid contingentId;
@@ -26,51 +26,44 @@ namespace MBACNationalsTests
         public void CanCreateTeam()
         {
             Test(
-                Given(),
+                Given(new ContingentCreated
+                {
+                    Id = contingentId,
+                }),
                 When(new CreateTeam
                 {
-                    Id = teamId,
+                    ContingentId = contingentId,
+                    TeamId = teamId,
                     Name = teamName,
                 }),
                 Then(new TeamCreated
                 {
-                    Id = teamId,
+                    Id = contingentId,
+                    TeamId = teamId,
                     Name = teamName,
                 }));
         }
 
-        [TestMethod]
-        public void CanNotDuplicateTeam()
-        {
-            Test(
-                Given(new TeamCreated
-                {
-                    Id = teamId,
-                    Name = teamName,
-                }),
-                When(new CreateTeam
-                {
-                    Id = teamId,
-                    Name = teamName,
-                }),
-                ThenFailWith<TeamAlreadyExists>());
-        }
-
-        [TestMethod]
-        public void CanAssignTeamToContingent()
-        {
-            Test(
-                Given(),
-                When(new AddTeamToContingent
-                {
-                    Id = teamId,
-                    ContingentId = contingentId
-                }),
-                Then(new TeamAssignedToContingent
-                {
-                    Id = teamId,
-                    ContingentId = contingentId
-                }));
-        }
+        //[TestMethod]
+        //public void CanNotDuplicateTeam()
+        //{
+        //    Test(
+        //        Given(new ContingentCreated
+        //        {
+        //            Id = contingentId,
+        //        }, new TeamCreated
+        //        {
+        //            Id = contingentId,
+        //            TeamId = teamId,
+        //            Name = teamName,
+        //        }),
+        //        When(new CreateTeam
+        //        {
+        //            ContingentId = contingentId,
+        //            TeamId = teamId,
+        //            Name = teamName,
+        //        }),
+        //        ThenFailWith<TeamAlreadyExists>());
+        //}
     }
 }

@@ -13,7 +13,7 @@ namespace WebFrontend.Controllers
                 new WebFrontend.Models.Participant.Index
                 {
                     Participants = Domain.ParticipantQueries.GetParticipants(),
-                    Teams = Domain.TeamQueries.GetTeams(),
+                    //Teams = Domain.TeamQueries.GetTeams(),
                 });
         }
 

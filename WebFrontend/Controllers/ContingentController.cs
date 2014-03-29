@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using WebFrontend.Attributes;
 using MBACNationals.Participant.Commands;
 using System;
-using MBACNationals.Team.Commands;
+using MBACNationals.Contingent.Commands;
 
 namespace WebFrontend.Controllers
 {
@@ -39,11 +39,22 @@ namespace WebFrontend.Controllers
         }
 
         [HttpPost]
-        public JsonResult AssignTeamToContingent(AddTeamToContingent command)
+        public JsonResult CreateTeam(CreateTeam command)
         {
+            command.TeamId = command.TeamId == Guid.Empty
+                ? Guid.NewGuid()
+                : command.TeamId;
+
             Domain.Dispatcher.SendCommand(command);
             return Json(command);
         }
+
+        //[HttpPost]
+        //public JsonResult AssignTeamToContingent(AddTeamToContingent command)
+        //{
+        //    Domain.Dispatcher.SendCommand(command);
+        //    return Json(command);
+        //}
 
         [HttpPost]
         public JsonResult AssignParticipantToTeam(AddParticipantToTeam command)

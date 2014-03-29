@@ -1,7 +1,6 @@
 ﻿using Edument.CQRS;
 using MBACNationals.ReadModels;
 using MBACNationals.Participant;
-using MBACNationals.Team;
 using MBACNationals.Contingent;
 using System;
 using System.IO;
@@ -12,7 +11,6 @@ namespace WebFrontend
     {
         public static MessageDispatcher Dispatcher;
         public static IParticipantQueries ParticipantQueries;
-        public static ITeamQueries TeamQueries;
         public static IContingentQueries ContingentQueries;
         public static IContingentViewQueries ContingentViewQueries;
 
@@ -21,14 +19,10 @@ namespace WebFrontend
             Dispatcher = new MessageDispatcher(new SqlEventStore(Properties.Settings.Default.DefaultConnection));
 
             Dispatcher.ScanInstance(new ParticipantCommandHandlers());
-            Dispatcher.ScanInstance(new TeamCommandHandlers());
             Dispatcher.ScanInstance(new ContingentCommandHandlers());
 
             ParticipantQueries = new Participants();
             Dispatcher.ScanInstance(ParticipantQueries);
-
-            TeamQueries = new Teams();
-            Dispatcher.ScanInstance(TeamQueries);
 
             ContingentQueries = new ContingentQueries();
             Dispatcher.ScanInstance(ContingentQueries);

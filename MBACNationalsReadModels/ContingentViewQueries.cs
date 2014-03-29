@@ -1,6 +1,6 @@
 ﻿using Edument.CQRS;
 using Events.Contingent;
-using Events.Team;
+using Events.Participant;
 using NDatabase;
 using System;
 using System.Collections.Generic;
@@ -11,13 +11,19 @@ namespace MBACNationals.ReadModels
     public class ContingentViewQueries : AReadModel,
         IContingentViewQueries,
         ISubscribeTo<ContingentCreated>,
-        ISubscribeTo<TeamAssignedToContingent>
+        ISubscribeTo<TeamCreated>,
+        ISubscribeTo<ParticipantAssignedToTeam>
     {
         public class Contingent
         {
             public Guid Id { get; internal set; }
             public string Province { get; internal set; }
             public IList<Team> Teams { get; internal set; }
+            
+            public Contingent()
+            {
+                Teams = new List<Team>();
+            }
         }
 
         public class Team
@@ -25,6 +31,19 @@ namespace MBACNationals.ReadModels
             public Guid Id { get; internal set; }
             public string Name { get; internal set; }
             public Guid ContingentId { get; internal set; }
+            public IList<Participant> Bowlers { get; internal set; }
+
+            public Team()
+            {
+                Bowlers = new List<Participant>();
+            }
+        }
+
+        public class Participant
+        {
+            public Guid Id { get; internal set; }
+            public string Name { get; internal set; }
+            public Guid TeamId { get; internal set; }
         }
 
         public Contingent GetContingent(Guid id)
@@ -70,27 +89,48 @@ namespace MBACNationals.ReadModels
                     new Contingent
                     {
                         Id = e.Id,
-                        Province = e.Province,
-                        Teams = new List<Team>()
+                        Province = e.Province
                     });
             }
         }
 
-        public void Handle(TeamAssignedToContingent e)
+        public void Handle(TeamCreated e)
         {
             using (var odb = OdbFactory.Open(ReadModelFilePath))
             {
-                var contingent = GetContingent(e.ContingentId, odb);
+                var contingent = GetContingent(e.Id, odb);
                 if (contingent == null)
                     return; //Contingent does not exist!
 
                 contingent.Teams.Add(
                     new Team
                     {
-                        Id = e.Id,
+                        Id = e.TeamId,
                         Name = e.Name,
-                        ContingentId = e.ContingentId
+                        ContingentId = e.Id
                     });
+
+                odb.Store(contingent);
+            }
+        }
+
+        public void Handle(ParticipantAssignedToTeam e)
+        {
+            using (var odb = OdbFactory.Open(ReadModelFilePath))
+            {
+                var contingent = odb.QueryAndExecute<Contingent>().FirstOrDefault(c => c.Teams.Any(t => t.Id.Equals(e.TeamId)));
+                if (contingent == null)
+                    return;
+
+                var team = contingent.Teams.FirstOrDefault(t => t.Id.Equals(e.TeamId));
+                if (team == null)
+                    return;
+
+                team.Bowlers.Add(new Participant { 
+                    Id = e.Id,
+                    TeamId = e.TeamId,
+                    Name = e.Name,
+                });
 
                 odb.Store(contingent);
             }

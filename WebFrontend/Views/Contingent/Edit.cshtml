@@ -22,7 +22,7 @@
         
         <div class="row">
             <h4><a data-ng-click="editDivisions(model.Teams);">Teams:</a></h4>
-            <div class="col-xs-3" data-ng-repeat="team in model.Teams" data-ng-show="team.Selected">
+            <div class="col-xs-3" data-ng-repeat="team in model.Teams">
                 <h5><a data-ng-click="editTeam(team);">{{team.Name}} {{team.Id}}</a></h5>                
                 <ol>
                     <li data-ng-show="team.Coach.Name">Coach: {{team.Coach.Name}}</li>
