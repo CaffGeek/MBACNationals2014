@@ -29,15 +29,15 @@ namespace MBACNationals.Contingent
         {
             var contingentAggregate = al(command.ContingentId);
 
-            if (contingentAggregate.Teams.Any(t => t.Name.Equals(command.Name)))
-                throw new TeamAlreadyExists();
-
-            yield return new TeamCreated
-            {
-                Id = command.ContingentId,
-                TeamId = command.TeamId,
-                Name = command.Name,
-            };
+            if (!contingentAggregate.Teams.Any(t => t.Name.Equals(command.Name)))
+                yield return new TeamCreated
+                {
+                    Id = command.ContingentId,
+                    TeamId = command.TeamId,
+                    Name = command.Name,
+                    Gender = command.Gender,
+                    SizeLimit = command.SizeLimit
+                };
         }
     }
 }

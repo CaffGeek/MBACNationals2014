@@ -7,5 +7,7 @@ namespace Events.Contingent
         public Guid Id;
         public Guid TeamId;
         public string Name;
+        public string Gender;
+        public int SizeLimit;
     }
 }

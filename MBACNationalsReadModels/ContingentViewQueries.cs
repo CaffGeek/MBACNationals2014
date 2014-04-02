@@ -19,11 +19,6 @@ namespace MBACNationals.ReadModels
             public Guid Id { get; internal set; }
             public string Province { get; internal set; }
             public IList<Team> Teams { get; internal set; }
-            
-            public Contingent()
-            {
-                Teams = new List<Team>();
-            }
         }
 
         public class Team
@@ -32,11 +27,7 @@ namespace MBACNationals.ReadModels
             public string Name { get; internal set; }
             public Guid ContingentId { get; internal set; }
             public IList<Participant> Bowlers { get; internal set; }
-
-            public Team()
-            {
-                Bowlers = new List<Participant>();
-            }
+            public int SizeLimit { get; internal set; }
         }
 
         public class Participant
@@ -89,7 +80,8 @@ namespace MBACNationals.ReadModels
                     new Contingent
                     {
                         Id = e.Id,
-                        Province = e.Province
+                        Province = e.Province,
+                        Teams = new List<Team>()
                     });
             }
         }
@@ -107,7 +99,9 @@ namespace MBACNationals.ReadModels
                     {
                         Id = e.TeamId,
                         Name = e.Name,
-                        ContingentId = e.Id
+                        ContingentId = e.Id,
+                        SizeLimit = e.SizeLimit,
+                        Bowlers = new List<Participant>()
                     });
 
                 odb.Store(contingent);

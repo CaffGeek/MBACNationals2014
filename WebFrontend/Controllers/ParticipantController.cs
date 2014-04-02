@@ -13,7 +13,6 @@ namespace WebFrontend.Controllers
                 new WebFrontend.Models.Participant.Index
                 {
                     Participants = Domain.ParticipantQueries.GetParticipants(),
-                    //Teams = Domain.TeamQueries.GetTeams(),
                 });
         }
 
@@ -33,7 +32,14 @@ namespace WebFrontend.Controllers
 
             Domain.Dispatcher.SendCommand(command);
 
-            //return Redirect("Index"); 
+            return Json(command);
+        }
+
+        [HttpPost]
+        public JsonResult Update(UpdateParticipant command)
+        {
+            Domain.Dispatcher.SendCommand(command);
+
             return Json(command);
         }
 
@@ -48,7 +54,6 @@ namespace WebFrontend.Controllers
 
             Domain.Dispatcher.SendCommand(command);
 
-            //return Content(value); 
             return Json(command);
         }
     }

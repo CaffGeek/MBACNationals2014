@@ -5,7 +5,6 @@
         return {
             SaveTeam: saveTeam,
             SaveParticipant: saveParticipant,
-            //AssignTeamToContingent: assignTeamToContingent,
             AssignParticipantToTeam: assignParticipantToTeam,
             LoadContingent: loadContingent
         };
@@ -15,19 +14,16 @@
                 ContingentId: contingent.Id,
                 TeamId: team.Id,
                 Name: team.Name,
+                Gender: team.Gender,
+                SizeLimit: team.SizeLimit,
             });
         }
 
         function saveParticipant(participant) {
-            return $http.post('/Participant/Create', participant);
+            return participant.Id
+                ? $http.post('/Participant/Update', participant)
+                : $http.post('/Participant/Create', participant);
         }
-
-        //function assignTeamToContingent(team, contingent) {
-        //    return $http.post('/Contingent/AssignTeamToContingent', {
-        //        Id: team.Id,
-        //        ContingentId: contingent.Id
-        //    });
-        //}
 
         function assignParticipantToTeam(participant, team) {
             return $http.post('/Contingent/AssignParticipantToTeam', {

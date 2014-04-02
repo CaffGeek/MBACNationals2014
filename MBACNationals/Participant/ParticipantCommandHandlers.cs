@@ -8,6 +8,7 @@ namespace MBACNationals.Participant
 {
     public class ParticipantCommandHandlers :
         IHandleCommand<CreateParticipant, ParticipantAggregate>,
+        IHandleCommand<UpdateParticipant, ParticipantAggregate>,
         IHandleCommand<RenameParticipant, ParticipantAggregate>,
         IHandleCommand<AddParticipantToTeam, ParticipantAggregate>
     {
@@ -28,27 +29,43 @@ namespace MBACNationals.Participant
             };
         }
 
+        public IEnumerable Handle(Func<Guid, ParticipantAggregate> al, UpdateParticipant command)
+        {
+            var agg = al(command.Id);
+
+            if (agg.Name != command.Name)
+                yield return new ParticipantRenamed
+                {
+                    Id = command.Id,
+                    Name = command.Name,
+                };
+
+            //TODO: More
+        }
+
         public IEnumerable Handle(Func<Guid, ParticipantAggregate> al, RenameParticipant command)
         {
             var agg = al(command.Id);
 
-            yield return new ParticipantRenamed
-            {
-                Id = command.Id,
-                Name = command.Name,
-            };
+            if (agg.Name != command.Name)
+                yield return new ParticipantRenamed
+                {
+                    Id = command.Id,
+                    Name = command.Name,
+                };
         }
 
         public IEnumerable Handle(Func<Guid, ParticipantAggregate> al, AddParticipantToTeam command)
         {
             var agg = al(command.Id);
 
-            yield return new ParticipantAssignedToTeam
-                {
-                    Id = command.Id,
-                    TeamId = command.TeamId,
-                    Name = agg.Name
-                };
+            if (agg.TeamId != command.TeamId)
+                yield return new ParticipantAssignedToTeam
+                    {
+                        Id = command.Id,
+                        TeamId = command.TeamId,
+                        Name = agg.Name
+                    };
         }
     }
 }

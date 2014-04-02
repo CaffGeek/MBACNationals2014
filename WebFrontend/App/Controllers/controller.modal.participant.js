@@ -12,11 +12,6 @@
             var deferred = $q.defer();
 
             $q.all([
-                //TODO: The team should be saved when the divisions controller is completed, not now, this is too late
-                //dataService.SaveTeam($scope.model.team).then(
-                //    function (response) {
-                //        $scope.model.team.Id = response.data.Id;
-                //    }),
                 dataService.SaveParticipant($scope.model.participant).then(
                     function (response) {
                         $scope.model.participant.Id = response.data.Id;
