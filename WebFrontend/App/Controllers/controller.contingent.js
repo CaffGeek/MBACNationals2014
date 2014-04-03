@@ -30,43 +30,49 @@
             var modalPromise = modalFactory.Divisions(teams);
 
             modalPromise.then(function (data) {
-                var currentTeams = $scope.model.Teams;
-                
-                $scope.model.Teams = $.extend(true, [], currentTeams, data);
+                //var currentTeams = $scope.model.Teams;                
+                //TODO: $scope.model.Teams = $.extend(true, [], currentTeams, data);
 
-                //TODO: Save all the selected teams and assign them to the contingent
-                angular.forEach($scope.model.Teams, function (team) {
-                    if (!team.Selected || team.ContingentId)
-                        return;
-                                        
-                    dataService.SaveTeam(team, $scope.model).then(function (data) {
-                        team.Id = data.data.TeamId;
-                    }).then(function (data) {
-                        angular.forEach($scope.model.Teams, function (team) {
-                            team.Bowlers = team.Bowlers || [];
-                            while (team.Bowlers.length < team.SizeLimit) {
-                                team.Bowlers.push({ Gender: team.Gender });
-                            }
-                        });
-                        editTeamModal(0);
-                    });
+                //Remove division
+                angular.forEach($scope.model.Teams, function (team, idx) {
+                    if (data.filter(function (obj) { return obj.Name == team.Name; }).length === 0)
+                    {
+                        alert('remove ' + team.Name); 
+                        $scope.model.Teams.splice(idx);
+                    }
+                });
+
+                angular.forEach(data, function (team, idx) {
+                    if ($scope.model.Teams.filter(function (obj) { return obj.Name == team.Name; }).length === 0) {
+                        $scope.model.Teams.push(team);
+                    }
                 });
                 
+                var saveTeamPromises = [];
+                angular.forEach($scope.model.Teams, function (team) {
+                    var saveTeamPromise = dataService.SaveTeam(team, $scope.model).then(function (data) {
+                        team.Id = data.data.TeamId;
+
+                        team.Bowlers = team.Bowlers || [];
+                        while (team.Bowlers.length < team.SizeLimit) {
+                            team.Bowlers.push({ Gender: team.Gender });
+                        }
+                    });
+
+                    saveTeamPromises.push(saveTeamPromise);
+                });
+
+                $q.all(saveTeamPromises).then(function (data) {
+                    editTeamModal(0);  //TODO: Only open new teams for editing
+                });
 
                 var editTeamModal = function (i) {
                     if (i >= $scope.model.Teams.length)
                         return;
 
-                    var team = $scope.model.Teams[i];
-                    
-                    if (team.Selected) {
-                        var modalPromise = editTeam(team);
-                        modalPromise.then(function () {
-                            editTeamModal(i + 1);
-                        });
-                    } else {
+                    editTeam($scope.model.Teams[i]).then(function () {
                         editTeamModal(i + 1);
-                    }
+                    });
                 };
             });
         };

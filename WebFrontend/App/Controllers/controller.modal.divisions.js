@@ -30,7 +30,7 @@
         }
 
         $scope.save = function () {
-            $modalInstance.close($scope.model.divisions);
+            $modalInstance.close($scope.model.divisions.filter(function (obj) { return obj.Selected; }));
         };
 
         $scope.cancel = function () {
