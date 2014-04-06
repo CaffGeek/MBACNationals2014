@@ -1,5 +1,4 @@
-﻿using MBACNationals.Enums;
-using System;
+﻿using System;
 
 namespace MBACNationals.Participant.Commands
 {
@@ -7,8 +6,12 @@ namespace MBACNationals.Participant.Commands
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public Gender Gender { get; set; }
+        public string Gender { get; set; }
         public bool IsDelegate { get; set; }
         public int YearsQualifying { get; set; }
+        public int LeagueGames { get; set; }
+        public int LeaguePinfall { get; set; }
+        public int TournamentGames { get; set; }
+        public int TournamentPinfall { get; set; }
     }
 }

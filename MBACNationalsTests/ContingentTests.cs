@@ -1,6 +1,5 @@
 ﻿using Edument.CQRS;
 using Events.Contingent;
-using MBACNationals.Enums;
 using MBACNationals.Contingent;
 using MBACNationals.Contingent.Commands;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

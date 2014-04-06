@@ -1,5 +1,4 @@
-﻿using MBACNationals.Enums;
-using System;
+﻿using System;
 
 namespace MBACNationals.Participant.Commands
 {

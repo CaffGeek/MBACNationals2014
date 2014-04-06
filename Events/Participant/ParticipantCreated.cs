@@ -1,5 +1,4 @@
-﻿using MBACNationals.Enums;
-using System;
+﻿using System;
 
 namespace Events.Participant
 {
@@ -7,7 +6,7 @@ namespace Events.Participant
     {
         public Guid Id;
         public string Name;
-        public Gender Gender;
+        public string Gender;
         public bool IsDelegate;
         public int YearsQualifying;
     }

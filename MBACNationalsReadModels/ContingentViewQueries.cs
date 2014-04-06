@@ -12,7 +12,9 @@ namespace MBACNationals.ReadModels
         IContingentViewQueries,
         ISubscribeTo<ContingentCreated>,
         ISubscribeTo<TeamCreated>,
-        ISubscribeTo<ParticipantAssignedToTeam>
+        ISubscribeTo<ParticipantCreated>,
+        ISubscribeTo<ParticipantAssignedToTeam>,
+        ISubscribeTo<ParticipantRenamed>
     {
         public class Contingent
         {
@@ -27,7 +29,14 @@ namespace MBACNationals.ReadModels
             public string Name { get; internal set; }
             public Guid ContingentId { get; internal set; }
             public IList<Participant> Bowlers { get; internal set; }
+            public string Gender { get; internal set; }
             public int SizeLimit { get; internal set; }
+            public bool RequiresShirtSize { get; internal set; }
+            public bool RequiresCoach { get; internal set; }
+            public bool RequiresAverage { get; internal set; }
+            public bool RequiresBio { get; internal set; }
+            public bool RequiresGender { get; internal set; }
+            public bool IncludesSinglesRep { get; internal set; }
         }
 
         public class Participant
@@ -35,6 +44,7 @@ namespace MBACNationals.ReadModels
             public Guid Id { get; internal set; }
             public string Name { get; internal set; }
             public Guid TeamId { get; internal set; }
+            public Guid ContingentId { get; internal set; }
         }
 
         public Contingent GetContingent(Guid id)
@@ -69,6 +79,12 @@ namespace MBACNationals.ReadModels
             return contingents.FirstOrDefault();
         }
 
+        private Participant GetParticipant(Guid id, NDatabase.Api.IOdb odb)
+        {
+            var participants = odb.QueryAndExecute<Participant>().Where(p => p.Id.Equals(id));
+            return participants.FirstOrDefault();
+        }
+
         public void Handle(ContingentCreated e)
         {
             using (var odb = OdbFactory.Open(ReadModelFilePath))
@@ -101,10 +117,34 @@ namespace MBACNationals.ReadModels
                         Name = e.Name,
                         ContingentId = e.Id,
                         SizeLimit = e.SizeLimit,
-                        Bowlers = new List<Participant>()
+                        Bowlers = new List<Participant>(),
+                        Gender = e.Gender,
+                        RequiresShirtSize = e.RequiresShirtSize,
+                        RequiresCoach = e.RequiresCoach,
+                        RequiresAverage = e.RequiresAverage,
+                        RequiresBio = e.RequiresBio,
+                        RequiresGender = e.RequiresGender,
+                        IncludesSinglesRep = e.IncludesSinglesRep,
                     });
 
                 odb.Store(contingent);
+            }
+        }
+
+        public void Handle(ParticipantCreated e)
+        {
+            using (var odb = OdbFactory.Open(ReadModelFilePath))
+            {
+                var participant = GetParticipant(e.Id, odb);
+                if (participant != null)
+                    return; //Already created
+
+                odb.Store(
+                    new Participant
+                    {
+                        Id = e.Id,
+                        Name = e.Name
+                    });
             }
         }
 
@@ -120,13 +160,28 @@ namespace MBACNationals.ReadModels
                 if (team == null)
                     return;
 
-                team.Bowlers.Add(new Participant { 
-                    Id = e.Id,
-                    TeamId = e.TeamId,
-                    Name = e.Name,
-                });
+                var participant = GetParticipant(e.Id, odb);
+                if (participant == null)
+                    return;
+
+                team.Bowlers.Add(participant);
 
                 odb.Store(contingent);
+            }
+        }
+
+        public void Handle(ParticipantRenamed e)
+        {
+            using (var odb = OdbFactory.Open(ReadModelFilePath))
+            {
+
+                var participant = GetParticipant(e.Id, odb);
+                if (participant == null)
+                    return;
+
+                participant.Name = e.Name;
+
+                odb.Store(participant);
             }
         }
     }

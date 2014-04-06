@@ -5,8 +5,8 @@ namespace MBACNationals.ReadModels
 {
     public interface IParticipantQueries
     {
-        List<Participants.Participant> GetParticipants();
+        List<ParticipantQueries.Participant> GetParticipants();
 
-        Participants.Participant GetParticipant(System.Guid id);
+        ParticipantQueries.Participant GetParticipant(System.Guid id);
     }
 }

@@ -36,7 +36,13 @@ namespace MBACNationals.Contingent
                     TeamId = command.TeamId,
                     Name = command.Name,
                     Gender = command.Gender,
-                    SizeLimit = command.SizeLimit
+                    SizeLimit = command.SizeLimit,
+                    RequiresShirtSize = command.RequiresShirtSize,
+                    RequiresCoach = command.RequiresCoach,
+                    RequiresAverage = command.RequiresAverage,
+                    RequiresBio = command.RequiresBio,
+                    RequiresGender = command.RequiresGender,
+                    IncludesSinglesRep = command.IncludesSinglesRep
                 };
         }
     }

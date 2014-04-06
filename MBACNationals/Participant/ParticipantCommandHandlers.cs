@@ -40,6 +40,45 @@ namespace MBACNationals.Participant
                     Name = command.Name,
                 };
 
+            if (agg.Gender != command.Gender)
+                yield return new ParticipantGenderReassigned
+                {
+                    Id = command.Id,
+                    Gender = command.Gender,
+                };
+
+            if (agg.IsDelegate != command.IsDelegate && command.IsDelegate)
+                yield return new ParticipantDelegateStatusGranted
+                {
+                    Id = command.Id
+                };
+
+            if (agg.IsDelegate != command.IsDelegate && !command.IsDelegate)
+                yield return new ParticipantDelegateStatusRevoked
+                {
+                    Id = command.Id
+                };
+
+            if (agg.YearsQualifying != command.YearsQualifying)
+                yield return new ParticipantYearsQualifyingChanged
+                {
+                    Id = command.Id,
+                    YearsQualifying = command.YearsQualifying,
+                };
+
+            if (agg.LeaguePinfall != command.LeaguePinfall
+                || agg.LeagueGames != command.LeagueGames
+                || agg.TournamentPinfall != command.TournamentPinfall
+                || agg.TournamentGames != command.TournamentGames)
+                yield return new ParticipantAverageChanged
+                {
+                    Id = command.Id,
+                    LeaguePinfall = command.LeaguePinfall,
+                    LeagueGames = command.LeagueGames,
+                    TournamentPinfall = command.TournamentPinfall,
+                    TournamentGames = command.TournamentGames,
+                };
+
             //TODO: More
         }
 

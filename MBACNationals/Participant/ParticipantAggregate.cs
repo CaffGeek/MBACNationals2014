@@ -1,6 +1,5 @@
 ﻿using Edument.CQRS;
 using Events.Participant;
-using MBACNationals.Enums;
 using System;
 
 namespace MBACNationals.Participant
@@ -8,11 +7,23 @@ namespace MBACNationals.Participant
     public class ParticipantAggregate : Aggregate,
         IApplyEvent<ParticipantCreated>,
         IApplyEvent<ParticipantRenamed>,
-        IApplyEvent<ParticipantAssignedToTeam>
+        IApplyEvent<ParticipantAssignedToTeam>,
+        IApplyEvent<ParticipantGenderReassigned>,
+        IApplyEvent<ParticipantDelegateStatusGranted>,
+        IApplyEvent<ParticipantDelegateStatusRevoked>,
+        IApplyEvent<ParticipantYearsQualifyingChanged>,
+        IApplyEvent<ParticipantAverageChanged>
     {
         public Guid TeamId { get; private set; }
         public string Name { get; private set; }
-        public Gender Gender { get; private set; }
+        public string Gender { get; private set; }
+        public bool IsDelegate { get; private set; }
+        public int YearsQualifying { get; private set; }
+        public int LeaguePinfall { get; private set; }
+        public int LeagueGames { get; private set; }
+        public int TournamentPinfall { get; private set; }
+        public int TournamentGames { get; private set; }
+        public int Average { get; private set; }
 
         public void Apply(ParticipantCreated e)
         {
@@ -28,6 +39,35 @@ namespace MBACNationals.Participant
         public void Apply(ParticipantAssignedToTeam e)
         {
             TeamId = e.TeamId;
+        }
+
+        public void Apply(ParticipantGenderReassigned e)
+        {
+            Gender = e.Gender;
+        }
+
+        public void Apply(ParticipantDelegateStatusGranted e)
+        {
+            IsDelegate = true;
+        }
+
+        public void Apply(ParticipantDelegateStatusRevoked e)
+        {
+            IsDelegate = false;
+        }
+
+        public void Apply(ParticipantYearsQualifyingChanged e)
+        {
+            YearsQualifying = e.YearsQualifying;
+        }
+
+        public void Apply(ParticipantAverageChanged e)
+        {
+            LeaguePinfall = e.LeaguePinfall;
+            LeagueGames = e.LeagueGames;
+            TournamentPinfall = e.TournamentPinfall;
+            TournamentGames = e.TournamentGames;
+            Average = (LeaguePinfall + TournamentPinfall) / (LeagueGames + TournamentGames);
         }
     }
 }

@@ -6,16 +6,24 @@
             SaveTeam: saveTeam,
             SaveParticipant: saveParticipant,
             AssignParticipantToTeam: assignParticipantToTeam,
-            LoadContingent: loadContingent
+            LoadContingent: loadContingent,
+            LoadParticipant: loadParticipant
         };
 
         function saveTeam(team, contingent) {
+            //TODO: Use extend
             return $http.post('/Contingent/CreateTeam', {
                 ContingentId: contingent.Id,
                 TeamId: team.Id,
                 Name: team.Name,
                 Gender: team.Gender,
                 SizeLimit: team.SizeLimit,
+                RequiresShirtSize: team.RequiresShirtSize,
+                RequiresCoach: team.RequiresCoach,
+                RequiresAverage: team.RequiresAverage,
+                RequiresBio: team.RequiresBio,
+                RequiresGender: team.RequiresGender,
+                IncludesSinglesRep: team.IncludesSinglesRep
             });
         }
 
@@ -35,6 +43,12 @@
         function loadContingent(province) {
             return $http.get('/Contingent', {
                 params: { province: province }
+            });
+        };
+
+        function loadParticipant(id) {
+            return $http.get('/Participant', {
+                params: { id: id }
             });
         };
     };

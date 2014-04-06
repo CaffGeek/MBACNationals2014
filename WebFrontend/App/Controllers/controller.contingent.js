@@ -106,7 +106,11 @@
         };
 
         function editParticipant(participant, team) {
-            return modalFactory.Participant(participant, team);
+            return dataService.LoadParticipant(participant.Id).then(function (data) {
+                return modalFactory.Participant(data.data, team).then(function (data) {
+                    participant = data; //TODO: write back to scope somehow
+                });
+            });
         };
     };
 

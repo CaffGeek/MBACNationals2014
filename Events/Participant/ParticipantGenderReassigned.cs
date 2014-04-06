@@ -2,9 +2,9 @@
 
 namespace Events.Participant
 {
-    public class ParticipantRenamed
+    public class ParticipantGenderReassigned
     {
         public Guid Id;
-        public string Name;
+        public string Gender;
     }
 }

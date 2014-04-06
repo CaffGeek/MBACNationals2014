@@ -16,6 +16,13 @@ namespace WebFrontend.Controllers
                 });
         }
 
+        [HttpGet]
+        public JsonResult Index(Guid id)
+        {
+            var participant = Domain.ParticipantQueries.GetParticipant(id);
+            return Json(participant, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult View(Guid id)
         {
             return View(

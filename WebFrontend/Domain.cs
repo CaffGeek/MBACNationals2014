@@ -21,7 +21,7 @@ namespace WebFrontend
             Dispatcher.ScanInstance(new ParticipantCommandHandlers());
             Dispatcher.ScanInstance(new ContingentCommandHandlers());
 
-            ParticipantQueries = new Participants();
+            ParticipantQueries = new ParticipantQueries();
             Dispatcher.ScanInstance(ParticipantQueries);
 
             ContingentQueries = new ContingentQueries();

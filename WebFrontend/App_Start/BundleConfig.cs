@@ -48,6 +48,7 @@ namespace WebFrontend
                         "~/Scripts/ui-bootstrap-tpls-0.9.0.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                        "~/App/Filters/filter.*",
                         "~/App/app.js",
                         "~/App/Controllers/controller.*",
                         "~/App/Directives/directive.*",

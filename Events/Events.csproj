@@ -41,7 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contingent\ContingentCreated.cs" />
-    <Compile Include="Enums\Gender.cs" />
+    <Compile Include="Participant\ParticipantAverageChanged.cs" />
+    <Compile Include="Participant\ParticipantYearsQualifyingChanged.cs" />
+    <Compile Include="Participant\ParticipantDelegateStatusChanged.cs" />
+    <Compile Include="Participant\ParticipantGenderReassigned.cs" />
     <Compile Include="Participant\ParticipantRenamed.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Participant\ParticipantCreated.cs" />
