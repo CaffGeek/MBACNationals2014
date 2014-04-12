@@ -184,7 +184,6 @@
     <Compile Include="Models\Account\UsersContext.cs" />
     <Compile Include="Models\Participant\View.cs" />
     <Compile Include="Models\Participant\Index.cs" />
-    <Compile Include="Models\zzzTeam\zzzView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -197,7 +196,10 @@
     <Content Include="App\Controllers\controller.contingent.js" />
     <Content Include="App\Controllers\controller.modal.divisions.js" />
     <Content Include="App\Controllers\controller.modal.participant.js" />
+    <Content Include="App\Controllers\controller.reservation.js" />
+    <Content Include="App\Directives\directive.droppable.js" />
     <Content Include="App\Directives\directive.autofocus.js" />
+    <Content Include="App\Directives\directive.draggable.js" />
     <Content Include="App\Factories\factory.modal.js" />
     <Content Include="App\Filters\filter.rounddown.js" />
     <Content Include="App\Services\service.data.js" />
@@ -339,6 +341,7 @@
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\_RemoveExternalLoginsPartial.cshtml" />
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Contingent\Reservation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\Entities\" />

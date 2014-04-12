@@ -26,6 +26,13 @@ namespace WebFrontend.Controllers
             return Json(participant, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult Contingent(string province)
+        {
+            var participant = Domain.ReservationQueries.GetParticipants(province);
+            return Json(participant, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult View(Guid id)
         {
             return View(

@@ -2,7 +2,6 @@
 using MBACNationals.ReadModels;
 using MBACNationals.Participant;
 using MBACNationals.Contingent;
-using System;
 using System.IO;
 
 namespace WebFrontend
@@ -13,6 +12,7 @@ namespace WebFrontend
         public static IParticipantQueries ParticipantQueries;
         public static IContingentQueries ContingentQueries;
         public static IContingentViewQueries ContingentViewQueries;
+        public static IReservationQueries ReservationQueries;
 
         public static void Setup()
         {
@@ -20,6 +20,7 @@ namespace WebFrontend
 
             Dispatcher.ScanInstance(new ParticipantCommandHandlers());
             Dispatcher.ScanInstance(new ContingentCommandHandlers());
+            //TODO: Dispatcher.ScanInstance(new ReservationCommandHandlers());
 
             ParticipantQueries = new ParticipantQueries();
             Dispatcher.ScanInstance(ParticipantQueries);
@@ -29,6 +30,9 @@ namespace WebFrontend
 
             ContingentViewQueries = new ContingentViewQueries();
             Dispatcher.ScanInstance(ContingentViewQueries);
+
+            ReservationQueries = new ReservationQueries();
+            Dispatcher.ScanInstance(ReservationQueries);
 
             File.Delete(@"C:\Users\chadh\Documents\GitHub\MBACNationals2014\WebFrontend\App_Data\MBACReadModels.db");
             Dispatcher.RepublishEvents(); //TODO: HACK: each time the app starts, the readmodel is regenerated

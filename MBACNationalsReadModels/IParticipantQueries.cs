@@ -1,5 +1,4 @@
-﻿using Events.Participant;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace MBACNationals.ReadModels
 {

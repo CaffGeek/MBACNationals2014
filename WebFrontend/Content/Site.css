@@ -63,3 +63,33 @@ textarea {
 a {
     cursor: pointer;
 }
+
+.hotelRooms {
+    width: 100%;
+}
+
+.hotelRooms > div {
+    width: 19%;
+    float: left;
+    margin:  .5%;
+    padding: .5%;
+    height: 8em;
+}
+
+.hotelRooms > div > div {
+    border: 1px black solid;
+    overflow-y: auto;
+    height: 6em;
+}
+
+[draggable] {
+    cursor: pointer;
+}
+
+.drag {
+  opacity: 0.5;
+}
+
+.hotelRooms .over {
+  background: #ddd;
+}

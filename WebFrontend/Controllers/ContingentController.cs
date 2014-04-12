@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using WebFrontend.Attributes;
 using MBACNationals.Participant.Commands;
 using System;
+using System.Linq;
 using MBACNationals.Contingent.Commands;
 
 namespace WebFrontend.Controllers
@@ -11,6 +12,18 @@ namespace WebFrontend.Controllers
     public class ContingentController : Controller
     {
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        [RestrictAccessByRouteId] //Province
+        public ActionResult Reservation()
+        {
+            return View();
+        }
+
+        [RestrictAccessByRouteId] //Province
+        public ActionResult Edit()
         {
             return View();
         }
@@ -30,12 +43,6 @@ namespace WebFrontend.Controllers
             contingent = Domain.ContingentViewQueries.GetContingent(province);
 
             return Json(contingent, JsonRequestBehavior.AllowGet);
-        }
-
-        [RestrictAccessByRouteId] //Province
-        public ActionResult Edit(string province)
-        {
-            return View(province);
         }
 
         [HttpPost]

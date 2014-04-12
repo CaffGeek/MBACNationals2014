@@ -1,0 +1,22 @@
+﻿<div data-ng-app="app">
+    <div class="container" data-ng-controller="ReservationController">
+        <h2>Drag attendees to assign them to rooms</h2>
+
+        <div class="row clearfix">
+		    <div class="col-md-2 column">
+                <div data-ng-repeat="p in model.participants">
+                    <div id="{{p.Id}}" data-draggable="">{{p.Name}}</div>
+                </div>        
+		    </div>
+		    
+			<div class="col-md-10">
+				<div data-ng-repeat="y in [1, 2, 3, 4, 5]" class="hotelRooms">
+					<div data-ng-repeat="x in [1, 2, 3, 4, 5]">
+                        <h6>Room #{{(y-1)*5+x}}</h6>
+                        <div id="bin{{(y-1)*5+x}}" data-droppable="{{(y-1)*5+x}}" data-drop="handleDrop"></div>
+					</div>
+				</div>
+			</div>
+	    </div>
+    </div>
+</div>

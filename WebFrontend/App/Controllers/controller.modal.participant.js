@@ -1,7 +1,7 @@
 ﻿(function () {
     "use strict";
 
-    var modalParticipantController = function ($scope, $q, $modalInstance, $http, dataService, participant, team) {
+    var modalParticipantController = function ($scope, $q, $modalInstance, $http, $timeout, dataService, participant, team) {
         $scope.model = {};
         
         $scope.model.title = team.Name;

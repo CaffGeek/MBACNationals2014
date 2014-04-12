@@ -8,7 +8,8 @@
             AssignParticipantToTeam: assignParticipantToTeam,
             AssignCoachToTeam: assignCoachToTeam,
             LoadContingent: loadContingent,
-            LoadParticipant: loadParticipant
+            LoadParticipant: loadParticipant,
+            LoadParticipants: loadParticipants
         };
 
         function saveTeam(team, contingent) {
@@ -57,6 +58,12 @@
         function loadParticipant(id) {
             return $http.get('/Participant', {
                 params: { id: id }
+            });
+        };
+
+        function loadParticipants(province) {
+            return $http.get('/Participant/Contingent', {
+                params: { province: province }
             });
         };
     };
