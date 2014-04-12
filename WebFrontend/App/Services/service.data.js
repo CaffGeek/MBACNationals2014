@@ -6,6 +6,7 @@
             SaveTeam: saveTeam,
             SaveParticipant: saveParticipant,
             AssignParticipantToTeam: assignParticipantToTeam,
+            AssignCoachToTeam: assignCoachToTeam,
             LoadContingent: loadContingent,
             LoadParticipant: loadParticipant
         };
@@ -35,6 +36,13 @@
 
         function assignParticipantToTeam(participant, team) {
             return $http.post('/Contingent/AssignParticipantToTeam', {
+                Id: participant.Id,
+                TeamId: team.Id
+            });
+        }
+
+        function assignCoachToTeam(participant, team) {
+            return $http.post('/Contingent/AssignCoachToTeam', {
                 Id: participant.Id,
                 TeamId: team.Id
             });

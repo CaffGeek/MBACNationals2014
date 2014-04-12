@@ -14,6 +14,7 @@ namespace MBACNationals.ReadModels
         ISubscribeTo<TeamCreated>,
         ISubscribeTo<ParticipantCreated>,
         ISubscribeTo<ParticipantAssignedToTeam>,
+        ISubscribeTo<CoachAssignedToTeam>,
         ISubscribeTo<ParticipantRenamed>,
         ISubscribeTo<ParticipantDelegateStatusGranted>,
         ISubscribeTo<ParticipantDelegateStatusRevoked>,
@@ -32,6 +33,7 @@ namespace MBACNationals.ReadModels
             public string Name { get; internal set; }
             public Guid ContingentId { get; internal set; }
             public IList<Participant> Bowlers { get; internal set; }
+            public Participant Coach { get; internal set; }
             public string Gender { get; internal set; }
             public int SizeLimit { get; internal set; }
             public bool RequiresShirtSize { get; internal set; }
@@ -122,6 +124,26 @@ namespace MBACNationals.ReadModels
                     return;
 
                 team.Bowlers.Add(participant);
+            });
+        }
+
+        public void Handle(CoachAssignedToTeam e)
+        {
+            var cntgt = Read<Contingent>(c => c.Teams.Any(t => t.Id.Equals(e.TeamId))).FirstOrDefault();
+            if (cntgt == null)
+                return;
+
+            Update<Contingent>(cntgt.Id, (contingent, odb) =>
+            {
+                var team = contingent.Teams.FirstOrDefault(t => t.Id.Equals(e.TeamId));
+                if (team == null)
+                    return;
+
+                var participant = Read<Participant>(x => x.Id.Equals(e.Id), odb).FirstOrDefault();
+                if (participant == null)
+                    return;
+
+                team.Coach = participant;
             });
         }
 

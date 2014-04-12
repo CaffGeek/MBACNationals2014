@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contingent\ContingentCreated.cs" />
+    <Compile Include="Participant\CoachAssignedToTeam.cs" />
     <Compile Include="Participant\ParticipantAverageChanged.cs" />
     <Compile Include="Participant\ParticipantYearsQualifyingChanged.cs" />
     <Compile Include="Participant\ParticipantDelegateStatusChanged.cs" />

@@ -48,16 +48,16 @@ namespace WebFrontend.Controllers
             Domain.Dispatcher.SendCommand(command);
             return Json(command);
         }
-
-        //[HttpPost]
-        //public JsonResult AssignTeamToContingent(AddTeamToContingent command)
-        //{
-        //    Domain.Dispatcher.SendCommand(command);
-        //    return Json(command);
-        //}
-
+        
         [HttpPost]
         public JsonResult AssignParticipantToTeam(AddParticipantToTeam command)
+        {
+            Domain.Dispatcher.SendCommand(command);
+            return Json(command);
+        }
+
+        [HttpPost]
+        public JsonResult AssignCoachToTeam(AddCoachToTeam command)
         {
             Domain.Dispatcher.SendCommand(command);
             return Json(command);

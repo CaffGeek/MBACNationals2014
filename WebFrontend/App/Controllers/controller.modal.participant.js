@@ -17,7 +17,11 @@
                         $scope.model.participant.Id = response.data.Id;
                     })
             ]).then(function (response) {
-                dataService.AssignParticipantToTeam($scope.model.participant, $scope.model.team);
+                if ($scope.model.participant.IsCoach) {
+                    dataService.AssignCoachToTeam($scope.model.participant, $scope.model.team);
+                } else {
+                    dataService.AssignParticipantToTeam($scope.model.participant, $scope.model.team);
+                }
             }).then(function (response) {
                 $modalInstance.close($scope.model.participant);
             });

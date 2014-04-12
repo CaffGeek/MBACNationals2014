@@ -1,6 +1,6 @@
 ﻿<div class="modal-content">
     <div class="modal-header">
-        <h3>{{model.title}}</h3>
+        <h3>{{model.title}} <span ng-if="model.participant.IsCoach">Coach</span></h3>
     </div>
     <div class="modal-body form-horizontal">
         <div class="form-group">

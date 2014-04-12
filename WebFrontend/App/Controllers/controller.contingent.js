@@ -101,17 +101,18 @@
             };
             editBowlerModal(0);
 
-            if (team.RequiresCoach) {
-                team.Coach = { IsCoach: true };
-                var modalPromise = editParticipant(team.Coach, team);
-            }
 
-            return dfd.promise;
+            return dfd.promise.then(function () { 
+                if (team.RequiresCoach) {
+                    team.Coach = { IsCoach: true };
+                    var modalPromise = editParticipant(team.Coach, team);
+                } 
+            });
         };
 
         function editParticipant(participant, team) {
             return dataService.LoadParticipant(participant.Id).then(function (data) {
-                return modalFactory.Participant(data.data, team).then(function (data) {
+                return modalFactory.Participant(data.data || participant, team).then(function (data) {
                     participant = data; //TODO: write back to scope somehow
                 });
             });
