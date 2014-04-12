@@ -27,7 +27,15 @@ namespace MBACNationals.ReadModels
             }
         }
 
-        protected T Read<T>(Func<T, bool> predicate)
+        protected IEnumerable<T> Read<T>()
+        {
+            using (var odb = OdbFactory.Open(ReadModelFilePath))
+            {
+                return Read<T>(x => true, odb);
+            }
+        }
+
+        protected IEnumerable<T> Read<T>(Func<T, bool> predicate)
         {
             using (var odb = OdbFactory.Open(ReadModelFilePath))
             {
@@ -35,14 +43,13 @@ namespace MBACNationals.ReadModels
             }
         }
 
-        protected T Read<T>(Func<T, bool> predicate, NDatabase.Api.IOdb odb)
+        protected IEnumerable<T> Read<T>(Func<T, bool> predicate, NDatabase.Api.IOdb odb)
         {
             if (odb == null)
                 return Read(predicate);
 
             return odb.QueryAndExecute<T>()
-                .Where(p => predicate(p))
-                .FirstOrDefault();            
+                .Where(p => predicate(p));    
         }
 
         protected void Update<T>(Guid id, Action<T> func)

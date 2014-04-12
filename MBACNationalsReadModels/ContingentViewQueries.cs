@@ -54,12 +54,12 @@ namespace MBACNationals.ReadModels
 
         public Contingent GetContingent(Guid id)
         {
-            return Read<Contingent>(x => x.Id.Equals(id));
+            return Read<Contingent>(x => x.Id.Equals(id)).FirstOrDefault();
         }
 
         public Contingent GetContingent(string province)
         {
-            return Read<Contingent>(x => x.Province.Equals(province));            
+            return Read<Contingent>(x => x.Province.Equals(province)).FirstOrDefault();            
         }
         
         public void Handle(ContingentCreated e)
@@ -108,7 +108,7 @@ namespace MBACNationals.ReadModels
 
         public void Handle(ParticipantAssignedToTeam e)
         {
-            var cntgt = Read<Contingent>(c => c.Teams.Any(t => t.Id.Equals(e.TeamId)));
+            var cntgt = Read<Contingent>(c => c.Teams.Any(t => t.Id.Equals(e.TeamId))).FirstOrDefault();
             if (cntgt == null)
                 return;
 
@@ -117,7 +117,7 @@ namespace MBACNationals.ReadModels
                 if (team == null)
                     return;
 
-                var participant = Read<Participant>(x => x.Id.Equals(e.Id), odb);
+                var participant = Read<Participant>(x => x.Id.Equals(e.Id), odb).FirstOrDefault();
                 if (participant == null)
                     return;
 
