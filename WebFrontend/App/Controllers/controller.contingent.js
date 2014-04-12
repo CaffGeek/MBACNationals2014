@@ -1,25 +1,24 @@
 ﻿(function () {
     "use strict";
 
-    var contingentController = function ($scope, $http, $q, modalFactory, dataService) {
-        var province = "MB"; //TODO: load from url or something
+    var contingentController = function ($scope, $http, $q, $location, modalFactory, dataService) {
+        var url = $location.absUrl();
+        var lastSlash = url.lastIndexOf('/');
+        var province = url.slice(lastSlash+1);
 
         $scope.model = {
             Teams: []
         };
-        //$scope.model.Province = province;
-        //$scope.model.Teams = $scope.model.Teams || []; //TODO: Use a Factory
 
         if (province) {
             dataService.LoadContingent(province).
                 success(function (contingent) {
                     $scope.model = contingent;
-                    editDivisions($scope.model.Teams);
+
+                    if (!$scope.model.Teams.length) {
+                        editDivisions($scope.model.Teams);
+                    }
                 }); 
-        } else {
-            if (!$scope.model.Teams.length) {
-                editDivisions($scope.model.Teams);
-            }
         }
         
         $scope.editDivisions = editDivisions;
@@ -82,7 +81,7 @@
             
             team.Bowlers = team.Bowlers || [];
 
-            var editParticipantModal = function (i) {
+            var editBowlerModal = function (i) {
                 if (i >= team.SizeLimit)
                 {
                     dfd.resolve();
@@ -97,10 +96,15 @@
 
                 var modalPromise = editParticipant(participant, team);
                 modalPromise.then(function (data) {
-                    editParticipantModal(i + 1);
+                    editBowlerModal(i + 1);
                 });
             };
-            editParticipantModal(0);
+            editBowlerModal(0);
+
+            if (team.RequiresCoach) {
+                team.Coach = { IsCoach: true };
+                var modalPromise = editParticipant(team.Coach, team);
+            }
 
             return dfd.promise;
         };

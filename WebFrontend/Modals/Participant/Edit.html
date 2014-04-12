@@ -18,20 +18,13 @@
         </div>
         
         <div class="form-group">
-            <label for="name" class="col-sm-3 control-label">Rookie</label>
-            <div class="col-sm-9">
-                <input type="checkbox" data-ng-model="model.participant.IsRookie" />
-            </div>
-        </div>
-
-        <div class="form-group" data-ng-show="!model.participant.IsRookie">
             <label for="name" class="col-sm-3 control-label">Years</label>
             <div class="col-sm-9">
-                <input type="number" data-ng-model="model.participant.YearsQualifying" /> (including this)
+                <input type="number" data-ng-model="model.participant.YearsQualifying" min="1" /> (including this)
             </div>
         </div>
 
-        <div class="form-group"><!--data-ng-show="model.team.RequiresGender"-->
+        <div class="form-group" data-ng-show="model.team.RequiresGender">
             <label for="name" class="col-sm-3 control-label">Gender</label>
             <div class="col-sm-9">
                 <label class="radio-inline">
@@ -43,14 +36,14 @@
             </div>
         </div>
 
-        <div class="form-group" data-ng-show="model.team.RequiresShirtSize">
+        <div class="form-group" data-ng-if="model.team.RequiresShirtSize">
             <label for="name" class="col-sm-3 control-label">Shirt</label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" id="shirtSize" placeholder="Shirt Size" data-ng-model="model.participant.ShirtSize"  />
             </div>
         </div>
 
-        <div class="form-group table-responsive" data-ng-show="model.team.RequiresAverage">
+        <div class="form-group table-responsive" data-ng-if="model.team.RequiresAverage">
             <table class="table table-condensed table-bordered">
                 <thead>
                     <tr>

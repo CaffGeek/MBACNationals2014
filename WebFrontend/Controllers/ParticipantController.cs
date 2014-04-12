@@ -17,9 +17,12 @@ namespace WebFrontend.Controllers
         }
 
         [HttpGet]
-        public JsonResult Index(Guid id)
+        public JsonResult Index(Guid? id)
         {
-            var participant = Domain.ParticipantQueries.GetParticipant(id);
+            if (!id.HasValue)
+                return Json(null, JsonRequestBehavior.AllowGet);
+
+            var participant = Domain.ParticipantQueries.GetParticipant(id.Value);
             return Json(participant, JsonRequestBehavior.AllowGet);
         }
 
