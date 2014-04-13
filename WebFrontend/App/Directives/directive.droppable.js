@@ -48,8 +48,7 @@
                   var value = $(this).attr('data-droppable');
                   var binId = this.id;
                   var item = document.getElementById(e.dataTransfer.getData('Text'));
-                  this.appendChild(item);
-
+                  
                   scope.$apply(function (scope) {
                       var fn = scope.drop();
                       if ('undefined' !== typeof fn) {

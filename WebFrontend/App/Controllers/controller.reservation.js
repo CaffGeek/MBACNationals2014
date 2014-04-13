@@ -18,7 +18,13 @@
         }
 
         $scope.handleDrop = function (id, roomNumber) {
-            dataService.AssignParticipantToRoom(id, roomNumber);
+            dataService.AssignParticipantToRoom(id, roomNumber).then(function (data) {
+                var participant = $scope.model.participants.filter(function (obj) { return obj.Id == id; })[0];
+                if (!participant)
+                    return;
+
+                participant.RoomNumber = roomNumber;
+            });
         }
     };
 
