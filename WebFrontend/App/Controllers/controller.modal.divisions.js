@@ -38,5 +38,5 @@
         };
     };
 
-    app.controller("ModalDivisionsController", modalDivisionsController);
+    app.controller("ModalDivisionsController", ["$scope", "$modalInstance", "$http", "title", "divisions", modalDivisionsController]);
 }());

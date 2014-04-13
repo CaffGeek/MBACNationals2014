@@ -32,5 +32,5 @@
         };
     };
 
-    app.controller("ModalParticipantController", modalParticipantController);
+    app.controller("ModalParticipantController", ["$scope", "$q", "$modalInstance", "$http", "$timeout", "dataService", "participant", "team", modalParticipantController]);
 }());

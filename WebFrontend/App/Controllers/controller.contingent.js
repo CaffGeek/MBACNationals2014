@@ -119,5 +119,5 @@
         };
     };
 
-    app.controller("ContingentController", contingentController);
+    app.controller("ContingentController", ["$scope", "$http", "$q", "$location", "modalFactory", "dataService", contingentController]);
 }());

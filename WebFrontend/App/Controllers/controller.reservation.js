@@ -23,5 +23,5 @@
         }
     };
 
-    app.controller("ReservationController", reservationController);
+    app.controller("ReservationController", ["$scope", "$http", "$q", "$location", "modalFactory", "dataService", reservationController]);
 }());
