@@ -29,6 +29,15 @@ namespace MBACNationals.Participant
                 IsDelegate = command.IsDelegate,
                 YearsQualifying = command.YearsQualifying
             };
+
+            yield return new ParticipantAverageChanged
+            {
+                Id = command.Id,
+                LeaguePinfall = command.LeaguePinfall,
+                LeagueGames = command.LeagueGames,
+                TournamentPinfall = command.TournamentPinfall,
+                TournamentGames = command.TournamentGames,
+            };
         }
 
         public IEnumerable Handle(Func<Guid, ParticipantAggregate> al, UpdateParticipant command)
@@ -80,8 +89,6 @@ namespace MBACNationals.Participant
                     TournamentPinfall = command.TournamentPinfall,
                     TournamentGames = command.TournamentGames,
                 };
-
-            //TODO: More
         }
 
         public IEnumerable Handle(Func<Guid, ParticipantAggregate> al, RenameParticipant command)

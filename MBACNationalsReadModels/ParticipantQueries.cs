@@ -57,11 +57,13 @@ namespace MBACNationals.ReadModels
         public void Handle(ParticipantCreated e)
         {
             Create(new Participant
-                        {
-                            Id = e.Id,
-                            Name = e.Name,
-                            Gender = e.Gender
-                        });
+            {
+                Id = e.Id,
+                Name = e.Name,
+                Gender = e.Gender,
+                IsDelegate = e.IsDelegate,
+                YearsQualifying = e.YearsQualifying,
+            });
         }
 
         public void Handle(ParticipantRenamed e)

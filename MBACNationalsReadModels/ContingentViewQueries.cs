@@ -106,12 +106,12 @@ namespace MBACNationals.ReadModels
         public void Handle(ParticipantCreated e)
         {
             Create(new Participant
-                    {
-                        Id = e.Id,
-                        Name = e.Name,
-                        IsDelegate = e.IsDelegate,
-                        IsRookie = e.YearsQualifying == 1
-                    });
+            {
+                Id = e.Id,
+                Name = e.Name,
+                IsDelegate = e.IsDelegate,
+                IsRookie = e.YearsQualifying == 1                
+            });
         }
 
         public void Handle(ParticipantAssignedToTeam e)
