@@ -10,12 +10,17 @@ namespace MBACNationals.ReadModels
 {
     public abstract class AReadModel
     {
-        protected string ReadModelFilePath = MBACNationalsReadModels.Properties.Settings.Default.ReadModelConnection;
+        private string _readModelFilePath;
 
+        public AReadModel(string readModelFilePath)
+        {
+            _readModelFilePath = readModelFilePath;
+        }
+        
         protected void Create<T>(T entity)
             where T : class, IEntity
         {
-            using (var odb = OdbFactory.Open(ReadModelFilePath))
+            using (var odb = OdbFactory.Open(_readModelFilePath))
             {
                 var exists = odb.QueryAndExecute<T>()
                                 .Where(p => p.Id.Equals(entity.Id))
@@ -29,7 +34,7 @@ namespace MBACNationals.ReadModels
 
         protected IEnumerable<T> Read<T>()
         {
-            using (var odb = OdbFactory.Open(ReadModelFilePath))
+            using (var odb = OdbFactory.Open(_readModelFilePath))
             {
                 return Read<T>(x => true, odb);
             }
@@ -37,7 +42,7 @@ namespace MBACNationals.ReadModels
 
         protected IEnumerable<T> Read<T>(Func<T, bool> predicate)
         {
-            using (var odb = OdbFactory.Open(ReadModelFilePath))
+            using (var odb = OdbFactory.Open(_readModelFilePath))
             {
                 return Read(predicate, odb);
             }
@@ -61,7 +66,7 @@ namespace MBACNationals.ReadModels
         protected void Update<T>(Guid id, Action<T, NDatabase.Api.IOdb> func)
             where T : class, IEntity
         {
-            using (var odb = OdbFactory.Open(ReadModelFilePath))
+            using (var odb = OdbFactory.Open(_readModelFilePath))
             {
                 var entity = odb.QueryAndExecute<T>()
                     .Where(p => p.Id.Equals(id))

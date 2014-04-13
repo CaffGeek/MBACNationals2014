@@ -11,6 +11,12 @@ namespace MBACNationals.ReadModels
         ISubscribeTo<ParticipantCreated>,
         ISubscribeTo<ParticipantRenamed>
     {
+        public ReservationQueries(string readModelFilePath)
+            : base(readModelFilePath) 
+        {
+
+        }
+
         public class Participant : IEntity
         {
             public Guid Id { get; internal set; }

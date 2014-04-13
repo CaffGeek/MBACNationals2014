@@ -10,6 +10,12 @@ namespace MBACNationals.ReadModels
         IContingentQueries,
         ISubscribeTo<ContingentCreated>
     {
+        public ContingentQueries(string readModelFilePath)
+            : base(readModelFilePath)
+        {
+
+        }
+
         public class Contingent : IEntity
         {
             public Guid Id { get; internal set; }

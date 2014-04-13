@@ -19,6 +19,12 @@ namespace MBACNationals.ReadModels
         ISubscribeTo<ParticipantYearsQualifyingChanged>,
         ISubscribeTo<ParticipantAverageChanged>
     {
+        public ParticipantQueries(string readModelFilePath)
+            : base(readModelFilePath) 
+        {
+
+        }
+
         public class Participant : IEntity
         {
             public Guid Id { get; internal set; }

@@ -20,6 +20,12 @@ namespace MBACNationals.ReadModels
         ISubscribeTo<ParticipantDelegateStatusRevoked>,
         ISubscribeTo<ParticipantYearsQualifyingChanged>
     {
+        public ContingentViewQueries(string readModelFilePath)
+            : base(readModelFilePath) 
+        {
+
+        }
+
         public class Contingent : IEntity
         {
             public Guid Id { get; internal set; }
