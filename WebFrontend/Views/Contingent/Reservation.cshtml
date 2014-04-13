@@ -5,7 +5,7 @@
         <div class="row clearfix">
 		    <div class="col-md-2 column">
                 <div data-ng-repeat="p in model.participants | filter:{RoomNumber:0, Name:'!!'}">
-                    <div id="{{p.Id}}" data-draggable="">{{p.Name}} - {{p.RoomNumber}}</div>
+                    <div id="{{p.Id}}" data-draggable="">{{p.Name}}</div>
                 </div>        
 		    </div>
 		    
@@ -15,7 +15,7 @@
                         <h6>Room #{{(y-1)*5+x}}</h6>
                         <div id="bin{{(y-1)*5+x}}" data-droppable="{{(y-1)*5+x}}" data-drop="handleDrop">
                             <div data-ng-repeat="p in model.participants | filter:{RoomNumber:(y-1)*5+x}">
-                                <div id="{{p.Id}}" data-draggable="">{{p.Name}} - {{p.RoomNumber}}</div>
+                                <div id="{{p.Id}}" data-draggable="">{{p.Name}}</div>
                             </div>        
                         </div>
 					</div>
