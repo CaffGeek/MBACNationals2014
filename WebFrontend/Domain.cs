@@ -1,4 +1,5 @@
-﻿using Edument.CQRS;
+﻿using MBACNationalsReadModels.Properties;
+using Edument.CQRS;
 using MBACNationals.ReadModels;
 using MBACNationals.Participant;
 using MBACNationals.Contingent;
@@ -34,7 +35,8 @@ namespace WebFrontend
             ReservationQueries = new ReservationQueries();
             Dispatcher.ScanInstance(ReservationQueries);
 
-            File.Delete(@"C:\Users\chadh\Documents\GitHub\MBACNationals2014\WebFrontend\App_Data\MBACReadModels.db");
+            var dbPath = Settings.Default.Properties["ReadModelConnection"].DefaultValue;
+            File.Delete(dbPath as string);
             Dispatcher.RepublishEvents(); //TODO: HACK: each time the app starts, the readmodel is regenerated
         }
     }
