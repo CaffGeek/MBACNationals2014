@@ -37,7 +37,9 @@ namespace WebFrontend
             ReservationQueries = new ReservationQueries(readModelFilePath);
             Dispatcher.ScanInstance(ReservationQueries);
 
-            File.Delete(readModelFilePath);
+            if (File.Exists(readModelFilePath))
+                File.Delete(readModelFilePath);
+
             Dispatcher.RepublishEvents(); //TODO: HACK: each time the app starts, the readmodel is regenerated
         }
     }
