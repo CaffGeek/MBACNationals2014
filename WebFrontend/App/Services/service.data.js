@@ -9,7 +9,8 @@
             AssignCoachToTeam: assignCoachToTeam,
             LoadContingent: loadContingent,
             LoadParticipant: loadParticipant,
-            LoadParticipants: loadParticipants
+            LoadParticipants: loadParticipants,
+            AssignParticipantToRoom: assignParticipantToRoom
         };
 
         function saveTeam(team, contingent) {
@@ -66,6 +67,13 @@
                 params: { province: province }
             });
         };
+
+        function assignParticipantToRoom(id, roomNumber) {
+            return $http.post('/Participant/AssignToRoom', {
+                Id: id,
+                RoomNumber: roomNumber
+            });
+        }
     };
 
     app.factory('dataService', ['$http', dataService]);

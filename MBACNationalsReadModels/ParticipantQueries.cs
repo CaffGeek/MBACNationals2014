@@ -40,6 +40,7 @@ namespace MBACNationals.ReadModels
             public int TournamentPinfall { get; internal set; }
             public int TournamentGames { get; internal set; }
             public int Average { get; internal set; }
+            public int RoomNumber { get; internal set; }
         }
 
         public List<Participant> GetParticipants()

@@ -18,8 +18,7 @@
         }
 
         $scope.handleDrop = function (id, roomNumber) {
-            //TODO:!!!
-            alert('Participant ' + id + ' has been assigned to room #' + roomNumber);
+            dataService.AssignParticipantToRoom(id, roomNumber);
         }
     };
 

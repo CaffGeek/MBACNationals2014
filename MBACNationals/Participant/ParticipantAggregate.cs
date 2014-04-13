@@ -13,7 +13,8 @@ namespace MBACNationals.Participant
         IApplyEvent<ParticipantDelegateStatusGranted>,
         IApplyEvent<ParticipantDelegateStatusRevoked>,
         IApplyEvent<ParticipantYearsQualifyingChanged>,
-        IApplyEvent<ParticipantAverageChanged>
+        IApplyEvent<ParticipantAverageChanged>,
+        IApplyEvent<ParticipantAssignedToRoom>
     {
         public Guid TeamId { get; private set; }
         public string Name { get; private set; }
@@ -26,6 +27,7 @@ namespace MBACNationals.Participant
         public int TournamentPinfall { get; private set; }
         public int TournamentGames { get; private set; }
         public int Average { get; private set; }
+        public int RoomNumber { get; private set; }
 
         public void Apply(ParticipantCreated e)
         {
@@ -76,6 +78,11 @@ namespace MBACNationals.Participant
             TournamentPinfall = e.TournamentPinfall;
             TournamentGames = e.TournamentGames;
             Average = (LeaguePinfall + TournamentPinfall) / (LeagueGames + TournamentGames);
+        }
+
+        public void Apply(ParticipantAssignedToRoom e)
+        {
+            RoomNumber = e.RoomNumber;
         }
     }
 }

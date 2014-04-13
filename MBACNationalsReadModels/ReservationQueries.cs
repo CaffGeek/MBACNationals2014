@@ -9,7 +9,8 @@ namespace MBACNationals.ReadModels
     public class ReservationQueries : AReadModel,
         IReservationQueries,
         ISubscribeTo<ParticipantCreated>,
-        ISubscribeTo<ParticipantRenamed>
+        ISubscribeTo<ParticipantRenamed>,
+        ISubscribeTo<ParticipantAssignedToRoom>
     {
         public ReservationQueries(string readModelFilePath)
             : base(readModelFilePath) 
@@ -22,6 +23,7 @@ namespace MBACNationals.ReadModels
             public Guid Id { get; internal set; }
             public string Name { get; internal set; }
             public string Province { get; internal set; }
+            public int RoomNumber { get; internal set; }
         }
 
         public List<ReservationQueries.Participant> GetParticipants(string province)
@@ -42,6 +44,11 @@ namespace MBACNationals.ReadModels
         public void Handle(ParticipantRenamed e)
         {
             Update<Participant>(e.Id, x => x.Name = e.Name);
+        }
+
+        public void Handle(ParticipantAssignedToRoom e)
+        {
+            Update<Participant>(e.Id, x => x.RoomNumber = e.RoomNumber);
         }
     }
 }

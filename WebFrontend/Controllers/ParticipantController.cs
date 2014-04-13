@@ -61,6 +61,14 @@ namespace WebFrontend.Controllers
         }
 
         [HttpPost]
+        public JsonResult AssignToRoom(AssignParticipantToRoom command)
+        {
+            Domain.Dispatcher.SendCommand(command);
+
+            return Json(command);
+        }
+
+        [HttpPost]
         public JsonResult Rename(string id, string value)
         {
             var command = new RenameParticipant

@@ -11,7 +11,8 @@ namespace MBACNationals.Participant
         IHandleCommand<UpdateParticipant, ParticipantAggregate>,
         IHandleCommand<RenameParticipant, ParticipantAggregate>,
         IHandleCommand<AddParticipantToTeam, ParticipantAggregate>,
-        IHandleCommand<AddCoachToTeam, ParticipantAggregate>
+        IHandleCommand<AddCoachToTeam, ParticipantAggregate>,
+        IHandleCommand<AssignParticipantToRoom, ParticipantAggregate>
     {
         public IEnumerable Handle(Func<Guid, ParticipantAggregate> al, CreateParticipant command)
         {
@@ -119,6 +120,17 @@ namespace MBACNationals.Participant
                     TeamId = command.TeamId,
                     Name = agg.Name
                 };
+        }
+
+        public IEnumerable Handle(Func<Guid, ParticipantAggregate> al, AssignParticipantToRoom command)
+        {
+            var agg = al(command.Id);
+
+            yield return new ParticipantAssignedToRoom
+            {
+                Id = command.Id,
+                RoomNumber = command.RoomNumber
+            };
         }
     }
 }
