@@ -46,6 +46,7 @@
     <Compile Include="Contingent\Exceptions\ContingentAlreadyExists.cs" />
     <Compile Include="Participant\Commands\AddCoachToTeam.cs" />
     <Compile Include="Participant\Commands\AssignParticipantToRoom.cs" />
+    <Compile Include="Participant\Commands\RemoveParticipantFromRoom.cs" />
     <Compile Include="Participant\Commands\UpdateParticipant.cs" />
     <Compile Include="Participant\Commands\RenameParticipant.cs" />
     <Compile Include="Participant\Exceptions.cs" />

@@ -69,6 +69,14 @@ namespace WebFrontend.Controllers
         }
 
         [HttpPost]
+        public JsonResult RemoveFromRoom(RemoveParticipantFromRoom command)
+        {
+            Domain.Dispatcher.SendCommand(command);
+
+            return Json(command);
+        }
+
+        [HttpPost]
         public JsonResult Rename(string id, string value)
         {
             var command = new RenameParticipant

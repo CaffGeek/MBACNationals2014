@@ -12,7 +12,7 @@
     @Styles.Render("~/Content/bootstrap/theme")
 </head>
 <body>
-    <div class="container">
+    <div class="container" data-ng-app="app">
 
         <div class="masthead">
             <div class="row">
@@ -26,22 +26,14 @@
                 </div>
             </div>            
             
-            <ul class="nav nav-justified">
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="#">Schedule</a></li>
-                <li><a href="#">Sponsors</a></li>
-                <li><a href="#">Store</a></li>
-                <li><a href="#">Results</a></li>
-                <li><a href="/Participant">Participants</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
+            @Html.Partial("_AdminMenuPartial")
         </div>
 
         @RenderBody()
 
         <!-- Site footer -->
         <div class="footer">
-            <p>&copy; <a href="http://gcsquared.com/">GC2</a> 2014</p>
+            <p>&copy; <a href="http://gcsquared.com/">GC2</a> @System.DateTime.Now.Year</p>
         </div>
 
     </div>

@@ -1,10 +1,8 @@
-﻿using System.Web.Mvc;
-using System.ComponentModel.DataAnnotations;
-using WebFrontend.Attributes;
+﻿using MBACNationals.Contingent.Commands;
 using MBACNationals.Participant.Commands;
 using System;
-using System.Linq;
-using MBACNationals.Contingent.Commands;
+using System.Web.Mvc;
+using WebFrontend.Attributes;
 
 namespace WebFrontend.Controllers
 {
@@ -17,14 +15,37 @@ namespace WebFrontend.Controllers
         }
 
         [RestrictAccessByRouteId] //Province
-        public ActionResult Reservation()
+        public ActionResult Reservation(string province)
         {
+            ViewBag.Province = province;
             return View();
         }
 
         [RestrictAccessByRouteId] //Province
-        public ActionResult Edit()
+        public ActionResult Edit(string province)
         {
+            ViewBag.Province = province;
+            return View();
+        }
+
+        [RestrictAccessByRouteId] //Province
+        public ActionResult Arrivals(string province)
+        {
+            ViewBag.Province = province;
+            return View();
+        }
+
+        [RestrictAccessByRouteId] //Province
+        public ActionResult Practice(string province)
+        {
+            ViewBag.Province = province;
+            return View();
+        }
+
+        [RestrictAccessByRouteId] //Province
+        public ActionResult Profiles(string province)
+        {
+            ViewBag.Province = province;
             return View();
         }
 

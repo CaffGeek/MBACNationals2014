@@ -14,7 +14,8 @@ namespace MBACNationals.Participant
         IApplyEvent<ParticipantDelegateStatusRevoked>,
         IApplyEvent<ParticipantYearsQualifyingChanged>,
         IApplyEvent<ParticipantAverageChanged>,
-        IApplyEvent<ParticipantAssignedToRoom>
+        IApplyEvent<ParticipantAssignedToRoom>,
+        IApplyEvent<ParticipantRemovedFromRoom>
     {
         public Guid TeamId { get; private set; }
         public string Name { get; private set; }
@@ -83,6 +84,11 @@ namespace MBACNationals.Participant
         public void Apply(ParticipantAssignedToRoom e)
         {
             RoomNumber = e.RoomNumber;
+        }
+
+        public void Apply(ParticipantRemovedFromRoom e)
+        {
+            RoomNumber = 0;
         }
     }
 }

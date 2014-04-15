@@ -197,6 +197,8 @@
     <Content Include="App\Controllers\controller.modal.divisions.js" />
     <Content Include="App\Controllers\controller.modal.participant.js" />
     <Content Include="App\Controllers\controller.reservation.js" />
+    <Content Include="App\Controllers\controller.arrivals.js" />
+    <Content Include="App\Directives\directive.activemenu.js" />
     <Content Include="App\Directives\directive.droppable.js" />
     <Content Include="App\Directives\directive.autofocus.js" />
     <Content Include="App\Directives\directive.draggable.js" />
@@ -342,6 +344,10 @@
     <Content Include="Views\Account\_RemoveExternalLoginsPartial.cshtml" />
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
     <Content Include="Views\Contingent\Reservation.cshtml" />
+    <Content Include="Views\Shared\_AdminMenuPartial.cshtml" />
+    <Content Include="Views\Contingent\Arrivals.cshtml" />
+    <Content Include="Views\Contingent\Practice.cshtml" />
+    <Content Include="Views\Contingent\Profiles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\Entities\" />

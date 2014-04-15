@@ -64,6 +64,11 @@ a {
     cursor: pointer;
 }
 
+div.noHotelRoom {
+    border: 1px black solid;
+    min-height: 20em;
+}
+
 .hotelRooms {
     width: 100%;
 }

@@ -1,0 +1,85 @@
+﻿<div>
+    <div class="container" data-ng-controller="ArrivalsController">
+        <h2>Arrival and Departure Information</h2>
+
+        <h3>Arrivals</h3>
+        <table class="table table-striped table-condensed table-hover">
+            <thead>
+                <tr>
+                    <th>Travel Method</th>
+                    <th>Date & Time</th>
+                    <th>Airline and Flight Number</th>
+                    <th>Number of People</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="item in model.arrivals">
+                    <td>
+                        <select>
+                            <option>Air</option>
+                            <option>Car</option>
+                            <option>Bus</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="datetime" />
+                    </td>
+                    <td>
+                        <input />
+                    </td>
+                    <td>
+                        <input type="number" />
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">
+                        <a data-ng-click="model.arrivals.push({});">Add Row</a>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <h3>Departures</h3>
+        <table class="table table-striped table-condensed table-hover">
+            <thead>
+                <tr>
+                    <th>Travel Method</th>
+                    <th>Date & Time</th>
+                    <th>Airline and Flight Number</th>
+                    <th>Number of People</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="item in model.departures">
+                    <td>
+                        <select>
+                            <option>Air</option>
+                            <option>Car</option>
+                            <option>Bus</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="datetime" />
+
+                    </td>
+                    <td>
+                        <input />
+                    </td>
+                    <td>
+                        <input type="number" />
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">
+                        <a data-ng-click="model.departures.push({});">Add Row</a>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

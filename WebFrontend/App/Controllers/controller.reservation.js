@@ -17,13 +17,23 @@
                 });
         }
 
-        $scope.handleDrop = function (id, roomNumber) {
+        $scope.addToRoom = function (id, roomNumber) {
             dataService.AssignParticipantToRoom(id, roomNumber).then(function (data) {
                 var participant = $scope.model.participants.filter(function (obj) { return obj.Id == id; })[0];
                 if (!participant)
                     return;
 
                 participant.RoomNumber = roomNumber;
+            });
+        }
+
+        $scope.removeFromRoom = function (id) {
+            dataService.RemoveParticipantFromRoom(id).then(function (data) {
+                var participant = $scope.model.participants.filter(function (obj) { return obj.Id == id; })[0];
+                if (!participant)
+                    return;
+
+                participant.RoomNumber = 0;
             });
         }
     };
