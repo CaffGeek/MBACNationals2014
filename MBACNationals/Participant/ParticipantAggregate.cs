@@ -78,7 +78,12 @@ namespace MBACNationals.Participant
             LeagueGames = e.LeagueGames;
             TournamentPinfall = e.TournamentPinfall;
             TournamentGames = e.TournamentGames;
-            Average = (LeaguePinfall + TournamentPinfall) / (LeagueGames + TournamentGames);
+            var pinfall = LeaguePinfall + TournamentPinfall;
+            var games = LeagueGames + TournamentGames;
+            
+            Average = games > 0 
+                ? pinfall / games
+                : 0;
         }
 
         public void Apply(ParticipantAssignedToRoom e)

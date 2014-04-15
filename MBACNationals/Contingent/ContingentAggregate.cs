@@ -1,13 +1,15 @@
 ﻿using Edument.CQRS;
 using Events.Contingent;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace MBACNationals.Contingent
 {
     public class ContingentAggregate : Aggregate,
         IApplyEvent<ContingentCreated>,
-        IApplyEvent<TeamCreated>
+        IApplyEvent<TeamCreated>,
+        IApplyEvent<TeamRemoved>
     {
         public string Province { get; private set; }
         public List<Team> Teams { get; private set; }
@@ -26,6 +28,11 @@ namespace MBACNationals.Contingent
         {
             var team = new Team(e, Id.Value);
             Teams.Add(team);
+        }
+
+        public void Apply(TeamRemoved e)
+        {
+            Teams.RemoveAll(x => x.Id.Equals(e.TeamId));
         }
     }
 
@@ -51,7 +58,7 @@ namespace MBACNationals.Contingent
 
         public void Apply(TeamCreated e)
         {
-            Id = e.Id;
+            Id = e.TeamId;
             Name = e.Name;
             Gender = e.Gender;
             SizeLimit = e.SizeLimit;

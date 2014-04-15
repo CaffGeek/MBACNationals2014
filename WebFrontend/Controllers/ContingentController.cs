@@ -76,6 +76,16 @@ namespace WebFrontend.Controllers
             Domain.Dispatcher.SendCommand(command);
             return Json(command);
         }
+
+        [HttpPost]
+        public JsonResult RemoveTeam(RemoveTeam command)
+        {
+            if (command.TeamId == null || command.TeamId == Guid.Empty)
+                return Json(command);
+
+            Domain.Dispatcher.SendCommand(command);
+            return Json(command);
+        }
         
         [HttpPost]
         public JsonResult AssignParticipantToTeam(AddParticipantToTeam command)

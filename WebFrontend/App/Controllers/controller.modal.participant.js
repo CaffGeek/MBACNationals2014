@@ -1,7 +1,7 @@
 ﻿(function () {
     "use strict";
 
-    var modalParticipantController = function ($scope, $q, $modalInstance, $http, $timeout, dataService, participant, team) {
+    var modalParticipantController = function ($scope, $q, $modalInstance, dataService, participant, team) {
         $scope.model = {};
         
         $scope.model.title = team.Name;
@@ -11,12 +11,9 @@
         $scope.save = function () {
             var deferred = $q.defer();
 
-            $q.all([
-                dataService.SaveParticipant($scope.model.participant).then(
-                    function (response) {
-                        $scope.model.participant.Id = response.data.Id;
-                    })
-            ]).then(function (response) {
+            dataService.SaveParticipant($scope.model.participant).then(function (response) {
+                $scope.model.participant.Id = response.data.Id;
+            }).then(function (response) {
                 if ($scope.model.participant.IsCoach) {
                     dataService.AssignCoachToTeam($scope.model.participant, $scope.model.team);
                 } else {
@@ -32,5 +29,5 @@
         };
     };
 
-    app.controller("ModalParticipantController", ["$scope", "$q", "$modalInstance", "$http", "$timeout", "dataService", "participant", "team", modalParticipantController]);
+    app.controller("ModalParticipantController", ["$scope", "$q", "$modalInstance", "dataService", "participant", "team", modalParticipantController]);
 }());

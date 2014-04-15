@@ -9,7 +9,8 @@ namespace MBACNationals.Contingent
 {
     public class ContingentCommandHandlers :
         IHandleCommand<CreateContingent, ContingentAggregate>,
-        IHandleCommand<CreateTeam, ContingentAggregate>
+        IHandleCommand<CreateTeam, ContingentAggregate>,
+        IHandleCommand<RemoveTeam, ContingentAggregate>
     {
         public IEnumerable Handle(Func<Guid, ContingentAggregate> al, CreateContingent command)
         {
@@ -43,7 +44,18 @@ namespace MBACNationals.Contingent
                     RequiresBio = command.RequiresBio,
                     RequiresGender = command.RequiresGender,
                     IncludesSinglesRep = command.IncludesSinglesRep
-                };
+                };            
+        }
+
+        public IEnumerable Handle(Func<Guid, ContingentAggregate> al, RemoveTeam command)
+        {
+            var contingentAggregate = al(command.ContingentId);
+                        
+            yield return new TeamRemoved
+            {
+                Id = command.ContingentId,
+                TeamId = command.TeamId
+            };
         }
     }
 }

@@ -12,6 +12,7 @@ namespace MBACNationals.ReadModels
         IContingentViewQueries,
         ISubscribeTo<ContingentCreated>,
         ISubscribeTo<TeamCreated>,
+        ISubscribeTo<TeamRemoved>,
         ISubscribeTo<ParticipantCreated>,
         ISubscribeTo<ParticipantAssignedToTeam>,
         ISubscribeTo<CoachAssignedToTeam>,
@@ -100,6 +101,14 @@ namespace MBACNationals.ReadModels
                         RequiresGender = e.RequiresGender,
                         IncludesSinglesRep = e.IncludesSinglesRep,
                     });
+            });
+        }
+
+        public void Handle(TeamRemoved e)
+        {
+            Update<Contingent>(e.Id, contingent =>
+            {
+                contingent.Teams.Remove(contingent.Teams.SingleOrDefault(x => x.Id.Equals(e.TeamId)));
             });
         }
 

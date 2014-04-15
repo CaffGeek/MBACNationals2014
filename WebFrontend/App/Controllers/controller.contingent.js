@@ -29,14 +29,14 @@
             var modalPromise = modalFactory.Divisions(teams);
 
             modalPromise.then(function (data) {
-                //var currentTeams = $scope.model.Teams;                
+                //var currentTeams = $scope.model.Teams;
                 //TODO: $scope.model.Teams = $.extend(true, [], currentTeams, data);
-
+                
                 //Remove division
                 angular.forEach($scope.model.Teams, function (team, idx) {
                     if (data.filter(function (obj) { return obj.Name == team.Name; }).length === 0)
                     {
-                        alert('remove ' + team.Name); 
+                        dataService.RemoveTeam(team, $scope.model); //Fire and forget
                         $scope.model.Teams.splice(idx);
                     }
                 });
@@ -46,7 +46,7 @@
                         $scope.model.Teams.push(team);
                     }
                 });
-                
+
                 var saveTeamPromises = [];
                 angular.forEach($scope.model.Teams, function (team) {
                     var saveTeamPromise = dataService.SaveTeam(team, $scope.model).then(function (data) {
@@ -69,9 +69,14 @@
                     if (i >= $scope.model.Teams.length)
                         return;
 
-                    editTeam($scope.model.Teams[i]).then(function () {
+                    var team = $scope.model.Teams[i];
+                    if (!(team && team.Bowlers && team.Bowlers.length && team.Bowlers[0].Id)) {
+                        editTeam(team).then(function () {
+                            editTeamModal(i + 1);
+                        });
+                    } else {
                         editTeamModal(i + 1);
-                    });
+                    }
                 };
             });
         };
@@ -99,15 +104,21 @@
                     editBowlerModal(i + 1);
                 });
             };
-            editBowlerModal(0);
 
+            var modalPromise;
+            if (team.RequiresCoach) {
+                team.Coach = team.Coach || { IsCoach: true };
+                modalPromise = editParticipant(team.Coach, team);
+            }
 
-            return dfd.promise.then(function () { 
-                if (team.RequiresCoach) {
-                    team.Coach = { IsCoach: true };
-                    var modalPromise = editParticipant(team.Coach, team);
-                } 
-            });
+            if (modalPromise)
+                modalPromise.then(function () {
+                    editBowlerModal(0);
+                });
+            else
+                editBowlerModal(0);
+            
+            return dfd.promise;
         };
 
         function editParticipant(participant, team) {

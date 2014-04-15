@@ -4,6 +4,7 @@
     var dataService = function ($http) {
         return {
             SaveTeam: saveTeam,
+            RemoveTeam: removeTeam,
             SaveParticipant: saveParticipant,
             AssignParticipantToTeam: assignParticipantToTeam,
             AssignCoachToTeam: assignCoachToTeam,
@@ -28,6 +29,13 @@
                 RequiresBio: team.RequiresBio,
                 RequiresGender: team.RequiresGender,
                 IncludesSinglesRep: team.IncludesSinglesRep
+            });
+        }
+
+        function removeTeam(team, contingent) {
+            return $http.post('/Contingent/RemoveTeam', {
+                ContingentId: contingent.Id,
+                TeamId: team.Id
             });
         }
 
