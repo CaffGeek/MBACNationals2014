@@ -16,7 +16,7 @@
             <tbody>
                 <tr data-ng-repeat="item in model.arrivals">
                     <td>
-                        <select data-ng-model="item.ModeOfTransportation">
+                        <select data-ng-model="item.ModeOfTransportation" data-ng-init="item.ModeOfTransportation='Air'">
                             <option>Air</option>
                             <option>Car</option>
                             <option>Bus</option>
@@ -58,7 +58,7 @@
             <tbody>
                 <tr data-ng-repeat="item in model.departures">
                     <td>
-                        <select data-ng-model="item.ModeOfTransportation">
+                        <select data-ng-model="item.ModeOfTransportation" data-ng-init="item.ModeOfTransportation='Air'">
                             <option>Air</option>
                             <option>Car</option>
                             <option>Bus</option>
