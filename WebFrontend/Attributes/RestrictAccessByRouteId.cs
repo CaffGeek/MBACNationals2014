@@ -15,7 +15,7 @@ namespace WebFrontend.Attributes
                 return true;
 
             var handler = httpContext.Handler as MvcHandler;
-            var contingent = handler.RequestContext.RouteData.Values["id"] as string;
+            var contingent = handler.RequestContext.RouteData.Values["province"] as string;
 
             return httpContext.User.IsInRole(contingent);
         }
