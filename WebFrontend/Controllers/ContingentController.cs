@@ -69,10 +69,9 @@ namespace WebFrontend.Controllers
         [HttpGet]
         public JsonResult TravelPlans(string province)
         {
-            throw new NotImplementedException();
-            //var travelPlans = Domain.ContingentTravelPlansViewQueries.GetTravelPlans(province);
+            var travelPlans = Domain.ContingentTravelPlanQueries.GetTravelPlans(province);
 
-            //return Json(travelPlans, JsonRequestBehavior.AllowGet);
+            return Json(travelPlans, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

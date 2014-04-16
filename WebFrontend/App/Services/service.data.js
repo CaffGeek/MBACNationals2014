@@ -13,6 +13,7 @@
             LoadParticipants: loadParticipants,
             AssignParticipantToRoom: assignParticipantToRoom,
             RemoveParticipantFromRoom: removeParticipantFromRoom,
+            LoadTravelPlans: loadTravelPlans,
             SaveTravelPlans: saveTravelPlans
         };
 
@@ -88,6 +89,12 @@
         function removeParticipantFromRoom(id) {
             return $http.post('/Participant/RemoveFromRoom', {
                 Id: id
+            });
+        }
+
+        function loadTravelPlans(province) {
+            return $http.get('/Contingent/TravelPlans', {
+                params: { province: province }
             });
         }
 

@@ -44,7 +44,9 @@
   <ItemGroup>
     <Compile Include="AReadModel.cs" />
     <Compile Include="ContingentQueries.cs" />
+    <Compile Include="ContingentTravelPlanQueries.cs" />
     <Compile Include="ContingentViewQueries.cs" />
+    <Compile Include="IContingentTravelPlanQueries.cs" />
     <Compile Include="IContingentViewQueries.cs" />
     <Compile Include="IContingentQueries.cs" />
     <Compile Include="IParticipantQueries.cs" />

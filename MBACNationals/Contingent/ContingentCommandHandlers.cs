@@ -63,14 +63,20 @@ namespace MBACNationals.Contingent
         {
             var contingentAggregate = al(command.Id);
 
-            //var travelPlans = command.TravelPlans.Select();
-            throw new NotImplementedException();
-
-            //yield return new TravelPlansChanged
-            //{
-            //    Id = command.Id,
-            //    TravelPlans = travelPlans
-            //};
+            var travelPlans = command.TravelPlans.Select(x => new TravelPlansChanged.TravelPlan
+            {
+                ModeOfTransportation = x.ModeOfTransportation,
+                When = x.When,
+                FlightNumber = x.FlightNumber,
+                NumberOfPeople = x.NumberOfPeople,
+                Type = x.Type
+            }).ToList();
+            
+            yield return new TravelPlansChanged
+            {
+                Id = command.Id,
+                TravelPlans = travelPlans
+            };
         }
     }
 }

@@ -6,8 +6,8 @@
         var lastSlash = url.lastIndexOf('/');
         var province = url.slice(lastSlash+1);
 
-        var emptyArrival = { When: '2014-06-28T09:00', Type: 1 };
-        var emptyDeparture = { When: '2014-07-03T09:00', Type: 2 };
+        var emptyArrival = { ModeOfTransportation: 'Air', When: '2014-06-28T09:00', Type: 1 };
+        var emptyDeparture = { ModeOfTransportation: 'Air', When: '2014-07-03T09:00', Type: 2 };
 
         $scope.model = {
             province: province,
@@ -17,18 +17,20 @@
         };
 
         if (province) {
-            //dataService.LoadParticipants(province).
-            //    success(function (participants) {
-            //        $scope.model.participants = participants;
-            //    });
+            dataService.LoadTravelPlans(province).
+                success(function (contingentTravelPlans) {
+                    $scope.model.id = contingentTravelPlans.Id;
+                    $scope.model.province = contingentTravelPlans.Province;
+                    $scope.model.travelPlans = contingentTravelPlans.TravelPlans;
+                });
         }
 
         $scope.addArrival = function () {
-            $scope.model.arrivals.push(angular.copy(emptyArrival));
+            $scope.model.travelPlans.push(angular.copy(emptyArrival));
         };
 
         $scope.addDeparture = function () {
-            $scope.model.departures.push(angular.copy(emptyDeparture));
+            $scope.model.travelPlans.push(angular.copy(emptyDeparture));
         };
 
         $scope.saveTravelPlans = function () {

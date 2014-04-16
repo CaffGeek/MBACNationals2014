@@ -1,8 +1,8 @@
 ﻿using Edument.CQRS;
 using Events.Contingent;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MBACNationals.Contingent
 {
@@ -40,8 +40,7 @@ namespace MBACNationals.Contingent
 
         public void Apply(TravelPlansChanged e)
         {
-            //TODO: Just replace them
-            throw new NotImplementedException();
+            TravelPlans = e.TravelPlans.Select(x => new TravelPlan(x)).ToList();
         }
     }
 
@@ -82,10 +81,20 @@ namespace MBACNationals.Contingent
 
     public class TravelPlan
     {
-        public string ModeOfTransportation { get; private set; }
-        public DateTime When { get; private set; }
-        public string FlightNumber { get; private set; }
-        public int NumberOfPeople { get; private set; }
-        public int Type { get; private set; }
+        public string ModeOfTransportation { get; set; }
+        public DateTime When { get; set; }
+        public string FlightNumber { get; set; }
+        public int NumberOfPeople { get; set; }
+        public int Type { get; set; }
+
+        //ugh
+        public TravelPlan(dynamic e)
+        {            
+            ModeOfTransportation = e.ModeOfTransportation;
+            When = e.When;
+            FlightNumber = e.FlightNumber;
+            NumberOfPeople = e.NumberOfPeople;
+            Type = e.Type;
+        }
     }    
 }
