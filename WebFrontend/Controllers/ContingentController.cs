@@ -66,6 +66,15 @@ namespace WebFrontend.Controllers
             return Json(contingent, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult TravelPlans(string province)
+        {
+            throw new NotImplementedException();
+            //var travelPlans = Domain.ContingentTravelPlansViewQueries.GetTravelPlans(province);
+
+            //return Json(travelPlans, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public JsonResult CreateTeam(CreateTeam command)
         {
@@ -80,7 +89,7 @@ namespace WebFrontend.Controllers
         [HttpPost]
         public JsonResult RemoveTeam(RemoveTeam command)
         {
-            if (command.TeamId == null || command.TeamId == Guid.Empty)
+            if (command.TeamId == null || command.TeamId.Equals(Guid.Empty))
                 return Json(command);
 
             Domain.Dispatcher.SendCommand(command);
@@ -97,6 +106,16 @@ namespace WebFrontend.Controllers
         [HttpPost]
         public JsonResult AssignCoachToTeam(AddCoachToTeam command)
         {
+            Domain.Dispatcher.SendCommand(command);
+            return Json(command);
+        }
+
+        [HttpPost]
+        public JsonResult SaveTravelPlans(SaveTravelPlans command)
+        {
+            if (command.Id == null || command.Id.Equals(Guid.Empty))
+                return Json(command);
+
             Domain.Dispatcher.SendCommand(command);
             return Json(command);
         }

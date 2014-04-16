@@ -14,7 +14,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr data-ng-repeat="item in model.arrivals">
+                <tr data-ng-repeat="item in model.travelPlans | filter: {Type: 1}">
                     <td>
                         <select data-ng-model="item.ModeOfTransportation" data-ng-init="item.ModeOfTransportation='Air'">
                             <option>Air</option>
@@ -23,7 +23,7 @@
                         </select>
                     </td>
                     <td>
-                        <input data-ng-model="item.ArriveAt" type="datetime-local"
+                        <input data-ng-model="item.When" type="datetime-local"
                             placeholder="yyyy-MM-ddTHH:mm" min="2014-06-01T00:00" max="2014-07-31T00:00" required />
                     </td>
                     <td>
@@ -56,7 +56,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr data-ng-repeat="item in model.departures">
+                <tr data-ng-repeat="item in model.travelPlans | filter: {Type: 2}">
                     <td>
                         <select data-ng-model="item.ModeOfTransportation" data-ng-init="item.ModeOfTransportation='Air'">
                             <option>Air</option>
@@ -65,7 +65,7 @@
                         </select>
                     </td>
                     <td>
-                        <input data-ng-model="item.DepartAt" type="datetime-local"
+                        <input data-ng-model="item.When" type="datetime-local"
                             placeholder="yyyy-MM-ddTHH:mm" min="2014-06-01T00:00" max="2014-07-31T00:00" required />
                     </td>
                     <td>
@@ -86,6 +86,6 @@
             </tfoot>
         </table>
 
-        <a href="#" data-ng-click="saveTravelInfo()" class="btn btn-primary btn-large pull-right">Save</a>
+        <a href="#" data-ng-click="saveTravelPlans()" class="btn btn-primary btn-large pull-right">Save</a>
     </div>
 </div>

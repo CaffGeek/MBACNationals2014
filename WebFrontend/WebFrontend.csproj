@@ -214,6 +214,7 @@
     <Content Include="Content\bootstrap\bootstrap.css" />
     <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\bootstrap\themes\justified-nav.css" />
+    <Content Include="Content\fonts\bebas___-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -272,6 +273,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\Images\2014_logo.png" />
+    <Content Include="Content\Images\facebook_icon.png" />
+    <Content Include="Content\Images\hamburger_blk.gif" />
+    <Content Include="Content\Images\header_bkg.jpg" />
+    <Content Include="Content\Images\header_image.jpg" />
+    <Content Include="Content\Images\nav_bkg.jpg" />
+    <Content Include="Content\Images\nav_bkg.png" />
+    <Content Include="Content\Images\twitter_icon.png" />
     <Content Include="Modals\Contingent\Divisions.html" />
     <Content Include="Modals\Participant\Edit.html" />
     <Content Include="Properties\Settings.settings">
@@ -287,6 +296,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\bebas___-webfont.eot" />
+    <Content Include="Content\fonts\bebas___-webfont.ttf" />
+    <Content Include="Content\fonts\bebas___-webfont.woff" />
     <None Include="Properties\PublishProfiles\nationals2014.manitobamasterbowlers.com.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\angular-mocks.js" />
@@ -324,7 +336,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Participant\Index.cshtml" />
     <Content Include="Views\Shared\_CreateParticipant.cshtml" />
@@ -348,6 +359,7 @@
     <Content Include="Views\Contingent\Arrivals.cshtml" />
     <Content Include="Views\Contingent\Practice.cshtml" />
     <Content Include="Views\Contingent\Profiles.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\Entities\" />

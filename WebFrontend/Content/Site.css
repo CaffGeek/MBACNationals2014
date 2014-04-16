@@ -2,7 +2,16 @@
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     color: #232323;
+	background-image:url(/Content/Images/header_bkg.jpg);
+	background-repeat:repeat-x;
     background-color: #fff;
+}
+
+#logo { 
+    position:absolute;
+    z-index:20;
+    margin-top:-30px;
+    margin-left:20px;
 }
 
 header, footer, nav, section {

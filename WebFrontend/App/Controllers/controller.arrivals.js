@@ -6,12 +6,14 @@
         var lastSlash = url.lastIndexOf('/');
         var province = url.slice(lastSlash+1);
 
-        var emptyArrival = { ArriveAt: '2014-06-28T09:00' };
-        var emptyDeparture = { DepartAt: '2014-07-03T09:00' };
+        var emptyArrival = { When: '2014-06-28T09:00', Type: 1 };
+        var emptyDeparture = { When: '2014-07-03T09:00', Type: 2 };
 
         $scope.model = {
-            arrivals: [angular.copy(emptyArrival), angular.copy(emptyArrival), angular.copy(emptyArrival)],
-            departures: [angular.copy(emptyDeparture), angular.copy(emptyDeparture), angular.copy(emptyDeparture)]
+            province: province,
+            travelPlans: [
+                angular.copy(emptyArrival), angular.copy(emptyArrival), angular.copy(emptyArrival),
+                angular.copy(emptyDeparture), angular.copy(emptyDeparture), angular.copy(emptyDeparture)]
         };
 
         if (province) {
@@ -29,12 +31,16 @@
             $scope.model.departures.push(angular.copy(emptyDeparture));
         };
 
-        $scope.saveTravelInfo = function () {
-            alert('TODO:');
+        $scope.saveTravelPlans = function () {
+            dataService.SaveTravelPlans($scope.model);
         };
 
-        $scope.removeRecord = function () {
-            alert('TODO:');
+        $scope.removeRecord = function (travelPlan) {
+            var idx = $scope.model.travelPlans.indexOf(travelPlan);
+            if (idx < 0)
+                return;
+
+            $scope.model.travelPlans.splice(idx, 1);
         };
     };
 

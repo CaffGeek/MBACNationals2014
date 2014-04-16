@@ -9,14 +9,17 @@ namespace MBACNationals.Contingent
     public class ContingentAggregate : Aggregate,
         IApplyEvent<ContingentCreated>,
         IApplyEvent<TeamCreated>,
-        IApplyEvent<TeamRemoved>
+        IApplyEvent<TeamRemoved>,
+        IApplyEvent<TravelPlansChanged>
     {
         public string Province { get; private set; }
         public List<Team> Teams { get; private set; }
+        public List<TravelPlan> TravelPlans { get; private set; }
 
         public ContingentAggregate()
         {
             Teams = new List<Team>();
+            TravelPlans = new List<TravelPlan>();
         }
 
         public void Apply(ContingentCreated e)
@@ -33,6 +36,12 @@ namespace MBACNationals.Contingent
         public void Apply(TeamRemoved e)
         {
             Teams.RemoveAll(x => x.Id.Equals(e.TeamId));
+        }
+
+        public void Apply(TravelPlansChanged e)
+        {
+            //TODO: Just replace them
+            throw new NotImplementedException();
         }
     }
 
@@ -70,4 +79,13 @@ namespace MBACNationals.Contingent
             IncludesSinglesRep = e.IncludesSinglesRep;
         }
     }
+
+    public class TravelPlan
+    {
+        public string ModeOfTransportation { get; private set; }
+        public DateTime When { get; private set; }
+        public string FlightNumber { get; private set; }
+        public int NumberOfPeople { get; private set; }
+        public int Type { get; private set; }
+    }    
 }

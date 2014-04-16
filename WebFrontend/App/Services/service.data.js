@@ -12,7 +12,8 @@
             LoadParticipant: loadParticipant,
             LoadParticipants: loadParticipants,
             AssignParticipantToRoom: assignParticipantToRoom,
-            RemoveParticipantFromRoom: removeParticipantFromRoom
+            RemoveParticipantFromRoom: removeParticipantFromRoom,
+            SaveTravelPlans: saveTravelPlans
         };
 
         function saveTeam(team, contingent) {
@@ -88,6 +89,10 @@
             return $http.post('/Participant/RemoveFromRoom', {
                 Id: id
             });
+        }
+
+        function saveTravelPlans(travelPlans) {
+            return $http.post('/Contingent/SaveTravelPlans', travelPlans);
         }
     };
 

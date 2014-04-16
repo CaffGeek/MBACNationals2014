@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contingent\TravelPlansChanged.cs" />
     <Compile Include="Contingent\ContingentCreated.cs" />
     <Compile Include="Contingent\TeamRemoved.cs" />
     <Compile Include="Participant\CoachAssignedToTeam.cs" />

@@ -13,27 +13,30 @@
 </head>
 <body>
     <div class="container" data-ng-app="app">
-
-        <div class="masthead">
-            <div class="row">
-                <div class="col-xs-12 col-md-8">
-                    <h3 class="text-muted">MBAC Nationals 2014 - Winnipeg</h3>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row">
+                    <img src="~/Content/Images/2014_logo.png" />
                 </div>
-                <div class="col-xs-6 col-md-4">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
+                <div class="row">
+                    @Html.Partial("_LoginPartial")
                 </div>
-            </div>            
-            
-            @Html.Partial("_AdminMenuPartial")
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    @Html.Partial("_AdminMenuPartial")
+                </div>
+                <div class="row">
+                    <img src="~/Content/Images/header_image.jpg" style="width:100%;" />
+                </div>
+            </div>
         </div>
 
         @RenderBody()
 
         <!-- Site footer -->
         <div class="footer">
-            <p>&copy; <a href="http://gcsquared.com/">GC2</a> @System.DateTime.Now.Year</p>
+          <p>Site Design &copy; 2013-@System.DateTime.Now.Year Charlene McIvor and Chad Hurd</p>
         </div>
 
     </div>
