@@ -17,6 +17,9 @@ namespace WebFrontend.Controllers
         [RestrictAccessByRouteId] //Province
         public ActionResult Reservation(string province)
         {
+            if (string.IsNullOrWhiteSpace(province))
+                return View("_ProvinceSelector");
+
             ViewBag.Province = province;
             return View();
         }
@@ -24,6 +27,9 @@ namespace WebFrontend.Controllers
         [RestrictAccessByRouteId] //Province
         public ActionResult Edit(string province)
         {
+            if (string.IsNullOrWhiteSpace(province))
+                return View("_ProvinceSelector");
+
             ViewBag.Province = province;
             return View();
         }
@@ -31,6 +37,9 @@ namespace WebFrontend.Controllers
         [RestrictAccessByRouteId] //Province
         public ActionResult Arrivals(string province)
         {
+            if (string.IsNullOrWhiteSpace(province))
+                return View("_ProvinceSelector");
+
             ViewBag.Province = province;
             return View();
         }
@@ -38,6 +47,9 @@ namespace WebFrontend.Controllers
         [RestrictAccessByRouteId] //Province
         public ActionResult Practice(string province)
         {
+            if (string.IsNullOrWhiteSpace(province))
+                return View("_ProvinceSelector");
+
             ViewBag.Province = province;
             return View();
         }
@@ -45,6 +57,9 @@ namespace WebFrontend.Controllers
         [RestrictAccessByRouteId] //Province
         public ActionResult Profiles(string province)
         {
+            if (string.IsNullOrWhiteSpace(province))
+                return View("_ProvinceSelector");
+
             ViewBag.Province = province;
             return View();
         }

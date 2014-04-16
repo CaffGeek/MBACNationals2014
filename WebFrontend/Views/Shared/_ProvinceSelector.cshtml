@@ -1,0 +1,17 @@
+﻿<div class="row">
+    <div class="col-md-3 col-xs-6" data-ng-repeat="y in [
+        { Code: 'BC', Flag: 'BC', Name: 'British Columbia'},
+        { Code: 'AB', Flag: 'AB', Name: 'Alberta'},
+        { Code: 'SK', Flag: 'SK', Name: 'Saskatchewan'},
+        { Code: 'MB', Flag: 'MB', Name: 'Manitoba'},
+        { Code: 'NO', Flag: 'ON', Name: 'Northern Ontario'},
+        { Code: 'SO', Flag: 'ON', Name: 'Southern Ontario'},
+        { Code: 'QC', Flag: 'QC', Name: 'Quebec'},
+        { Code: 'NL', Flag: 'NL', Name: 'Newfoundland'}
+        ]">
+        <a href="{{y.Code}}">
+            <img src="~/Content/Images/Flags/{{y.Flag}}.gif" alt="y.Code" width="192" height="129" />
+            <h6>{{y.Name}}</h6>
+        </a>
+    </div>
+</div>
