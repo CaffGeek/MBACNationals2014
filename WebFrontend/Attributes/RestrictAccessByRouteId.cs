@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Web.Security;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebFrontend.Attributes
@@ -16,6 +17,9 @@ namespace WebFrontend.Attributes
 
             var handler = httpContext.Handler as MvcHandler;
             var contingent = handler.RequestContext.RouteData.Values["province"] as string;
+
+            if (string.IsNullOrWhiteSpace(contingent))
+                return true;
 
             return httpContext.User.IsInRole(contingent);
         }
