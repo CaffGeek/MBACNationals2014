@@ -90,6 +90,7 @@ namespace WebFrontend.Controllers
         }
 
         [HttpPost]
+        [RestrictAccessByRouteId]
         public JsonResult CreateTeam(CreateTeam command)
         {
             command.TeamId = command.TeamId == Guid.Empty
@@ -101,6 +102,7 @@ namespace WebFrontend.Controllers
         }
 
         [HttpPost]
+        [RestrictAccessByRouteId]
         public JsonResult RemoveTeam(RemoveTeam command)
         {
             if (command.TeamId == null || command.TeamId.Equals(Guid.Empty))
@@ -109,8 +111,9 @@ namespace WebFrontend.Controllers
             Domain.Dispatcher.SendCommand(command);
             return Json(command);
         }
-        
+
         [HttpPost]
+        [RestrictAccessByRouteId]
         public JsonResult AssignParticipantToTeam(AddParticipantToTeam command)
         {
             Domain.Dispatcher.SendCommand(command);
@@ -118,6 +121,7 @@ namespace WebFrontend.Controllers
         }
 
         [HttpPost]
+        [RestrictAccessByRouteId]
         public JsonResult AssignCoachToTeam(AddCoachToTeam command)
         {
             Domain.Dispatcher.SendCommand(command);
@@ -125,6 +129,7 @@ namespace WebFrontend.Controllers
         }
 
         [HttpPost]
+        [RestrictAccessByRouteId]
         public JsonResult SaveTravelPlans(SaveTravelPlans command)
         {
             if (command.Id == null || command.Id.Equals(Guid.Empty))

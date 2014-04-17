@@ -1,7 +1,7 @@
-﻿using MBACNationals.Participant;
-using MBACNationals.Participant.Commands;
+﻿using MBACNationals.Participant.Commands;
 using System;
 using System.Web.Mvc;
+using WebFrontend.Attributes;
 
 namespace WebFrontend.Controllers
 {
@@ -13,6 +13,15 @@ namespace WebFrontend.Controllers
                 new WebFrontend.Models.Participant.Index
                 {
                     Participants = Domain.ParticipantQueries.GetParticipants(),
+                });
+        }
+
+        public ActionResult View(Guid id)
+        {
+            return View(
+                new WebFrontend.Models.Participant.View
+                {
+                    Participant = Domain.ParticipantQueries.GetParticipant(id),
                 });
         }
 
@@ -33,16 +42,8 @@ namespace WebFrontend.Controllers
             return Json(participant, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult View(Guid id)
-        {
-            return View(
-                new WebFrontend.Models.Participant.View
-                {
-                    Participant = Domain.ParticipantQueries.GetParticipant(id),
-                });
-        }
-        
         [HttpPost]
+        [RestrictAccessByRouteId]
         public JsonResult Create(CreateParticipant command)
         {
             command.Id = Guid.NewGuid();
@@ -53,6 +54,7 @@ namespace WebFrontend.Controllers
         }
 
         [HttpPost]
+        [RestrictAccessByRouteId]
         public JsonResult Update(UpdateParticipant command)
         {
             Domain.Dispatcher.SendCommand(command);
@@ -61,6 +63,7 @@ namespace WebFrontend.Controllers
         }
 
         [HttpPost]
+        [RestrictAccessByRouteId]
         public JsonResult AssignToRoom(AssignParticipantToRoom command)
         {
             Domain.Dispatcher.SendCommand(command);
@@ -69,6 +72,7 @@ namespace WebFrontend.Controllers
         }
 
         [HttpPost]
+        [RestrictAccessByRouteId]
         public JsonResult RemoveFromRoom(RemoveParticipantFromRoom command)
         {
             Domain.Dispatcher.SendCommand(command);
@@ -77,6 +81,7 @@ namespace WebFrontend.Controllers
         }
 
         [HttpPost]
+        [RestrictAccessByRouteId]
         public JsonResult Rename(string id, string value)
         {
             var command = new RenameParticipant
