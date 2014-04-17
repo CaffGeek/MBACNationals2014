@@ -9,7 +9,9 @@
         { Code: 'QC', Flag: 'QC', Name: 'Quebec'},
         { Code: 'NL', Flag: 'NL', Name: 'Newfoundland'}
         ]">
-        <a href="{{y.Code}}">
+        <a href="@Url.Action(
+                     ViewContext.RouteData.Values["action"] as String,
+                     ViewContext.RouteData.Values["controller"] as String)/{{y.Code}}">
             <img src="~/Content/Images/Flags/{{y.Flag}}.gif" alt="y.Code" width="192" height="129" />
             <h6>{{y.Name}}</h6>
         </a>

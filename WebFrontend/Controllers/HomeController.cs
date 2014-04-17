@@ -6,8 +6,7 @@ namespace WebFrontend.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Edit", "Contingent");
         }
-
     }
 }
