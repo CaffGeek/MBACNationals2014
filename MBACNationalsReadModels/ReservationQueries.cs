@@ -1,4 +1,5 @@
 ﻿using Edument.CQRS;
+using Events.Contingent;
 using Events.Participant;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,11 @@ namespace MBACNationals.ReadModels
         ISubscribeTo<ParticipantCreated>,
         ISubscribeTo<ParticipantRenamed>,
         ISubscribeTo<ParticipantAssignedToRoom>,
-        ISubscribeTo<ParticipantRemovedFromRoom>
+        ISubscribeTo<ParticipantRemovedFromRoom>,
+
+        ISubscribeTo<ContingentCreated>,
+        ISubscribeTo<TeamCreated>,
+        ISubscribeTo<ParticipantAssignedToTeam>
     {
         public ReservationQueries(string readModelFilePath)
             : base(readModelFilePath) 
@@ -27,6 +32,18 @@ namespace MBACNationals.ReadModels
             public int RoomNumber { get; internal set; }
         }
 
+        public class Contingent : IEntity
+        {
+            public Guid Id { get; internal set; }
+            public string Province { get; internal set; }
+        }
+
+        public class Team : IEntity
+        {
+            public Guid Id { get; internal set; }
+            public Guid ContingentId { get; internal set; }
+        }
+
         public List<ReservationQueries.Participant> GetParticipants(string province)
         {
             return Read<Participant>(x => x.Province == province).ToList();
@@ -37,9 +54,25 @@ namespace MBACNationals.ReadModels
             Create(new Participant
             {
                 Id = e.Id,
-                Name = e.Name,
-                Province = "MB" //TODO: add province to Participant Created!
+                Name = e.Name
             });
+        }
+
+        public void Handle(ContingentCreated e)
+        {
+            Create(new Contingent { Id = e.Id, Province = e.Province });
+        }
+
+        public void Handle(TeamCreated e)
+        {
+            Create(new Team { Id = e.TeamId, ContingentId = e.Id });
+        }
+
+        public void Handle(ParticipantAssignedToTeam e)
+        {
+            var team = Read<Team>(x => x.Id == e.TeamId).FirstOrDefault();
+            var contingent = Read<Contingent>(x => x.Id == team.ContingentId).FirstOrDefault();
+            Update<Participant>(e.Id, x => x.Province = contingent.Province);
         }
 
         public void Handle(ParticipantRenamed e)
