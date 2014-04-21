@@ -16,7 +16,8 @@ namespace MBACNationals.ReadModels
 
         ISubscribeTo<ContingentCreated>,
         ISubscribeTo<TeamCreated>,
-        ISubscribeTo<ParticipantAssignedToTeam>
+        ISubscribeTo<ParticipantAssignedToTeam>,
+        ISubscribeTo<CoachAssignedToTeam>
     {
         public ReservationQueries(string readModelFilePath)
             : base(readModelFilePath) 
@@ -69,6 +70,13 @@ namespace MBACNationals.ReadModels
         }
 
         public void Handle(ParticipantAssignedToTeam e)
+        {
+            var team = Read<Team>(x => x.Id == e.TeamId).FirstOrDefault();
+            var contingent = Read<Contingent>(x => x.Id == team.ContingentId).FirstOrDefault();
+            Update<Participant>(e.Id, x => x.Province = contingent.Province);
+        }
+
+        public void Handle(CoachAssignedToTeam e)
         {
             var team = Read<Team>(x => x.Id == e.TeamId).FirstOrDefault();
             var contingent = Read<Contingent>(x => x.Id == team.ContingentId).FirstOrDefault();
