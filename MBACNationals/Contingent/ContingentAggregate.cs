@@ -10,16 +10,19 @@ namespace MBACNationals.Contingent
         IApplyEvent<ContingentCreated>,
         IApplyEvent<TeamCreated>,
         IApplyEvent<TeamRemoved>,
+        IApplyEvent<RoomTypeChanged>,
         IApplyEvent<TravelPlansChanged>
     {
         public string Province { get; private set; }
         public List<Team> Teams { get; private set; }
         public List<TravelPlan> TravelPlans { get; private set; }
+        public List<HotelRoom> HotelRooms { get; private set; }
 
         public ContingentAggregate()
         {
             Teams = new List<Team>();
             TravelPlans = new List<TravelPlan>();
+            HotelRooms = new List<HotelRoom>();
         }
 
         public void Apply(ContingentCreated e)
@@ -36,6 +39,15 @@ namespace MBACNationals.Contingent
         public void Apply(TeamRemoved e)
         {
             Teams.RemoveAll(x => x.Id.Equals(e.TeamId));
+        }
+
+        public void Apply(RoomTypeChanged e)
+        {
+            var room = HotelRooms.FirstOrDefault(x => x.Number == e.RoomNumber);
+            if (room == null)
+                HotelRooms.Add(new HotelRoom(e));
+            else
+                room.Type = e.Type;
         }
 
         public void Apply(TravelPlansChanged e)
@@ -87,7 +99,6 @@ namespace MBACNationals.Contingent
         public int NumberOfPeople { get; set; }
         public int Type { get; set; }
 
-        //ugh
         public TravelPlan(dynamic e)
         {            
             ModeOfTransportation = e.ModeOfTransportation;
@@ -96,5 +107,17 @@ namespace MBACNationals.Contingent
             NumberOfPeople = e.NumberOfPeople;
             Type = e.Type;
         }
-    }    
+    }
+
+    public class HotelRoom
+    {
+        public int Number { get; set; }
+        public string Type { get; set; }
+
+        public HotelRoom(dynamic e)
+        {
+            Number = e.RoomNumber;
+            Type = e.Type;
+        }
+    }
 }

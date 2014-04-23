@@ -4,14 +4,20 @@
 
         <div class="row clearfix">
             <h3></h3>
-		    <div class="col-md-2 column noHotelRoom" data-droppable="" data-drop="removeFromRoom">
+		    <div class="col-sm-2 column noHotelRoom" data-droppable="" data-drop="removeFromRoom">
                 <div id="{{p.Id}}" data-draggable="" data-ng-repeat="p in model.participants | filter:{RoomNumber:0, Name:'!!'}">{{p.Name}}</div>
 		    </div>
 		    
-			<div class="col-md-10">
+			<div class="col-sm-10">
 				<div data-ng-repeat="y in [1, 2, 3, 4, 5]" class="hotelRooms">
 					<div data-ng-repeat="x in [1, 2, 3, 4, 5]">
-                        <h6>Room #{{(y-1)*5+x}} //TODO: Room Type</h6> 
+                        <h6>
+                            Room #{{(y-1)*5+x}}
+                            <select id="binType{{(y-1)*5+x}}" data-ng-model="model.rooms[(y-1)*5+x].Type" data-ng-change="setRoomType((y-1)*5+x)">
+                                <option value="Single">Single</option>
+                                <option value="Double">Double</option>
+                            </select>
+                        </h6> 
                         <div id="bin{{(y-1)*5+x}}" data-droppable="{{(y-1)*5+x}}" data-drop="addToRoom">
                             <div id="{{p.Id}}" data-draggable="" data-ng-repeat="p in model.participants | filter:{RoomNumber:(y-1)*5+x}">{{p.Name}}</div>
                         </div>

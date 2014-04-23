@@ -11,6 +11,7 @@ namespace MBACNationals.Contingent
         IHandleCommand<CreateContingent, ContingentAggregate>,
         IHandleCommand<CreateTeam, ContingentAggregate>,
         IHandleCommand<RemoveTeam, ContingentAggregate>,
+        IHandleCommand<ChangeRoomType, ContingentAggregate>,
         IHandleCommand<SaveTravelPlans, ContingentAggregate>
     {
         public IEnumerable Handle(Func<Guid, ContingentAggregate> al, CreateContingent command)
@@ -57,6 +58,19 @@ namespace MBACNationals.Contingent
                 Id = command.ContingentId,
                 TeamId = command.TeamId
             };
+        }
+
+        public IEnumerable Handle(Func<Guid, ContingentAggregate> al, ChangeRoomType command)
+        {
+            var contingentAggregate = al(command.Id);
+            
+            yield return new RoomTypeChanged
+            {
+                Id = command.Id,
+                RoomNumber = command.RoomNumber,
+                Type = command.Type,
+            };
+
         }
 
         public IEnumerable Handle(Func<Guid, ContingentAggregate> al, SaveTravelPlans command)

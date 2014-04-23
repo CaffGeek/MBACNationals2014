@@ -13,6 +13,8 @@
             LoadParticipants: loadParticipants,
             AssignParticipantToRoom: assignParticipantToRoom,
             RemoveParticipantFromRoom: removeParticipantFromRoom,
+            LoadRooms: loadRooms,
+            ChangeRoomType: changeRoomType,
             LoadTravelPlans: loadTravelPlans,
             SaveTravelPlans: saveTravelPlans
         };
@@ -84,23 +86,37 @@
                 Id: id,
                 RoomNumber: roomNumber
             });
-        }
+        };
 
         function removeParticipantFromRoom(id) {
             return $http.post('/Participant/RemoveFromRoom', {
                 Id: id
             });
-        }
+        };
+
+        function loadRooms(province) {
+            return $http.get('/Contingent/Rooms', {
+                params: { province: province }
+            });
+        };
+
+        function changeRoomType(province, roomNumber, type) {
+            return $http.post('/Contingent/ChangeRoomType', {
+                Province: province,
+                RoomNumber: roomNumber,
+                Type: type
+            });
+        };
 
         function loadTravelPlans(province) {
             return $http.get('/Contingent/TravelPlans', {
                 params: { province: province }
             });
-        }
+        };
 
         function saveTravelPlans(travelPlans) {
             return $http.post('/Contingent/SaveTravelPlans', travelPlans);
-        }
+        };
     };
 
     app.factory('dataService', ['$http', dataService]);

@@ -89,6 +89,14 @@ namespace WebFrontend.Controllers
             return Json(travelPlans, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult Rooms(string province)
+        {
+            var rooms = Domain.ContingentTravelPlanQueries.GetRooms(province);
+
+            return Json(rooms, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         [RestrictAccessByRouteId]
         public JsonResult CreateTeam(CreateTeam command)
@@ -124,6 +132,20 @@ namespace WebFrontend.Controllers
         [RestrictAccessByRouteId]
         public JsonResult AssignCoachToTeam(AddCoachToTeam command)
         {
+            Domain.Dispatcher.SendCommand(command);
+            return Json(command);
+        }
+
+        [HttpPost]
+        [RestrictAccessByRouteId]
+        public JsonResult ChangeRoomType(ChangeRoomType command)
+        {
+            var contingent = Domain.ContingentViewQueries.GetContingent(command.Province);
+
+            if (contingent == null)
+                return Json(command);
+
+            command.Id = contingent.Id;
             Domain.Dispatcher.SendCommand(command);
             return Json(command);
         }

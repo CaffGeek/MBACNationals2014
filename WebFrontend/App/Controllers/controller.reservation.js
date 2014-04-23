@@ -7,7 +7,8 @@
         var province = url.slice(lastSlash+1);
 
         $scope.model = {
-            participants: []
+            participants: [],
+            rooms: []
         };
 
         if (province) {
@@ -15,6 +16,22 @@
                 success(function (participants) {
                     $scope.model.participants = participants;
                 });
+            dataService.LoadRooms(province).
+                success(function (data) {
+                    var sparseRooms = [];
+
+                    for (var i = 1; i <= 25; i++) {
+                        var room = data.HotelRooms.filter(function (obj) { return obj.RoomNumber == i; })[0];
+                        sparseRooms[i] = room || {};
+                    }
+
+                    $scope.model.rooms = sparseRooms;
+                });
+        }
+
+        $scope.setRoomType = function (roomNumber) {
+            var type = $scope.model.rooms[roomNumber].Type;
+            dataService.ChangeRoomType(province, roomNumber, type);
         }
 
         $scope.addToRoom = function (id, roomNumber) {
