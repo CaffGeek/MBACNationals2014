@@ -7,7 +7,8 @@
         var province = url.slice(lastSlash+1);
 
         $scope.model = {
-            Teams: []
+            Teams: [],
+            Guests: []
         };
 
         if (province) {
@@ -24,6 +25,8 @@
         $scope.editDivisions = editDivisions;
         $scope.editTeam = editTeam;
         $scope.editParticipant = editParticipant;
+        $scope.addGuest = addGuest;
+        $scope.editGuest = editGuest;
         
         function editDivisions(teams) {
             var modalPromise = modalFactory.Divisions(teams);
@@ -127,6 +130,20 @@
                     participant = data; //TODO: write back to scope somehow
                 });
             });
+        };
+
+        function addGuest() {
+            return modalFactory.Participant({ IsGuest: true }).
+                then(function (data) {
+                    dataService.AssignParticipantToContingent(data, $scope.model);
+                }).
+                then(function (data) {
+                    $scope.model.Guests.push(data); //TODO: write back to scope somehow
+                });
+        };
+
+        function editGuest(participant) {
+            alert('Edit Guest')
         };
     };
 

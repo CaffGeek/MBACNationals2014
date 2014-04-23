@@ -11,6 +11,7 @@ namespace MBACNationals.Participant
         IHandleCommand<UpdateParticipant, ParticipantAggregate>,
         IHandleCommand<RenameParticipant, ParticipantAggregate>,
         IHandleCommand<AddParticipantToTeam, ParticipantAggregate>,
+        IHandleCommand<AddParticipantToContingent, ParticipantAggregate>,
         IHandleCommand<AddCoachToTeam, ParticipantAggregate>,
         IHandleCommand<AssignParticipantToRoom, ParticipantAggregate>,
         IHandleCommand<RemoveParticipantFromRoom, ParticipantAggregate>
@@ -28,7 +29,8 @@ namespace MBACNationals.Participant
                 Name = command.Name,
                 Gender = command.Gender,
                 IsDelegate = command.IsDelegate,
-                YearsQualifying = command.YearsQualifying
+                YearsQualifying = command.YearsQualifying,
+                IsGuest = command.IsGuest,
             };
 
             yield return new ParticipantAverageChanged
@@ -115,6 +117,18 @@ namespace MBACNationals.Participant
                         TeamId = command.TeamId,
                         Name = agg.Name
                     };
+        }
+
+        public IEnumerable Handle(Func<Guid, ParticipantAggregate> al, AddParticipantToContingent command)
+        {
+            var agg = al(command.Id);
+
+            if (agg.ContingentId != command.ContingentId)
+                yield return new ParticipantAssignedToContingent
+                {
+                    Id = command.Id,
+                    ContingentId = command.ContingentId
+                };
         }
 
         public IEnumerable Handle(Func<Guid, ParticipantAggregate> al, AddCoachToTeam command)

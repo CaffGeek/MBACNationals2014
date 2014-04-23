@@ -14,6 +14,7 @@ namespace MBACNationals.ReadModels
         ISubscribeTo<TeamCreated>,
         ISubscribeTo<TeamRemoved>,
         ISubscribeTo<ParticipantCreated>,
+        ISubscribeTo<ParticipantAssignedToContingent>,
         ISubscribeTo<ParticipantAssignedToTeam>,
         ISubscribeTo<CoachAssignedToTeam>,
         ISubscribeTo<ParticipantRenamed>,
@@ -32,6 +33,7 @@ namespace MBACNationals.ReadModels
             public Guid Id { get; internal set; }
             public string Province { get; internal set; }
             public IList<Team> Teams { get; internal set; }
+            public IList<Participant> Guests { get; internal set; }
         }
 
         public class Team : IEntity
@@ -59,6 +61,7 @@ namespace MBACNationals.ReadModels
             public Guid ContingentId { get; internal set; }
             public bool IsRookie { get; internal set; }
             public bool IsDelegate { get; internal set; }
+            public bool IsGuest { get; internal set; }
         }
 
         public Contingent GetContingent(Guid id)
@@ -77,7 +80,8 @@ namespace MBACNationals.ReadModels
                     {
                         Id = e.Id,
                         Province = e.Province,
-                        Teams = new List<Team>()
+                        Teams = new List<Team>(),
+                        Guests = new List<Participant>(),
                     });
         }
 
@@ -119,8 +123,24 @@ namespace MBACNationals.ReadModels
                 Id = e.Id,
                 Name = e.Name,
                 IsDelegate = e.IsDelegate,
-                IsRookie = e.YearsQualifying == 1                
+                IsRookie = e.YearsQualifying == 1,
+                IsGuest = e.IsGuest
             });
+        }
+
+        public void Handle(ParticipantAssignedToContingent e)
+        {
+            Update<Contingent>(e.ContingentId, (contingent, odb) =>
+            {
+                var participant = Read<Participant>(x => x.Id.Equals(e.Id), odb).FirstOrDefault();
+                if (participant == null 
+                    || participant.IsGuest == false 
+                    || contingent.Guests.Any(x => x.Id == e.Id))
+                    return;
+
+                contingent.Guests.Add(participant);
+            });
+            Update<Participant>(e.Id, x => { x.ContingentId = e.ContingentId; });
         }
 
         public void Handle(ParticipantAssignedToTeam e)

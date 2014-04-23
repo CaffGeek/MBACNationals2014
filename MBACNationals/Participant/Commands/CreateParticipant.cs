@@ -13,5 +13,6 @@ namespace MBACNationals.Participant.Commands
         public int LeaguePinfall { get; set; }
         public int TournamentGames { get; set; }
         public int TournamentPinfall { get; set; }
+        public bool IsGuest { get; set; }
     }
 }

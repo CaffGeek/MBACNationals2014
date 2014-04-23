@@ -9,5 +9,6 @@ namespace Events.Participant
         public string Gender;
         public bool IsDelegate;
         public int YearsQualifying;
+        public bool IsGuest;
     }
 }

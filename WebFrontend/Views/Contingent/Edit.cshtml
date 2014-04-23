@@ -24,10 +24,13 @@
         </div>
         
         <div class="row">
-            <h4><a data-ng-click="editGuests(model.Teams);">Guests:</a></h4>
+            <h4><a data-ng-click="addGuest();">Guests:</a></h4>
             <ul>
                 <li data-ng-repeat="guest in model.Guests">
-                    {{guest.Name}}
+                    <a data-ng-click="editParticipant(guest);" title="{{guest.Id}}">
+                        {{guest.Name}}
+                    </a>
+                    <span data-ng-show="guest.IsDelegate"><sup>D</sup></span>
                 </li>
             </ul>
         </div>

@@ -7,6 +7,7 @@ namespace MBACNationals.Participant
     public class ParticipantAggregate : Aggregate,
         IApplyEvent<ParticipantCreated>,
         IApplyEvent<ParticipantRenamed>,
+        IApplyEvent<ParticipantAssignedToContingent>,
         IApplyEvent<ParticipantAssignedToTeam>,
         IApplyEvent<CoachAssignedToTeam>,
         IApplyEvent<ParticipantGenderReassigned>,
@@ -18,6 +19,7 @@ namespace MBACNationals.Participant
         IApplyEvent<ParticipantRemovedFromRoom>
     {
         public Guid TeamId { get; private set; }
+        public Guid ContingentId { get; private set; }
         public string Name { get; private set; }
         public string Gender { get; private set; }
         public bool IsDelegate { get; private set; }
@@ -45,6 +47,11 @@ namespace MBACNationals.Participant
         {
             IsCoach = true;
             TeamId = e.TeamId;
+        }
+
+        public void Apply(ParticipantAssignedToContingent e)
+        {
+            ContingentId = e.ContingentId;
         }
 
         public void Apply(ParticipantAssignedToTeam e)

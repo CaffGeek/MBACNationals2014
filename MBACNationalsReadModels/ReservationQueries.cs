@@ -16,6 +16,7 @@ namespace MBACNationals.ReadModels
 
         ISubscribeTo<ContingentCreated>,
         ISubscribeTo<TeamCreated>,
+        ISubscribeTo<ParticipantAssignedToContingent>,
         ISubscribeTo<ParticipantAssignedToTeam>,
         ISubscribeTo<CoachAssignedToTeam>
     {
@@ -67,6 +68,12 @@ namespace MBACNationals.ReadModels
         public void Handle(TeamCreated e)
         {
             Create(new Team { Id = e.TeamId, ContingentId = e.Id });
+        }
+
+        public void Handle(ParticipantAssignedToContingent e)
+        {
+            var contingent = Read<Contingent>(x => x.Id == e.ContingentId).FirstOrDefault();
+            Update<Participant>(e.Id, x => x.Province = contingent.Province);
         }
 
         public void Handle(ParticipantAssignedToTeam e)

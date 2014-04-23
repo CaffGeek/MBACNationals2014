@@ -122,6 +122,14 @@ namespace WebFrontend.Controllers
 
         [HttpPost]
         [RestrictAccessByRouteId]
+        public JsonResult AssignParticipantToContingent(AddParticipantToContingent command)
+        {
+            Domain.Dispatcher.SendCommand(command);
+            return Json(command);
+        }
+
+        [HttpPost]
+        [RestrictAccessByRouteId]
         public JsonResult AssignParticipantToTeam(AddParticipantToTeam command)
         {
             Domain.Dispatcher.SendCommand(command);
