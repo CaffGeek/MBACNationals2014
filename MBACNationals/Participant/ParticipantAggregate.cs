@@ -23,6 +23,7 @@ namespace MBACNationals.Participant
         public string Name { get; private set; }
         public string Gender { get; private set; }
         public bool IsDelegate { get; private set; }
+        public bool IsGuest { get; private set; }
         public bool IsCoach { get; private set; }
         public int YearsQualifying { get; private set; }
         public int LeaguePinfall { get; private set; }
@@ -36,6 +37,9 @@ namespace MBACNationals.Participant
         {
             Name = e.Name;
             Gender = e.Gender;
+            IsDelegate = e.IsDelegate;
+            IsGuest = e.IsGuest;
+            YearsQualifying = e.YearsQualifying;         
         }
 
         public void Apply(ParticipantRenamed e)
