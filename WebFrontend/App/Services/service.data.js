@@ -17,7 +17,8 @@
             LoadRooms: loadRooms,
             ChangeRoomType: changeRoomType,
             LoadTravelPlans: loadTravelPlans,
-            SaveTravelPlans: saveTravelPlans
+            SaveTravelPlans: saveTravelPlans,
+            LoadPracticePlan: loadPracticePlan
         };
 
         function saveTeam(team, contingent) {
@@ -125,6 +126,12 @@
         function saveTravelPlans(travelPlans) {
             return $http.post('/Contingent/SaveTravelPlans', travelPlans);
         };
+
+        function loadPracticePlan(province) {
+            return $http.get('/Contingent/PracticePlan', {
+                params: { province: province }
+            });
+        }
     };
 
     app.factory('dataService', ['$http', dataService]);
