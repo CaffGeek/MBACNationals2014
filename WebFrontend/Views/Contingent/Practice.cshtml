@@ -2,11 +2,7 @@
     <div class="container" data-ng-controller="PracticeController">
         <h2>{{model.province}} Practice Schedule</h2>
         
-        <p class="panel-info">
-            This page is not yet completed!!! It doesn't work
-        </p>
-
-        <table class="table table-striped table-condensed table-hover">
+        <table class="table table-striped table-condensed table-hover ">
             <thead>
                 <tr>
                     <th>Team</th>
@@ -15,7 +11,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr data-ng-repeat="team in model.teams">
+                <tr data-ng-repeat="team in model.teams | orderBy:'Name':true">
                     <td>{{team.Name}}</td>
                     <td><select data-ng-model="team.PracticeLocation" data-ng-options="location for location in model.practiceLocations"></select></td>
                     <td><select data-ng-model="team.PracticeTime" data-ng-options="time for time in model.allowedTimes"></select></td>
@@ -23,6 +19,6 @@
             </tbody>
         </table>
 
-        <a href="#" data-ng-click="saveTravelPlans()" class="btn btn-primary btn-large pull-right">Save</a>
+        <a href="#" data-ng-click="savePracticePlan()" class="btn btn-primary btn-large pull-right">Save</a>
     </div>
 </div>

@@ -14,6 +14,7 @@ namespace WebFrontend
         public static IContingentQueries ContingentQueries;
         public static IContingentViewQueries ContingentViewQueries;
         public static IContingentTravelPlanQueries ContingentTravelPlanQueries;
+        public static IContingentPracticePlanQueries ContingentPracticePlanQueries;
         public static IReservationQueries ReservationQueries;
 
         public static void Setup()
@@ -37,6 +38,9 @@ namespace WebFrontend
 
             ContingentTravelPlanQueries = new ContingentTravelPlanQueries(readModelFilePath);
             Dispatcher.ScanInstance(ContingentTravelPlanQueries);
+
+            ContingentPracticePlanQueries = new ContingentPracticePlanQueries(readModelFilePath);
+            Dispatcher.ScanInstance(ContingentPracticePlanQueries);
 
             ReservationQueries = new ReservationQueries(readModelFilePath);
             Dispatcher.ScanInstance(ReservationQueries);

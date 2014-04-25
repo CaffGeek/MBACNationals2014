@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace MBACNationals.ReadModels
+﻿namespace MBACNationals.ReadModels
 {
     public interface IContingentTravelPlanQueries
     {

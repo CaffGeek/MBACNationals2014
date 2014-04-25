@@ -12,7 +12,8 @@ namespace MBACNationals.Contingent
         IHandleCommand<CreateTeam, ContingentAggregate>,
         IHandleCommand<RemoveTeam, ContingentAggregate>,
         IHandleCommand<ChangeRoomType, ContingentAggregate>,
-        IHandleCommand<SaveTravelPlans, ContingentAggregate>
+        IHandleCommand<SaveTravelPlans, ContingentAggregate>,
+        IHandleCommand<SavePracticePlan, ContingentAggregate>
     {
         public IEnumerable Handle(Func<Guid, ContingentAggregate> al, CreateContingent command)
         {
@@ -91,6 +92,21 @@ namespace MBACNationals.Contingent
                 Id = command.Id,
                 TravelPlans = travelPlans
             };
+        }
+
+        public IEnumerable Handle(Func<Guid, ContingentAggregate> al, SavePracticePlan command)
+        {
+            var contingentAggregate = al(command.Id);
+
+            foreach (var team in command.Teams)
+            {
+                yield return new TeamPracticeRescheduled {
+                    Id = command.Id,
+                    TeamId = team.Id,
+                    PracticeLocation = team.PracticeLocation,
+                    PracticeTime = team.PracticeTime,
+                };
+            }
         }
     }
 }

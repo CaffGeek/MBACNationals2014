@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Contingent\Commands\ChangeRoomType.cs" />
     <Compile Include="Contingent\Commands\RemoveTeam.cs" />
+    <Compile Include="Contingent\Commands\SavePracticePlan.cs" />
     <Compile Include="Contingent\Commands\SaveTravelPlans.cs" />
     <Compile Include="Contingent\ContingentCommandHandlers.cs" />
     <Compile Include="Contingent\ContingentAggregate.cs" />

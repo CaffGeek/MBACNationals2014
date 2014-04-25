@@ -11,7 +11,8 @@ namespace MBACNationals.Contingent
         IApplyEvent<TeamCreated>,
         IApplyEvent<TeamRemoved>,
         IApplyEvent<RoomTypeChanged>,
-        IApplyEvent<TravelPlansChanged>
+        IApplyEvent<TravelPlansChanged>,
+        IApplyEvent<TeamPracticeRescheduled>
     {
         public string Province { get; private set; }
         public List<Team> Teams { get; private set; }
@@ -54,6 +55,15 @@ namespace MBACNationals.Contingent
         {
             TravelPlans = e.TravelPlans.Select(x => new TravelPlan(x)).ToList();
         }
+
+        public void Apply(TeamPracticeRescheduled e)
+        {
+            var team = Teams.FirstOrDefault(x => x.Id.Equals(e.TeamId));
+            if (team == null)
+                return;
+
+            team.Apply(e);
+        }
     }
 
     public class Team
@@ -69,9 +79,11 @@ namespace MBACNationals.Contingent
         public bool RequiresBio { get; private set; }
         public bool RequiresGender { get; private set; }
         public bool IncludesSinglesRep { get; private set; }
+        public PracticePlan PracticePlan { get; private set; }
 
         public Team(TeamCreated e, Guid contingentId)
         {
+            PracticePlan = new PracticePlan();
             ContingentId = contingentId;
             Apply(e);
         }
@@ -88,6 +100,12 @@ namespace MBACNationals.Contingent
             RequiresBio = e.RequiresBio;
             RequiresGender = e.RequiresGender;
             IncludesSinglesRep = e.IncludesSinglesRep;
+        }
+
+        public void Apply(TeamPracticeRescheduled e)
+        {
+            PracticePlan.PracticeLocation = e.PracticeLocation;
+            PracticePlan.PracticeTime = e.PracticeTime;
         }
     }
 
@@ -119,5 +137,11 @@ namespace MBACNationals.Contingent
             Number = e.RoomNumber;
             Type = e.Type;
         }
+    }
+
+    public class PracticePlan
+    {
+        public string PracticeLocation { get; set; }
+        public int PracticeTime { get; set; }
     }
 }

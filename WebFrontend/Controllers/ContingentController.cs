@@ -97,6 +97,14 @@ namespace WebFrontend.Controllers
             return Json(rooms, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult PracticePlan(string province)
+        {
+            var rooms = Domain.ContingentPracticePlanQueries.GetSchedule(province);
+
+            return Json(rooms, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         [RestrictAccessByRouteId]
         public JsonResult CreateTeam(CreateTeam command)
@@ -161,6 +169,17 @@ namespace WebFrontend.Controllers
         [HttpPost]
         [RestrictAccessByRouteId]
         public JsonResult SaveTravelPlans(SaveTravelPlans command)
+        {
+            if (command.Id == null || command.Id.Equals(Guid.Empty))
+                return Json(command);
+
+            Domain.Dispatcher.SendCommand(command);
+            return Json(command);
+        }
+
+        [HttpPost]
+        [RestrictAccessByRouteId]
+        public JsonResult SavePracticePlan(SavePracticePlan command)
         {
             if (command.Id == null || command.Id.Equals(Guid.Empty))
                 return Json(command);
