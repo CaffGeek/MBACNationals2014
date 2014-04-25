@@ -204,7 +204,7 @@
     <Content Include="App\Directives\directive.autofocus.js" />
     <Content Include="App\Directives\directive.draggable.js" />
     <Content Include="App\Factories\factory.modal.js" />
-    <Content Include="App\Filters\filter.rounddown.js" />
+    <Content Include="App\Filters\filter.numbers.js" />
     <Content Include="App\Services\service.data.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />

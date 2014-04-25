@@ -97,14 +97,22 @@ namespace MBACNationals.Contingent
         public IEnumerable Handle(Func<Guid, ContingentAggregate> al, SavePracticePlan command)
         {
             var contingentAggregate = al(command.Id);
-
-            foreach (var team in command.Teams)
+            foreach (var teamCommand in command.Teams)
             {
+                var team = contingentAggregate.Teams.FirstOrDefault(x => x.Id == teamCommand.Id);
+                
+                if (team == null)
+                    continue;
+
+                if (team.PracticePlan.PracticeLocation == teamCommand.PracticeLocation
+                    && team.PracticePlan.PracticeTime == teamCommand.PracticeTime)
+                    continue;
+
                 yield return new TeamPracticeRescheduled {
                     Id = command.Id,
-                    TeamId = team.Id,
-                    PracticeLocation = team.PracticeLocation,
-                    PracticeTime = team.PracticeTime,
+                    TeamId = teamCommand.Id,
+                    PracticeLocation = teamCommand.PracticeLocation,
+                    PracticeTime = teamCommand.PracticeTime,
                 };
             }
         }
