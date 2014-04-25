@@ -14,7 +14,7 @@
                 <tr data-ng-repeat="team in model.teams | orderBy:'Name':true">
                     <td>{{team.Name}}</td>
                     <td><select data-ng-model="team.PracticeLocation" data-ng-options="location for location in model.practiceLocations"></select></td>
-                    <td><select data-ng-model="team.PracticeTime" data-ng-options="time as time | hour for time in model.allowedTimes" dir="rtl"></select></td>
+                    <td><select data-ng-model="team.PracticeTime" data-ng-options="time as time | hour for time in model.allowedTimes"></select></td>
                 </tr>
             </tbody>
         </table>
