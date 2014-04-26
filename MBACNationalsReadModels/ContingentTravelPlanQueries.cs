@@ -10,7 +10,8 @@ namespace MBACNationals.ReadModels
         IContingentTravelPlanQueries,
         ISubscribeTo<ContingentCreated>,
         ISubscribeTo<TravelPlansChanged>,
-        ISubscribeTo<RoomTypeChanged>
+        ISubscribeTo<RoomTypeChanged>,
+        ISubscribeTo<ReservationInstructionsChanged>
     {
         public ContingentTravelPlanQueries(string readModelFilePath)
             : base(readModelFilePath) 
@@ -30,6 +31,7 @@ namespace MBACNationals.ReadModels
             public ContingentRooms(Guid id) : base(id) { }
             public string Province { get; internal set; }
             public IList<HotelRoom> HotelRooms { get; internal set; }
+            public string Instructions { get; internal set; }
         }
 
         public class TravelPlan
@@ -108,6 +110,11 @@ namespace MBACNationals.ReadModels
                     });
                 }
             });         
+        }
+
+        public void Handle(ReservationInstructionsChanged e)
+        {
+            Update<ContingentRooms>(e.Id, contingent => { contingent.Instructions = e.Instructions; });
         }
     }
 }

@@ -62,6 +62,7 @@
     <Compile Include="Participant\Commands\AddParticipantToTeam.cs" />
     <Compile Include="Contingent\Commands\CreateTeam.cs" />
     <Compile Include="Contingent\Exceptions\TeamAlreadyExists.cs" />
+    <Compile Include="Contingent\Commands\SaveReservationInstructions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Edument.CQRS\Edument.CQRS.csproj">

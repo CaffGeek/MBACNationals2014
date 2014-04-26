@@ -10,12 +10,16 @@
 		    
 			<div class="col-sm-10">
 				<div data-ng-repeat="y in [1, 2, 3, 4, 5]" class="hotelRooms">
-					<div data-ng-repeat="x in [1, 2, 3, 4, 5]">
+					<div data-ng-repeat="x in [1, 2, 3, 4, 5]" class="col-sm-3">
                         <h6>
                             Room #{{(y-1)*5+x}}
                             <select id="binType{{(y-1)*5+x}}" data-ng-model="model.rooms[(y-1)*5+x].Type" data-ng-change="setRoomType((y-1)*5+x)">
                                 <option value="Single">Single</option>
                                 <option value="Double">Double</option>
+                                <option value="SingleGold">Single Gold Floor</option>
+                                <option value="DoubleGold">Double Gold Floor</option>
+                                <option value="OneBedSuite">One Bedroom Suite</option>
+                                <option value="TwoBedSuite">Two Bedroom Suite</option>
                             </select>
                         </h6> 
                         <div id="bin{{(y-1)*5+x}}" data-droppable="{{(y-1)*5+x}}" data-drop="addToRoom">
@@ -23,6 +27,12 @@
                         </div>
 					</div>
 				</div>
+
+                <div>
+                    <h5>Special Instructions</h5>
+                    <textarea data-ng-model="model.instructions" class="col-sm-12"></textarea>
+                    <a href="#" data-ng-click="saveInstructions()" class="btn btn-primary btn-large pull-right">Save Instructions</a>
+                </div>
 			</div>
 	    </div>
     </div>

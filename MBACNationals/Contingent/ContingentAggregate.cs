@@ -12,12 +12,14 @@ namespace MBACNationals.Contingent
         IApplyEvent<TeamRemoved>,
         IApplyEvent<RoomTypeChanged>,
         IApplyEvent<TravelPlansChanged>,
-        IApplyEvent<TeamPracticeRescheduled>
+        IApplyEvent<TeamPracticeRescheduled>,
+        IApplyEvent<ReservationInstructionsChanged>
     {
         public string Province { get; private set; }
         public List<Team> Teams { get; private set; }
         public List<TravelPlan> TravelPlans { get; private set; }
         public List<HotelRoom> HotelRooms { get; private set; }
+        public string Instructions { get; private set; }
 
         public ContingentAggregate()
         {
@@ -63,6 +65,11 @@ namespace MBACNationals.Contingent
                 return;
 
             team.Apply(e);
+        }
+
+        public void Apply(ReservationInstructionsChanged e)
+        {
+            Instructions = e.Instructions;
         }
     }
 

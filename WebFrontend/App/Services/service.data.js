@@ -16,6 +16,7 @@
             RemoveParticipantFromRoom: removeParticipantFromRoom,
             LoadRooms: loadRooms,
             ChangeRoomType: changeRoomType,
+            SaveInstructions: saveInstructions,
             LoadTravelPlans: loadTravelPlans,
             SaveTravelPlans: saveTravelPlans,
             LoadPracticePlan: loadPracticePlan,
@@ -132,10 +133,17 @@
             return $http.get('/Contingent/PracticePlan', {
                 params: { province: province }
             });
-        }
+        };
 
         function savePracticePlan(practicePlan) {
             return $http.post('/Contingent/SavePracticePlan', practicePlan);
+        };
+
+        function saveInstructions(province, instructions) {
+            return $http.post('/Contingent/SaveReservationInstructions', {
+                Province: province,
+                Instructions: instructions
+            });
         };
     };
 

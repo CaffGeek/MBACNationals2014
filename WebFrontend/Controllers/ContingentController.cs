@@ -187,6 +187,21 @@ namespace WebFrontend.Controllers
             Domain.Dispatcher.SendCommand(command);
             return Json(command);
         }
+
+        [HttpPost]
+        [RestrictAccessByRouteId]
+        public JsonResult SaveReservationInstructions(SaveReservationInstructions command)
+        {
+            var contingent = Domain.ContingentViewQueries.GetContingent(command.Province);
+
+            if (contingent == null)
+                return Json(command);
+
+            command.Id = contingent.Id;
+            
+            Domain.Dispatcher.SendCommand(command);
+            return Json(command);
+        }
     }
 }
 

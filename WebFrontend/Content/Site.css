@@ -84,10 +84,8 @@ div.noHotelRoom {
 
 .hotelRooms > div {
     width: 19%;
-    float: left;
     margin:  .5%;
     padding: .5%;
-    height: 8em;
 }
 
 .hotelRooms > div > div {

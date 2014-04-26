@@ -26,6 +26,7 @@
                     }
 
                     $scope.model.rooms = sparseRooms;
+                    $scope.model.instructions = data.Instructions;
                 });
         }
 
@@ -52,6 +53,10 @@
 
                 participant.RoomNumber = 0;
             });
+        }
+
+        $scope.saveInstructions = function () {
+            dataService.SaveInstructions(province, $scope.model.instructions);
         }
     };
 
