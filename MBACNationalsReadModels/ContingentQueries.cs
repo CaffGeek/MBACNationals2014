@@ -16,9 +16,9 @@ namespace MBACNationals.ReadModels
 
         }
 
-        public class Contingent : IEntity
+        public class Contingent : AEntity
         {
-            public Guid Id { get; internal set; }
+            public Contingent(Guid id) : base(id) { }
             public string Province { get; internal set; }
         }
 
@@ -29,9 +29,8 @@ namespace MBACNationals.ReadModels
         
         public void Handle(ContingentCreated e)
         {
-            Create(new Contingent
+            Create(new Contingent(e.Id)
             {
-                Id = e.Id,
                 Province = e.Province,
             });
         }

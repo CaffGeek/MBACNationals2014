@@ -6,4 +6,14 @@ namespace Edument.CQRS
     {
         Guid Id { get; }
     }
+
+    public abstract class AEntity : IEntity
+    {
+        public AEntity(Guid id)
+        {
+            Id = id;
+        }
+
+        public Guid Id { get; private set; }
+    }
 }

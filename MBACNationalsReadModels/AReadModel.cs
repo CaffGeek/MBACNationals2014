@@ -18,7 +18,7 @@ namespace MBACNationals.ReadModels
         }
         
         protected void Create<T>(T entity)
-            where T : class, IEntity
+            where T : AEntity
         {
             using (var odb = OdbFactory.Open(_readModelFilePath))
             {
@@ -58,13 +58,13 @@ namespace MBACNationals.ReadModels
         }
 
         protected void Update<T>(Guid id, Action<T> func)
-            where T : class, IEntity
+            where T : AEntity
         {
             Update<T>(id, (t, odb) => { func(t); });
         }
 
         protected void Update<T>(Guid id, Action<T, NDatabase.Api.IOdb> func)
-            where T : class, IEntity
+            where T : AEntity
         {
             using (var odb = OdbFactory.Open(_readModelFilePath))
             {

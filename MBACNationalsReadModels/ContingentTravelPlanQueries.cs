@@ -18,16 +18,16 @@ namespace MBACNationals.ReadModels
 
         }
 
-        public class ContingentTravelPlans : IEntity
+        public class ContingentTravelPlans : AEntity
         {
-            public Guid Id { get; internal set; }
+            public ContingentTravelPlans(Guid id) : base(id) { }
             public string Province { get; internal set; }
             public IList<TravelPlan> TravelPlans { get; internal set; }
         }
 
-        public class ContingentRooms : IEntity
+        public class ContingentRooms : AEntity
         {
-            public Guid Id { get; internal set; }
+            public ContingentRooms(Guid id) : base(id) { }
             public string Province { get; internal set; }
             public IList<HotelRoom> HotelRooms { get; internal set; }
         }
@@ -59,16 +59,14 @@ namespace MBACNationals.ReadModels
 
         public void Handle(ContingentCreated e)
         {
-            Create(new ContingentTravelPlans
+            Create(new ContingentTravelPlans(e.Id)
             {
-                Id = e.Id,
                 Province = e.Province,
                 TravelPlans = new List<TravelPlan>()
             });
 
-            Create(new ContingentRooms
+            Create(new ContingentRooms(e.Id)
             {
-                Id = e.Id,
                 Province = e.Province,
                 HotelRooms = new List<HotelRoom>()
             });

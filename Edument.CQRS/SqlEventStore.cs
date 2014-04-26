@@ -60,7 +60,7 @@ namespace Edument.CQRS
                     cmd.CommandText = @"
                         SELECT [Type], [Body]
                         FROM [dbo].[Events]
-                        ORDER BY [Timestamp]";
+                        ORDER BY [Timestamp], [SequenceNumber]";
                     cmd.CommandType = CommandType.Text;
 
                     using (var r = cmd.ExecuteReader())

@@ -5,7 +5,7 @@
         $scope.model = {};
         
         $scope.model.title = team.Name;
-        $scope.model.participant = participant || {};
+        $scope.model.participant = participant || { Package: {} };
         $scope.model.team = team || {};
 
         $scope.save = function () {
@@ -26,6 +26,15 @@
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
+        };
+
+        $scope.togglePackages = function (isCompletePackage) {
+            $scope.model.participant.Package = $scope.model.participant.Package || {};
+
+            $scope.model.participant.Package.ManitobaDinner = isCompletePackage;
+            $scope.model.participant.Package.ManitobaDance = isCompletePackage;
+            $scope.model.participant.Package.FinalBanquet = isCompletePackage;
+            $scope.model.participant.Package.Transportation = isCompletePackage;
         };
     };
 

@@ -28,17 +28,17 @@ namespace MBACNationals.ReadModels
 
         }
 
-        public class Contingent : IEntity
+        public class Contingent : AEntity
         {
-            public Guid Id { get; internal set; }
+            public Contingent(Guid id) : base(id) { }
             public string Province { get; internal set; }
             public IList<Team> Teams { get; internal set; }
             public IList<Participant> Guests { get; internal set; }
         }
 
-        public class Team : IEntity
+        public class Team : AEntity
         {
-            public Guid Id { get; internal set; }
+            public Team(Guid id) : base(id) { }
             public string Name { get; internal set; }
             public Guid ContingentId { get; internal set; }
             public IList<Participant> Bowlers { get; internal set; }
@@ -53,9 +53,9 @@ namespace MBACNationals.ReadModels
             public bool IncludesSinglesRep { get; internal set; }
         }
 
-        public class Participant : IEntity
+        public class Participant : AEntity
         {
-            public Guid Id { get; internal set; }
+            public Participant(Guid id) : base(id) { }
             public string Name { get; internal set; }
             public Guid TeamId { get; internal set; }
             public Guid ContingentId { get; internal set; }
@@ -76,13 +76,12 @@ namespace MBACNationals.ReadModels
         
         public void Handle(ContingentCreated e)
         {
-            Create(new Contingent
-                    {
-                        Id = e.Id,
-                        Province = e.Province,
-                        Teams = new List<Team>(),
-                        Guests = new List<Participant>(),
-                    });
+            Create(new Contingent(e.Id)
+            {
+                Province = e.Province,
+                Teams = new List<Team>(),
+                Guests = new List<Participant>(),
+            });
         }
 
         public void Handle(TeamCreated e)
@@ -90,9 +89,8 @@ namespace MBACNationals.ReadModels
             Update<Contingent>(e.Id, contingent =>
             {
                 contingent.Teams.Add(
-                    new Team
+                    new Team(e.TeamId)
                     {
-                        Id = e.TeamId,
                         Name = e.Name,
                         ContingentId = e.Id,
                         SizeLimit = e.SizeLimit,
@@ -118,9 +116,8 @@ namespace MBACNationals.ReadModels
 
         public void Handle(ParticipantCreated e)
         {
-            Create(new Participant
+            Create(new Participant(e.Id)
             {
-                Id = e.Id,
                 Name = e.Name,
                 IsDelegate = e.IsDelegate,
                 IsRookie = e.YearsQualifying == 1,

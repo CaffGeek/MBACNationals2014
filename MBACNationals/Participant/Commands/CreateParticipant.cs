@@ -14,5 +14,14 @@ namespace MBACNationals.Participant.Commands
         public int TournamentGames { get; set; }
         public int TournamentPinfall { get; set; }
         public bool IsGuest { get; set; }
+        public PackageInformation Package { get; set; }
+
+        public class PackageInformation
+        {
+            public bool ManitobaDinner { get; set; }
+            public bool ManitobaDance { get; set; }
+            public bool FinalBanquet { get; set; }
+            public bool Transportation { get; set; }
+        }
     }
 }

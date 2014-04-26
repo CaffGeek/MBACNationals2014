@@ -19,16 +19,16 @@ namespace MBACNationals.ReadModels
 
         }
 
-        public class ContingentPracticePlan : IEntity
+        public class ContingentPracticePlan : AEntity
         {
-            public Guid Id { get; internal set; }
+            public ContingentPracticePlan(Guid id) : base(id) { }
             public string Province { get; internal set; }
             public IList<Team> Teams { get; internal set; }
         }
 
-        public class Team : IEntity
+        public class Team : AEntity
         {
-            public Guid Id { get; internal set; }
+            public Team(Guid id) : base(id) { }
             public string Name { get; internal set; }
             public string PracticeLocation { get; set; }
             public int PracticeTime { get; set; }
@@ -41,9 +41,8 @@ namespace MBACNationals.ReadModels
 
         public void Handle(ContingentCreated e)
         {
-            Create(new ContingentPracticePlan
+            Create(new ContingentPracticePlan(e.Id)
             {
-                Id = e.Id,
                 Province = e.Province,
                 Teams = new List<Team>()
             });
@@ -53,9 +52,8 @@ namespace MBACNationals.ReadModels
         {
             Update<ContingentPracticePlan>(e.Id, x =>
             {
-                var team = new Team
+                var team = new Team(e.TeamId)
                 {
-                    Id = e.TeamId,
                     Name = e.Name
                 };
                 x.Teams.Add(team);

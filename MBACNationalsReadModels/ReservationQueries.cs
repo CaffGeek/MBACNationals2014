@@ -26,23 +26,23 @@ namespace MBACNationals.ReadModels
 
         }
 
-        public class Participant : IEntity
+        public class Participant : AEntity
         {
-            public Guid Id { get; internal set; }
+            public Participant(Guid id) : base(id) { }
             public string Name { get; internal set; }
             public string Province { get; internal set; }
             public int RoomNumber { get; internal set; }
         }
 
-        public class Contingent : IEntity
+        public class Contingent : AEntity
         {
-            public Guid Id { get; internal set; }
+            public Contingent(Guid id) : base(id) { }
             public string Province { get; internal set; }
         }
 
-        public class Team : IEntity
+        public class Team : AEntity
         {
-            public Guid Id { get; internal set; }
+            public Team(Guid id) : base(id) { }
             public Guid ContingentId { get; internal set; }
         }
 
@@ -53,21 +53,20 @@ namespace MBACNationals.ReadModels
 
         public void Handle(ParticipantCreated e)
         {
-            Create(new Participant
+            Create(new Participant(e.Id)
             {
-                Id = e.Id,
                 Name = e.Name
             });
         }
 
         public void Handle(ContingentCreated e)
         {
-            Create(new Contingent { Id = e.Id, Province = e.Province });
+            Create(new Contingent(e.Id) { Province = e.Province });
         }
 
         public void Handle(TeamCreated e)
         {
-            Create(new Team { Id = e.TeamId, ContingentId = e.Id });
+            Create(new Team(e.TeamId) { ContingentId = e.Id });
         }
 
         public void Handle(ParticipantAssignedToContingent e)

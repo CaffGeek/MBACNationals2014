@@ -16,7 +16,8 @@ namespace MBACNationals.Participant
         IApplyEvent<ParticipantYearsQualifyingChanged>,
         IApplyEvent<ParticipantAverageChanged>,
         IApplyEvent<ParticipantAssignedToRoom>,
-        IApplyEvent<ParticipantRemovedFromRoom>
+        IApplyEvent<ParticipantRemovedFromRoom>,
+        IApplyEvent<ParticipantGuestPackageChanged>
     {
         public Guid TeamId { get; private set; }
         public Guid ContingentId { get; private set; }
@@ -32,6 +33,16 @@ namespace MBACNationals.Participant
         public int TournamentGames { get; private set; }
         public int Average { get; private set; }
         public int RoomNumber { get; private set; }
+        public bool IsGuestPackageRequired { get; private set; }
+        public PackageInformation Package { get; private set; }
+
+        public class PackageInformation
+        {
+            public bool ManitobaDinner { get; set; }
+            public bool ManitobaDance { get; set; }
+            public bool FinalBanquet { get; set; }
+            public bool Transportation { get; set; }
+        }
 
         public void Apply(ParticipantCreated e)
         {
@@ -39,7 +50,8 @@ namespace MBACNationals.Participant
             Gender = e.Gender;
             IsDelegate = e.IsDelegate;
             IsGuest = e.IsGuest;
-            YearsQualifying = e.YearsQualifying;         
+            YearsQualifying = e.YearsQualifying;
+            Package = new PackageInformation();
         }
 
         public void Apply(ParticipantRenamed e)
@@ -105,6 +117,14 @@ namespace MBACNationals.Participant
         public void Apply(ParticipantRemovedFromRoom e)
         {
             RoomNumber = 0;
+        }
+
+        public void Apply(ParticipantGuestPackageChanged e)
+        {
+            Package.ManitobaDinner = e.ManitobaDinner;
+            Package.ManitobaDance = e.ManitobaDance;
+            Package.FinalBanquet = e.FinalBanquet;
+            Package.Transportation = e.Transportation;
         }
     }
 }

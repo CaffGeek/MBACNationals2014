@@ -30,7 +30,7 @@ namespace MBACNationals.Participant
                 Gender = command.Gender,
                 IsDelegate = command.IsDelegate,
                 YearsQualifying = command.YearsQualifying,
-                IsGuest = command.IsGuest,
+                IsGuest = command.IsGuest
             };
 
             yield return new ParticipantAverageChanged
@@ -40,6 +40,15 @@ namespace MBACNationals.Participant
                 LeagueGames = command.LeagueGames,
                 TournamentPinfall = command.TournamentPinfall,
                 TournamentGames = command.TournamentGames,
+            };
+
+            yield return new ParticipantGuestPackageChanged
+            {
+                Id = command.Id,
+                ManitobaDinner = command.Package.ManitobaDinner,
+                ManitobaDance = command.Package.ManitobaDance,
+                FinalBanquet = command.Package.FinalBanquet,
+                Transportation = command.Package.Transportation,
             };
         }
 
@@ -91,6 +100,19 @@ namespace MBACNationals.Participant
                     LeagueGames = command.LeagueGames,
                     TournamentPinfall = command.TournamentPinfall,
                     TournamentGames = command.TournamentGames,
+                };
+
+            if (agg.Package.ManitobaDinner != command.Package.ManitobaDinner
+                || agg.Package.ManitobaDance != command.Package.ManitobaDance
+                || agg.Package.FinalBanquet != command.Package.FinalBanquet
+                || agg.Package.Transportation != command.Package.Transportation)
+                yield return new ParticipantGuestPackageChanged
+                {
+                    Id = command.Id,
+                    ManitobaDinner = command.Package.ManitobaDinner,
+                    ManitobaDance = command.Package.ManitobaDance,
+                    FinalBanquet = command.Package.FinalBanquet,
+                    Transportation = command.Package.Transportation,
                 };
         }
 
