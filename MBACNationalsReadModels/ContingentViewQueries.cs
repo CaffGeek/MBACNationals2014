@@ -57,8 +57,6 @@ namespace MBACNationals.ReadModels
         {
             public Participant(Guid id) : base(id) { }
             public string Name { get; internal set; }
-            public Guid TeamId { get; internal set; }
-            public Guid ContingentId { get; internal set; }
             public bool IsRookie { get; internal set; }
             public bool IsDelegate { get; internal set; }
             public bool IsGuest { get; internal set; }
@@ -113,7 +111,7 @@ namespace MBACNationals.ReadModels
                 contingent.Teams.Remove(contingent.Teams.SingleOrDefault(x => x.Id.Equals(e.TeamId)));
             });
         }
-
+		
         public void Handle(ParticipantCreated e)
         {
             Create(new Participant(e.Id)
@@ -137,7 +135,6 @@ namespace MBACNationals.ReadModels
 
                 contingent.Guests.Add(participant);
             });
-            Update<Participant>(e.Id, x => { x.ContingentId = e.ContingentId; });
         }
 
         public void Handle(ParticipantAssignedToTeam e)
