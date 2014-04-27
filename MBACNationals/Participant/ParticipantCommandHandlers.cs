@@ -42,14 +42,15 @@ namespace MBACNationals.Participant
                 TournamentGames = command.TournamentGames,
             };
 
-            yield return new ParticipantGuestPackageChanged
-            {
-                Id = command.Id,
-                ManitobaDinner = command.Package.ManitobaDinner,
-                ManitobaDance = command.Package.ManitobaDance,
-                FinalBanquet = command.Package.FinalBanquet,
-                Transportation = command.Package.Transportation,
-            };
+            if (command.Package != null)
+                yield return new ParticipantGuestPackageChanged
+                {
+                    Id = command.Id,
+                    ManitobaDinner = command.Package.ManitobaDinner,
+                    ManitobaDance = command.Package.ManitobaDance,
+                    FinalBanquet = command.Package.FinalBanquet,
+                    Transportation = command.Package.Transportation,
+                };
         }
 
         public IEnumerable Handle(Func<Guid, ParticipantAggregate> al, UpdateParticipant command)
