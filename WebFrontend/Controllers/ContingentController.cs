@@ -5,8 +5,7 @@ using System.Web.Mvc;
 using WebFrontend.Attributes;
 
 namespace WebFrontend.Controllers
-{
-    [Authorize]//TODO: Setup roles
+{    
     public class ContingentController : Controller
     {
         public ActionResult Index()
