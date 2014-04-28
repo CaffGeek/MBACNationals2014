@@ -67,6 +67,8 @@ namespace WebFrontend.Controllers
         [HttpGet]
         public JsonResult Index(string province)
         {
+            Response.AppendHeader("Access-Control-Allow-Origin", "*");
+
             var contingent = Domain.ContingentViewQueries.GetContingent(province);
 
             if (contingent != null)
