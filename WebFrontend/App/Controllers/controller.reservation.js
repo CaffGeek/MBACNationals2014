@@ -30,6 +30,31 @@
                 });
         }
 
+
+        $scope.calcBin = calcBin;
+        function calcBin(row, col) {
+            return ((row - 1) * 5) + col;
+        };
+
+        $scope.getRoomByBin = getRoomByBin;
+        function getRoomByBin(row, col) {
+            var bin = calcBin(row, col);
+            var foundRoom;
+            $scope.model.rooms.some(function (room) {
+                if (room.RoomNumber === bin) {
+                    foundRoom = room;
+                    return true; // break
+                }
+            });
+            return foundRoom;
+        }
+
+        $scope.isThisRoom = function (row, col) {
+            return function (participant) {
+                return participant.RoomNumber == calcBin(row, col);
+            }
+        }
+
         $scope.setRoomType = function (roomNumber) {
             var type = $scope.model.rooms[roomNumber].Type;
             dataService.ChangeRoomType(province, roomNumber, type);
