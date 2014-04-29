@@ -22,7 +22,7 @@
 
                     for (var i = 1; i <= 25; i++) {
                         var room = data.HotelRooms.filter(function (obj) { return obj.RoomNumber == i; })[0];
-                        sparseRooms[i] = room || {};
+                        sparseRooms[i] = room || { RoomNumber: i };
                     }
 
                     $scope.model.rooms = sparseRooms;
@@ -53,6 +53,10 @@
             return function (participant) {
                 return participant.RoomNumber == calcBin(row, col);
             }
+        }
+
+        $scope.unassignedRoom = function (participant) {
+            return participant.RoomNumber == 0;
         }
 
         $scope.setRoomType = function (roomNumber) {

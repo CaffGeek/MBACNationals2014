@@ -6,7 +6,7 @@
             <h3></h3>
 		    <div class="col-sm-2">
                 <div class="column noHotelRoom" data-droppable="" data-drop="removeFromRoom">
-                    <div id="{{p.Id}}" data-draggable="" data-ng-repeat="p in model.participants | filter:{RoomNumber:0, Name:'!!'}">{{p.Name}}</div>
+                    <div id="{{p.Id}}" data-draggable="" data-ng-repeat="p in model.participants | filter:unassignedRoom">{{p.Name}}</div>
 		        </div>    
                 <div>
                     <address>
