@@ -14,11 +14,9 @@
             dataService.SaveParticipant($scope.model.participant).then(function (response) {
                 $scope.model.participant.Id = response.data.Id;
             }).then(function (response) {
-                if ($scope.model.participant.Id === $scope.model.team.Alternate.Id) {
-                    dataService.AssignAlternateToTeam($scope.model.participant, $scope.model.team);
-                } else if ($scope.model.participant.IsCoach) {
+                if ($scope.model.participant.IsCoach) {
                     dataService.AssignCoachToTeam($scope.model.participant, $scope.model.team);
-                } else {
+                } else if ($scope.model.team.Id) {
                     dataService.AssignParticipantToTeam($scope.model.participant, $scope.model.team);
                 }
             }).then(function (response) {
