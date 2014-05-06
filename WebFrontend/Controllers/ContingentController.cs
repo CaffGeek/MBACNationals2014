@@ -147,6 +147,14 @@ namespace WebFrontend.Controllers
 
         [HttpPost]
         [RestrictAccessByRouteId]
+        public JsonResult AssignAlternateToTeam(AssignAlternateToTeam command)
+        {
+            Domain.Dispatcher.SendCommand(command);
+            return Json(command);
+        }
+
+        [HttpPost]
+        [RestrictAccessByRouteId]
         public JsonResult AssignCoachToTeam(AddCoachToTeam command)
         {
             Domain.Dispatcher.SendCommand(command);

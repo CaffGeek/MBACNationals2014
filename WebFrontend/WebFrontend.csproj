@@ -206,6 +206,9 @@
     <Content Include="App\Factories\factory.modal.js" />
     <Content Include="App\Filters\filter.numbers.js" />
     <Content Include="App\Services\service.data.js" />
+    <Content Include="App\Views\Contingent.html" />
+    <Content Include="App\Views\Alternates.html" />
+    <Content Include="App\Views\Guests.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -290,6 +293,10 @@
     <Content Include="Content\Images\nav_bkg.png" />
     <Content Include="Content\Images\twitter_icon.png" />
     <Content Include="Modals\Contingent\Divisions.html" />
+    <Content Include="Modals\Participant\_average.html" />
+    <Content Include="Modals\Participant\_gender.html" />
+    <Content Include="Modals\Participant\_guestpackage.html" />
+    <Content Include="Modals\Participant\_shirtsize.html" />
     <Content Include="Modals\Participant\Edit.html" />
     <Content Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

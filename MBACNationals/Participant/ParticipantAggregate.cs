@@ -9,6 +9,7 @@ namespace MBACNationals.Participant
         IApplyEvent<ParticipantRenamed>,
         IApplyEvent<ParticipantAssignedToContingent>,
         IApplyEvent<ParticipantAssignedToTeam>,
+        IApplyEvent<ParticipantDesignatedAsAlternate>,
         IApplyEvent<CoachAssignedToTeam>,
         IApplyEvent<ParticipantGenderReassigned>,
         IApplyEvent<ParticipantDelegateStatusGranted>,
@@ -26,6 +27,7 @@ namespace MBACNationals.Participant
         public bool IsDelegate { get; private set; }
         public bool IsGuest { get; private set; }
         public bool IsCoach { get; private set; }
+        public bool IsAlternate { get; private set; }
         public int YearsQualifying { get; private set; }
         public int LeaguePinfall { get; private set; }
         public int LeagueGames { get; private set; }
@@ -73,6 +75,12 @@ namespace MBACNationals.Participant
         public void Apply(ParticipantAssignedToTeam e)
         {
             TeamId = e.TeamId;
+        }
+
+        public void Apply(ParticipantDesignatedAsAlternate e)
+        {
+            TeamId = e.TeamId;
+            IsAlternate = true; 
         }
 
         public void Apply(ParticipantGenderReassigned e)
