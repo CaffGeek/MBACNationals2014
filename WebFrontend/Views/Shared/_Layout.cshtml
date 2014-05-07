@@ -36,7 +36,11 @@
 
         <!-- Site footer -->
         <div class="footer">
-          <p>Site Design &copy; 2013-@System.DateTime.Now.Year Charlene McIvor and Chad Hurd</p>
+            <p>Site Design &copy; 2013-@System.DateTime.Now.Year Charlene McIvor and Chad Hurd</p>
+            @if (User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Rebuild Read Models", "Rebuild", "Admin")
+            }
         </div>
 
     </div>

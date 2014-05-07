@@ -31,7 +31,7 @@ namespace MBACNationals.Participant
                 Gender = command.Gender,
                 IsDelegate = command.IsDelegate,
                 YearsQualifying = command.YearsQualifying,
-                IsGuest = command.IsGuest
+                IsGuest = command.IsGuest,
             };
 
             yield return new ParticipantAverageChanged
@@ -41,6 +41,12 @@ namespace MBACNationals.Participant
                 LeagueGames = command.LeagueGames,
                 TournamentPinfall = command.TournamentPinfall,
                 TournamentGames = command.TournamentGames,
+            };
+
+            yield return new ParticipantShirtSizeChanged
+            {
+                Id = command.Id,
+                ShirtSize = command.ShirtSize,
             };
 
             if (command.Package != null)
@@ -89,6 +95,13 @@ namespace MBACNationals.Participant
                 {
                     Id = command.Id,
                     YearsQualifying = command.YearsQualifying,
+                };
+
+            if (agg.ShirtSize != command.ShirtSize)
+                yield return new ParticipantShirtSizeChanged
+                {
+                    Id = command.Id,
+                    ShirtSize = command.ShirtSize,
                 };
 
             if (agg.LeaguePinfall != command.LeaguePinfall

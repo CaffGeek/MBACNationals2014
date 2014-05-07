@@ -18,7 +18,8 @@ namespace MBACNationals.Participant
         IApplyEvent<ParticipantAverageChanged>,
         IApplyEvent<ParticipantAssignedToRoom>,
         IApplyEvent<ParticipantRemovedFromRoom>,
-        IApplyEvent<ParticipantGuestPackageChanged>
+        IApplyEvent<ParticipantGuestPackageChanged>,
+        IApplyEvent<ParticipantShirtSizeChanged>
     {
         public Guid TeamId { get; private set; }
         public Guid ContingentId { get; private set; }
@@ -37,6 +38,7 @@ namespace MBACNationals.Participant
         public int RoomNumber { get; private set; }
         public bool IsGuestPackageRequired { get; private set; }
         public PackageInformation Package { get; private set; }
+        public string ShirtSize { get; private set; }
 
         public class PackageInformation
         {
@@ -133,6 +135,11 @@ namespace MBACNationals.Participant
             Package.ManitobaDance = e.ManitobaDance;
             Package.FinalBanquet = e.FinalBanquet;
             Package.Transportation = e.Transportation;
+        }
+
+        public void Apply(ParticipantShirtSizeChanged e)
+        {
+            ShirtSize = e.ShirtSize;
         }
     }
 }

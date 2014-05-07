@@ -1,4 +1,17 @@
 ﻿<label for="name" class="col-sm-3 control-label">Shirt</label>
 <div class="col-sm-9">
-    <input type="text" class="form-control" id="shirtSize" placeholder="Shirt Size" data-ng-model="model.participant.ShirtSize" />
+    <select id="shirtSize" data-ng-model="model.participant.ShirtSize">
+        <optgroup label="Ladies">
+            <option value="L-S">Ladies Small</option>
+            <option value="L-M">Ladies Medium</option>
+            <option value="L-L">Ladies Large</option>
+            <option value="L-XL">Ladies X-Large</option>
+        </optgroup>
+        <optgroup label="Mens">
+            <option value="M-S">Mens Small</option>
+            <option value="M-M">Mens Medium</option>
+            <option value="M-L">Mens Large</option>
+            <option value="M-XL">Mens X-Large</option>
+        </optgroup>
+    </select>
 </div>

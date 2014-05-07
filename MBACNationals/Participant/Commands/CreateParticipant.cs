@@ -15,6 +15,7 @@ namespace MBACNationals.Participant.Commands
         public int TournamentPinfall { get; set; }
         public bool IsGuest { get; set; }
         public PackageInformation Package { get; set; }
+        public string ShirtSize { get; set; }
 
         public class PackageInformation
         {

@@ -19,7 +19,8 @@ namespace MBACNationals.ReadModels
         ISubscribeTo<ParticipantDelegateStatusRevoked>,
         ISubscribeTo<ParticipantYearsQualifyingChanged>,
         ISubscribeTo<ParticipantAverageChanged>,
-        ISubscribeTo<ParticipantGuestPackageChanged>
+        ISubscribeTo<ParticipantGuestPackageChanged>,
+        ISubscribeTo<ParticipantShirtSizeChanged>
     {
         public ParticipantQueries(string readModelFilePath)
             : base(readModelFilePath) 
@@ -46,6 +47,7 @@ namespace MBACNationals.ReadModels
             public int RoomNumber { get; internal set; }
             public bool IsGuest { get; internal set; }
             public PackageInformation Package { get; internal set; }
+            public string ShirtSize { get; internal set; }
         }
 
         public class PackageInformation
@@ -141,6 +143,11 @@ namespace MBACNationals.ReadModels
                 x.Package.FinalBanquet = e.FinalBanquet;
                 x.Package.Transportation = e.Transportation;
             });
+        }
+
+        public void Handle(ParticipantShirtSizeChanged e)
+        {
+            Update<Participant>(e.Id, x => { x.ShirtSize = e.ShirtSize; });
         }
     }
 }
