@@ -9,6 +9,8 @@ namespace WebFrontend
 {
     public static class Domain
     {
+        public static string ReadModelFilePath { get; private set; }
+
         public static MessageDispatcher Dispatcher;
         public static IParticipantQueries ParticipantQueries;
         public static IContingentQueries ContingentQueries;
@@ -19,36 +21,38 @@ namespace WebFrontend
 
         public static void Setup()
         {
-            var readModelFilePath = HttpContext.Current.Server.MapPath("~/App_Data/MBACReadModels.db");
+            ReadModelFilePath = HttpContext.Current.Server.MapPath("~/App_Data/MBACReadModels.db");
 
             Dispatcher = new MessageDispatcher(new SqlEventStore(Properties.Settings.Default.DefaultConnection));
 
             Dispatcher.ScanInstance(new ParticipantCommandHandlers());
             Dispatcher.ScanInstance(new ContingentCommandHandlers());
-            //TODO: Dispatcher.ScanInstance(new ReservationCommandHandlers());
 
-            ParticipantQueries = new ParticipantQueries(readModelFilePath);
+            ParticipantQueries = new ParticipantQueries(ReadModelFilePath);
             Dispatcher.ScanInstance(ParticipantQueries);
 
-            ContingentQueries = new ContingentQueries(readModelFilePath);
+            ContingentQueries = new ContingentQueries(ReadModelFilePath);
             Dispatcher.ScanInstance(ContingentQueries);
 
-            ContingentViewQueries = new ContingentViewQueries(readModelFilePath);
+            ContingentViewQueries = new ContingentViewQueries(ReadModelFilePath);
             Dispatcher.ScanInstance(ContingentViewQueries);
 
-            ContingentTravelPlanQueries = new ContingentTravelPlanQueries(readModelFilePath);
+            ContingentTravelPlanQueries = new ContingentTravelPlanQueries(ReadModelFilePath);
             Dispatcher.ScanInstance(ContingentTravelPlanQueries);
 
-            ContingentPracticePlanQueries = new ContingentPracticePlanQueries(readModelFilePath);
+            ContingentPracticePlanQueries = new ContingentPracticePlanQueries(ReadModelFilePath);
             Dispatcher.ScanInstance(ContingentPracticePlanQueries);
 
-            ReservationQueries = new ReservationQueries(readModelFilePath);
+            ReservationQueries = new ReservationQueries(ReadModelFilePath);
             Dispatcher.ScanInstance(ReservationQueries);
+        }
 
-            if (File.Exists(readModelFilePath))
-                File.Delete(readModelFilePath);
-
-            Dispatcher.RepublishEvents(); //TODO: HACK: each time the app starts, the readmodel is regenerated
+        public static void RebuildReadModels()
+        {
+            if (File.Exists(ReadModelFilePath))
+                File.Delete(ReadModelFilePath);
+            
+            Dispatcher.RepublishEvents();
         }
     }
 }
