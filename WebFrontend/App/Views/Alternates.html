@@ -12,7 +12,7 @@
             <td>
                 <select 
                     data-ng-model="team.Alternate" 
-                    data-ng-options="participant.Id as participant.Name for participant in getAlternatePossibilities() | orderBy:'Name'"
+                    data-ng-options="participant.Id as participant.Name for participant in getAllContingentMembers() | orderBy:'Name'"
                     data-ng-change="assignAlternateToTeam(team.Alternate, team)">
                 </select>
             </td>

@@ -24,7 +24,7 @@
                 }); 
         }
 
-        $scope.getAlternatePossibilities = getAlternatePossibilities;
+        $scope.getAllContingentMembers = getAllContingentMembers;
         $scope.editDivisions = editDivisions;
         $scope.editTeam = editTeam;
         $scope.editParticipant = editParticipant;
@@ -135,25 +135,28 @@
 
         function editParticipant(participant, team) {
             return dataService.LoadParticipant(participant.Id).then(function (data) {
-                return modalFactory.Participant(data.data || participant, team).then(function (data) {
-                    participant = data; //TODO: write back to scope somehow
-                });
+                return modalFactory.Participant(data.data || participant, team);
+            }).then(function (data) {
+                participant.Name = data.Name;
+                participant.IsDelegate = data.IsDelegate;
+                participant.IsRookie = data.YearsQualifying == 1;
+                participant.IsGuest = data.IsGuest;
             });
         };
 
         function assignAlternateToTeam(newAlternate, team) {
-            var possibilities = getAlternatePossibilities();
+            var possibilities = getAllContingentMembers();
             var participant = possibilities.filter(function (obj) { return obj && obj.Id == newAlternate; })[0];
             return dataService.AssignAlternateToTeam(participant, team);
         };
 
         function editAlternate(alternateId, team) {
-            var possibilities = getAlternatePossibilities();
+            var possibilities = getAllContingentMembers();
             var participant = possibilities.filter(function (obj) { return obj && obj.Id == alternateId; })[0];
             return editParticipant(participant, team);
         };
 
-        function getAlternatePossibilities() {
+        function getAllContingentMembers() {
             var possibilities = [];
 
             possibilities = possibilities.concat($scope.model.Guests);
@@ -166,13 +169,10 @@
         }
 
         function addGuest() {
-            return modalFactory.Participant({ IsGuest: true }).
-                then(function (data) {
-                    dataService.AssignParticipantToContingent(data, $scope.model);
-                }).
-                then(function (data) {
-                    $scope.model.Guests.push(data); //TODO: write back to scope somehow
-                });
+            return modalFactory.Participant({ IsGuest: true }).then(function (data) {
+                $scope.model.Guests.push(data);
+                dataService.AssignParticipantToContingent(data, $scope.model);
+            });
         };
     };
 

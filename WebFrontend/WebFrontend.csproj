@@ -373,7 +373,6 @@
     <Content Include="Views\Shared\_AdminMenuPartial.cshtml" />
     <Content Include="Views\Contingent\Arrivals.cshtml" />
     <Content Include="Views\Contingent\Practice.cshtml" />
-    <Content Include="Views\Contingent\Profiles.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_ProvinceSelector.cshtml" />
   </ItemGroup>
