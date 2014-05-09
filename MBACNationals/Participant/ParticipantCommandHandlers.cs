@@ -15,7 +15,8 @@ namespace MBACNationals.Participant
         IHandleCommand<AddParticipantToContingent, ParticipantAggregate>,
         IHandleCommand<AddCoachToTeam, ParticipantAggregate>,
         IHandleCommand<AssignParticipantToRoom, ParticipantAggregate>,
-        IHandleCommand<RemoveParticipantFromRoom, ParticipantAggregate>
+        IHandleCommand<RemoveParticipantFromRoom, ParticipantAggregate>,
+        IHandleCommand<UpdateParticipantProfile, ParticipantAggregate>
     {
         public IEnumerable Handle(Func<Guid, ParticipantAggregate> al, CreateParticipant command)
         {
@@ -211,6 +212,40 @@ namespace MBACNationals.Participant
             yield return new ParticipantRemovedFromRoom
             {
                 Id = command.Id
+            };
+        }
+
+        public IEnumerable Handle(Func<Guid, ParticipantAggregate> al, UpdateParticipantProfile command)
+        {
+            var agg = al(command.Id);
+
+            yield return new ParticipantProfileChanged
+            {
+                Id = command.Id,
+                Age = command.Age,
+                HomeTown = command.HomeTown,
+                MaritalStatus = command.MaritalStatus,
+                SpouseName = command.SpouseName,
+                Children = command.Children,
+                Occupation = command.Occupation,
+
+                HomeCenter = command.HomeCenter,
+                YearsBowling = command.YearsBowling,
+                NumberOfLeagues = command.NumberOfLeagues,
+                HighestAverage = command.HighestAverage,
+
+                YearsCoaching = command.YearsCoaching,
+                BestFinishProvincially = command.BestFinishProvincially,
+                BestFinishNationally = command.BestFinishNationally,
+
+                MasterProvincialWins = command.MasterProvincialWins,
+                MastersAchievements = command.MastersAchievements,
+
+                OpenAchievements = command.OpenAchievements,
+                OpenYears = command.OpenYears,
+
+                OtherAchievements = command.OtherAchievements,
+                Hobbies = command.Hobbies,
             };
         }
     }

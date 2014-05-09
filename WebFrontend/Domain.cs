@@ -13,6 +13,7 @@ namespace WebFrontend
 
         public static MessageDispatcher Dispatcher;
         public static IParticipantQueries ParticipantQueries;
+        public static IParticipantProfileQueries ParticipantProfileQueries;
         public static IContingentQueries ContingentQueries;
         public static IContingentViewQueries ContingentViewQueries;
         public static IContingentTravelPlanQueries ContingentTravelPlanQueries;
@@ -30,6 +31,9 @@ namespace WebFrontend
 
             ParticipantQueries = new ParticipantQueries(ReadModelFilePath);
             Dispatcher.ScanInstance(ParticipantQueries);
+
+            ParticipantProfileQueries = new ParticipantProfileQueries(ReadModelFilePath);
+            Dispatcher.ScanInstance(ParticipantProfileQueries);
 
             ContingentQueries = new ContingentQueries(ReadModelFilePath);
             Dispatcher.ScanInstance(ContingentQueries);

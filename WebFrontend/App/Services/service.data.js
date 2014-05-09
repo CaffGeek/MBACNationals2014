@@ -21,7 +21,9 @@
             LoadTravelPlans: loadTravelPlans,
             SaveTravelPlans: saveTravelPlans,
             LoadPracticePlan: loadPracticePlan,
-            SavePracticePlan: savePracticePlan
+            SavePracticePlan: savePracticePlan,
+            SaveParticipantProfile: saveParticipantProfile,
+            LoadParticipantProfile: loadParticipantProfile
         };
 
         function saveTeam(team, contingent) {
@@ -151,6 +153,16 @@
             return $http.post('/Contingent/SaveReservationInstructions', {
                 Province: province,
                 Instructions: instructions
+            });
+        };
+
+        function saveParticipantProfile(participant) {
+            return $http.post('/Participant/Profile', participant);
+        };
+
+        function loadParticipantProfile(participant) {
+            return $http.get('/Participant/Profile', {
+                params: { id: participant.Id }
             });
         };
     };

@@ -42,6 +42,13 @@ namespace WebFrontend.Controllers
             return Json(participant, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult Profile(Guid id)
+        {
+            var participantProfile = Domain.ParticipantProfileQueries.GetProfile(id);
+            return Json(participantProfile, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         [RestrictAccessByRouteId]
         public JsonResult Create(CreateParticipant command)
@@ -90,6 +97,15 @@ namespace WebFrontend.Controllers
                 Name = value
             };
 
+            Domain.Dispatcher.SendCommand(command);
+
+            return Json(command);
+        }
+
+        [HttpPost]
+        [RestrictAccessByRouteId]
+        public JsonResult Profile(UpdateParticipantProfile command)
+        {
             Domain.Dispatcher.SendCommand(command);
 
             return Json(command);

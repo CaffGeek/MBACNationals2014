@@ -19,7 +19,8 @@ namespace MBACNationals.Participant
         IApplyEvent<ParticipantAssignedToRoom>,
         IApplyEvent<ParticipantRemovedFromRoom>,
         IApplyEvent<ParticipantGuestPackageChanged>,
-        IApplyEvent<ParticipantShirtSizeChanged>
+        IApplyEvent<ParticipantShirtSizeChanged>,
+        IApplyEvent<ParticipantProfileChanged>
     {
         public Guid TeamId { get; private set; }
         public Guid ContingentId { get; private set; }
@@ -39,6 +40,7 @@ namespace MBACNationals.Participant
         public bool IsGuestPackageRequired { get; private set; }
         public PackageInformation Package { get; private set; }
         public string ShirtSize { get; private set; }
+        public ProfileDetails Profile { get; private set; }
 
         public class PackageInformation
         {
@@ -46,6 +48,29 @@ namespace MBACNationals.Participant
             public bool ManitobaDance { get; set; }
             public bool FinalBanquet { get; set; }
             public bool Transportation { get; set; }
+        }
+
+        public class ProfileDetails
+        {
+            public int Age{ get; set; }
+            public string HomeTown{ get; set; }
+            public string MaritalStatus{ get; set; }
+            public string SpouseName{ get; set; }
+            public string Children{ get; set; }
+            public string Occupation{ get; set; }
+            public string HomeCenter{ get; set; }
+            public int YearsBowling{ get; set; }
+            public int NumberOfLeagues{ get; set; }
+            public int HighestAverage{ get; set; }
+            public int YearsCoaching{ get; set; }
+            public string BestFinishProvincially{ get; set; }
+            public string BestFinishNationally{ get; set; }
+            public int MasterProvincialWins{ get; set; }
+            public string MastersAchievements{ get; set; }
+            public string OpenAchievements{ get; set; }
+            public int OpenYears{ get; set; }
+            public string OtherAchievements{ get; set; }
+            public string Hobbies{ get; set; }
         }
 
         public void Apply(ParticipantCreated e)
@@ -56,6 +81,7 @@ namespace MBACNationals.Participant
             IsGuest = e.IsGuest;
             YearsQualifying = e.YearsQualifying;
             Package = new PackageInformation();
+            Profile = new ProfileDetails();
         }
 
         public void Apply(ParticipantRenamed e)
@@ -140,6 +166,29 @@ namespace MBACNationals.Participant
         public void Apply(ParticipantShirtSizeChanged e)
         {
             ShirtSize = e.ShirtSize;
+        }
+
+        public void Apply(ParticipantProfileChanged e)
+        {
+            Profile.Age = e.Age;
+            Profile.HomeTown = e.HomeTown;
+            Profile.MaritalStatus = e.MaritalStatus;
+            Profile.SpouseName = e.SpouseName;
+            Profile.Children = e.Children;
+            Profile.Occupation = e.Occupation;
+            Profile.HomeCenter = e.HomeCenter;
+            Profile.YearsBowling = e.YearsBowling;
+            Profile.NumberOfLeagues = e.NumberOfLeagues;
+            Profile.HighestAverage = e.HighestAverage;
+            Profile.YearsCoaching = e.YearsCoaching;
+            Profile.BestFinishProvincially = e.BestFinishProvincially;
+            Profile.BestFinishNationally = e.BestFinishNationally;
+            Profile.MasterProvincialWins = e.MasterProvincialWins;
+            Profile.MastersAchievements = e.MastersAchievements;
+            Profile.OpenAchievements = e.OpenAchievements;
+            Profile.OpenYears = e.OpenYears;
+            Profile.OtherAchievements = e.OtherAchievements;
+            Profile.Hobbies = e.Hobbies;
         }
     }
 }

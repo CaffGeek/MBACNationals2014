@@ -55,6 +55,7 @@
     <Compile Include="Participant\Commands\RemoveParticipantFromRoom.cs" />
     <Compile Include="Participant\Commands\UpdateParticipant.cs" />
     <Compile Include="Participant\Commands\RenameParticipant.cs" />
+    <Compile Include="Participant\Commands\UpdateParticipantProfile.cs" />
     <Compile Include="Participant\Exceptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Participant\Commands\CreateParticipant.cs" />
