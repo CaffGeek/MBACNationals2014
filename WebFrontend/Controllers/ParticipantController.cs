@@ -26,6 +26,7 @@ namespace WebFrontend.Controllers
         }
 
         [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public JsonResult Index(Guid? id)
         {
             if (!id.HasValue)
@@ -36,6 +37,7 @@ namespace WebFrontend.Controllers
         }
 
         [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public JsonResult Contingent(string province)
         {
             var participant = Domain.ReservationQueries.GetParticipants(province);
@@ -43,6 +45,7 @@ namespace WebFrontend.Controllers
         }
 
         [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public JsonResult Profile(Guid id)
         {
             var participantProfile = Domain.ParticipantProfileQueries.GetProfile(id);

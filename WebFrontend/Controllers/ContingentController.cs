@@ -14,6 +14,7 @@ namespace WebFrontend.Controllers
         }
 
         [RestrictAccessByRouteId] //Province
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult Reservation(string province)
         {
             if (string.IsNullOrWhiteSpace(province))
@@ -24,6 +25,7 @@ namespace WebFrontend.Controllers
         }
 
         [RestrictAccessByRouteId] //Province
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult Edit(string province)
         {
             if (string.IsNullOrWhiteSpace(province))
@@ -34,6 +36,7 @@ namespace WebFrontend.Controllers
         }
 
         [RestrictAccessByRouteId] //Province
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult Arrivals(string province)
         {
             if (string.IsNullOrWhiteSpace(province))
@@ -44,6 +47,7 @@ namespace WebFrontend.Controllers
         }
 
         [RestrictAccessByRouteId] //Province
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult Practice(string province)
         {
             if (string.IsNullOrWhiteSpace(province))
@@ -54,6 +58,7 @@ namespace WebFrontend.Controllers
         }
 
         [RestrictAccessByRouteId] //Province
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult Profiles(string province)
         {
             if (string.IsNullOrWhiteSpace(province))
@@ -64,6 +69,7 @@ namespace WebFrontend.Controllers
         }
 
         [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public JsonResult Index(string province)
         {
             Response.AppendHeader("Access-Control-Allow-Origin", "*");
@@ -83,6 +89,7 @@ namespace WebFrontend.Controllers
         }
 
         [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public JsonResult TravelPlans(string province)
         {
             var travelPlans = Domain.ContingentTravelPlanQueries.GetTravelPlans(province);
@@ -91,6 +98,7 @@ namespace WebFrontend.Controllers
         }
 
         [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public JsonResult Rooms(string province)
         {
             var rooms = Domain.ContingentTravelPlanQueries.GetRooms(province);
@@ -99,6 +107,7 @@ namespace WebFrontend.Controllers
         }
 
         [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public JsonResult PracticePlan(string province)
         {
             var rooms = Domain.ContingentPracticePlanQueries.GetSchedule(province);
