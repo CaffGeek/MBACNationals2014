@@ -35,6 +35,7 @@ namespace Edument.CQRS
                         SELECT [Type], [Body]
                         FROM [dbo].[Events]
                         WHERE [AggregateId] = @AggregateId
+                          AND ISNULL([IsDeleted], 0) = 0
                         ORDER BY [Timestamp], [SequenceNumber]";
                     cmd.CommandType = CommandType.Text;
                     cmd.Parameters.Add(new SqlParameter("@AggregateId", id));
@@ -60,6 +61,7 @@ namespace Edument.CQRS
                     cmd.CommandText = @"
                         SELECT [Type], [Body]
                         FROM [dbo].[Events]
+                        WHERE ISNULL([IsDeleted], 0) = 0
                         ORDER BY [Timestamp], [SequenceNumber]";
                     cmd.CommandType = CommandType.Text;
 
@@ -111,8 +113,8 @@ namespace Edument.CQRS
                 {
                     var e = newEvents[i];
                     queryText.AppendFormat(
-                        @"INSERT INTO [dbo].[Events] ([AggregateId], [SequenceNumber], [Type], [Body], [Timestamp])
-                          VALUES(@AggregateId, {0}, @Type{1}, @Body{1}, @CommitDateTime);",
+                        @"INSERT INTO [dbo].[Events] ([AggregateId], [SequenceNumber], [Type], [Body], [Timestamp], [IsDeleted])
+                          VALUES(@AggregateId, {0}, @Type{1}, @Body{1}, @CommitDateTime, 0);",
                         eventsLoaded + i, i);
                     cmd.Parameters.AddWithValue("Type" + i.ToString(), e.GetType().AssemblyQualifiedName);
                     cmd.Parameters.AddWithValue("Body" + i.ToString(), SerializeEvent(e));

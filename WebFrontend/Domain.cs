@@ -54,6 +54,11 @@ namespace WebFrontend
 
             ReservationQueries = new ReservationQueries(ReadModelFilePath);
             Dispatcher.ScanInstance(ReservationQueries);
+
+            if (!File.Exists(ReadModelFilePath))
+            {
+                RebuildReadModels();
+            }
         }
 
         public static void RebuildReadModels()
