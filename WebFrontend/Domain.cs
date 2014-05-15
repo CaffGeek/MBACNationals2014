@@ -60,14 +60,14 @@ namespace WebFrontend
         {
             var bakFile = HttpContext.Current.Server.MapPath("~/app_offline.bak");
             var htmFile = HttpContext.Current.Server.MapPath("~/app_offline.htm");
-            File.Move(bakFile, htmFile);
+            File.Copy(bakFile, htmFile, true);
 
             if (File.Exists(ReadModelFilePath))
                 File.Delete(ReadModelFilePath);
             
             Dispatcher.RepublishEvents();
 
-            File.Move(htmFile, bakFile);
+            File.Delete(htmFile);
         }
     }
 }
