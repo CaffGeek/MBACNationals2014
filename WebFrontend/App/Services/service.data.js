@@ -11,6 +11,7 @@
             AssignAlternateToTeam: assignAlternateToTeam,
             AssignCoachToTeam: assignCoachToTeam,
             LoadContingent: loadContingent,
+            LoadContingentEvents: loadContingentEvents,
             LoadParticipant: loadParticipant,
             LoadParticipants: loadParticipants,
             AssignParticipantToRoom: assignParticipantToRoom,
@@ -89,6 +90,12 @@
                 params: { province: province }
             });
         };
+
+        function loadContingentEvents(province) {
+            return $http.get('/Contingent/History', {
+                params: { province: province }
+            });
+        }
 
         function loadParticipant(id) {
             return $http.get('/Participant', {

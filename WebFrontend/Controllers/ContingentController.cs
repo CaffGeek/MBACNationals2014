@@ -115,6 +115,15 @@ namespace WebFrontend.Controllers
             return Json(rooms, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+        public JsonResult History(string province)
+        {
+            var rooms = Domain.ContingentEventHistoryQueries.GetEvents(province);
+
+            return Json(rooms, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         [RestrictAccessByRouteId]
         public JsonResult CreateTeam(CreateTeam command)

@@ -47,6 +47,8 @@
     <Compile Include="ContingentQueries.cs" />
     <Compile Include="ContingentTravelPlanQueries.cs" />
     <Compile Include="ContingentViewQueries.cs" />
+    <Compile Include="ContingentEventHistoryQueries.cs" />
+    <Compile Include="IContingentEventHistoryQueries.cs" />
     <Compile Include="IParticipantProfileQueries.cs" />
     <Compile Include="EntityMissingException.cs" />
     <Compile Include="IContingentPracticePlanQueries.cs" />

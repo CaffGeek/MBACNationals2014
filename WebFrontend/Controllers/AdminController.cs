@@ -6,13 +6,12 @@ using System.Web.Mvc;
 
 namespace WebFrontend.Controllers
 {
-    [Authorize(Roles="Admin")]
+    [Authorize(Users="Chad")]
     public class AdminController : Controller
     {
         public void Rebuild()
         {
             Domain.RebuildReadModels();
         }
-
     }
 }

@@ -32,6 +32,7 @@
         $scope.editAlternate = editAlternate;
         $scope.addGuest = addGuest;
         $scope.isTeam = isTeam;
+        $scope.loadHistory = loadHistory;
 
         function isTeam(x) {
             return x.SizeLimit > 1;
@@ -174,6 +175,12 @@
                 dataService.AssignParticipantToContingent(data, $scope.model);
             });
         };
+
+        function loadHistory() {
+            dataService.LoadContingentEvents(province).then(function (data) {
+                $scope.model.Events = data.data;
+            });
+        }
     };
 
     app.controller("ContingentController", ["$scope", "$http", "$q", "$location", "modalFactory", "dataService", contingentController]);
