@@ -7,7 +7,7 @@
                     <th>Years</th>
                 </tr>
             </thead>
-            <tbody data-ng-repeat="participant in model.Participants | orderBy:'YearsQualifying':true | filter:plaqueFilter" data-ng-if="participant.Name">
+            <tbody data-ng-repeat="participant in model.Participants | orderBy:['YearsQualifying','Name']:true | filter:plaqueFilter" data-ng-if="participant.Name">
                 <tr>
                     <td>{{participant.Name}}</td>
                     <td>{{participant.YearsQualifying}}</td>
