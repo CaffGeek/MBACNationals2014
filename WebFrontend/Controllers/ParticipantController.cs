@@ -38,6 +38,14 @@ namespace WebFrontend.Controllers
 
         [HttpGet]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+        public JsonResult All()
+        {
+            var participants = Domain.ParticipantQueries.GetParticipants();
+            return Json(participants, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public JsonResult Contingent(string province)
         {
             var participant = Domain.ReservationQueries.GetParticipants(province);

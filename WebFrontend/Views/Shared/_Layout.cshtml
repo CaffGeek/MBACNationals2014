@@ -39,6 +39,10 @@
             <p>Site Design &copy; 2013-@System.DateTime.Now.Year Charlene McIvor and Chad Hurd</p>
             @if (User.IsInRole("Admin"))
             {
+                @Html.ActionLink("Reports", "Reports", "Admin")
+            }
+            @if (User.Identity.Name.Equals("Chad"))
+            {
                 @Html.ActionLink("Rebuild Read Models", "Rebuild", "Admin")
             }
         </div>

@@ -14,6 +14,7 @@
             LoadContingentEvents: loadContingentEvents,
             LoadParticipant: loadParticipant,
             LoadParticipants: loadParticipants,
+            LoadAllParticipants: loadAllParticipants,
             AssignParticipantToRoom: assignParticipantToRoom,
             RemoveParticipantFromRoom: removeParticipantFromRoom,
             LoadRooms: loadRooms,
@@ -107,6 +108,10 @@
             return $http.get('/Participant/Contingent', {
                 params: { province: province }
             });
+        };
+
+        function loadAllParticipants() {
+            return $http.get('/Participant/All');
         };
 
         function assignParticipantToRoom(id, roomNumber) {
