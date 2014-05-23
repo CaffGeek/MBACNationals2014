@@ -7,7 +7,7 @@
 		var province = url.slice(lastSlash+1);
 
 		$scope.model = {};
-		$scope.viewUrl = '/App/Views/Reports/ParticipationPlaques.html';
+		$scope.viewUrl = '/App/Views/Reports/Averages.html';
 
 		$scope.loadParticipants = loadParticipants;
 		$scope.plaqueFilter = plaqueFilter;

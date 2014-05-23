@@ -42,6 +42,7 @@ namespace MBACNationals.Participant
                 LeagueGames = command.LeagueGames,
                 TournamentPinfall = command.TournamentPinfall,
                 TournamentGames = command.TournamentGames,
+                Average = agg.Average
             };
 
             yield return new ParticipantShirtSizeChanged
@@ -116,6 +117,7 @@ namespace MBACNationals.Participant
                     LeagueGames = command.LeagueGames,
                     TournamentPinfall = command.TournamentPinfall,
                     TournamentGames = command.TournamentGames,
+                    Average = agg.Average
                 };
 
             if (agg.Package.ManitobaDinner != command.Package.ManitobaDinner

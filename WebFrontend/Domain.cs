@@ -10,7 +10,7 @@ namespace WebFrontend
     public static class Domain
     {
         public static bool IsRebuilding { get; private set; }
-        public static string ReadModelFilePath { get; private set; }
+        public static string ReadModelFolder { get; private set; }
 
         public static MessageDispatcher Dispatcher;
         public static IParticipantQueries ParticipantQueries;
@@ -24,38 +24,38 @@ namespace WebFrontend
 
         public static void Setup()
         {
-            ReadModelFilePath = HttpContext.Current.Server.MapPath("~/App_Data/MBACReadModels.db");
+            ReadModelFolder = HttpContext.Current.Server.MapPath("~/App_Data/ReadModels/");
 
             Dispatcher = new MessageDispatcher(new SqlEventStore(Properties.Settings.Default.DefaultConnection));
 
             Dispatcher.ScanInstance(new ParticipantCommandHandlers());
             Dispatcher.ScanInstance(new ContingentCommandHandlers());
 
-            ParticipantQueries = new ParticipantQueries(ReadModelFilePath);
+            ParticipantQueries = new ParticipantQueries(ReadModelFolder);
             Dispatcher.ScanInstance(ParticipantQueries);
 
-            ParticipantProfileQueries = new ParticipantProfileQueries(ReadModelFilePath);
+            ParticipantProfileQueries = new ParticipantProfileQueries(ReadModelFolder);
             Dispatcher.ScanInstance(ParticipantProfileQueries);
 
-            ContingentQueries = new ContingentQueries(ReadModelFilePath);
+            ContingentQueries = new ContingentQueries(ReadModelFolder);
             Dispatcher.ScanInstance(ContingentQueries);
 
-            ContingentViewQueries = new ContingentViewQueries(ReadModelFilePath);
+            ContingentViewQueries = new ContingentViewQueries(ReadModelFolder);
             Dispatcher.ScanInstance(ContingentViewQueries);
 
-            ContingentTravelPlanQueries = new ContingentTravelPlanQueries(ReadModelFilePath);
+            ContingentTravelPlanQueries = new ContingentTravelPlanQueries(ReadModelFolder);
             Dispatcher.ScanInstance(ContingentTravelPlanQueries);
 
-            ContingentPracticePlanQueries = new ContingentPracticePlanQueries(ReadModelFilePath);
+            ContingentPracticePlanQueries = new ContingentPracticePlanQueries(ReadModelFolder);
             Dispatcher.ScanInstance(ContingentPracticePlanQueries);
 
-            ContingentEventHistoryQueries = new ContingentEventHistoryQueries(ReadModelFilePath);
+            ContingentEventHistoryQueries = new ContingentEventHistoryQueries(ReadModelFolder);
             Dispatcher.ScanInstance(ContingentEventHistoryQueries);
 
-            ReservationQueries = new ReservationQueries(ReadModelFilePath);
+            ReservationQueries = new ReservationQueries(ReadModelFolder);
             Dispatcher.ScanInstance(ReservationQueries);
 
-            if (!File.Exists(ReadModelFilePath))
+            if (!Directory.Exists(ReadModelFolder))
             {
                 RebuildReadModels();
             }
@@ -67,8 +67,8 @@ namespace WebFrontend
             var htmFile = HttpContext.Current.Server.MapPath("~/app_offline.htm");
             File.Copy(bakFile, htmFile, true);
 
-            if (File.Exists(ReadModelFilePath))
-                File.Delete(ReadModelFilePath);
+            if (Directory.Exists(ReadModelFolder))
+                Directory.Delete(ReadModelFolder, true);
             
             Dispatcher.RepublishEvents();
 

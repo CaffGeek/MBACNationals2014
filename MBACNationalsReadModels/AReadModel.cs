@@ -2,6 +2,7 @@
 using NDatabase;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +13,9 @@ namespace MBACNationals.ReadModels
     {
         private string _readModelFilePath;
 
-        public AReadModel(string readModelFilePath)
+        public AReadModel(string readModelFolder)
         {
-            _readModelFilePath = readModelFilePath;
+            _readModelFilePath = Path.Combine(readModelFolder, this.GetType().Name);
         }
         
         protected void Create<T>(T entity)
@@ -66,11 +67,11 @@ namespace MBACNationals.ReadModels
         protected void Update<T>(Guid id, Action<T, NDatabase.Api.IOdb> func)
             where T : AEntity
         {
+            var p1 = Read<T>(x => x.Id == id).FirstOrDefault();
             using (var odb = OdbFactory.Open(_readModelFilePath))
             {
-                var entity = odb.QueryAndExecute<T>()
-                    .Where(p => p.Id.Equals(id))
-                    .FirstOrDefault();
+                var entity = odb.AsQueryable<T>()
+                    .FirstOrDefault(p => p.Id.Equals(id));
 
                 if (entity == null)
                     return;
@@ -78,6 +79,7 @@ namespace MBACNationals.ReadModels
                 func(entity, odb);
                 odb.Store(entity);
             }
+            var p2 = Read<T>(x => x.Id == id).FirstOrDefault();
         }
     }
 }

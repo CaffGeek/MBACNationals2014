@@ -212,6 +212,7 @@
     <Content Include="App\Views\Alternates.html" />
     <Content Include="App\Views\History.html" />
     <Content Include="App\Views\Guests.html" />
+    <Content Include="App\Views\Reports\Averages.html" />
     <Content Include="App\Views\Reports\ParticipationPlaques.html" />
     <Content Include="app_offline.bak">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

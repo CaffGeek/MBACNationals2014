@@ -33,8 +33,8 @@ namespace MBACNationals.ReadModels
             public Participant(Guid id) : base(id) { }
             public string Name { get; internal set; }
             public string Gender { get; internal set; }
-            public Guid ContingentId { get; set; }
-            public Guid TeamId { get; internal set; }
+            public string ContingentId { get; internal set; }
+            public string TeamId { get; internal set; }
             public string TeamName { get; internal set; }
             public bool IsDelegate { get; internal set; }
             public bool IsCoach { get; internal set; }
@@ -77,7 +77,9 @@ namespace MBACNationals.ReadModels
                 IsDelegate = e.IsDelegate,
                 YearsQualifying = e.YearsQualifying,
                 IsGuest = e.IsGuest,
-                Package = new PackageInformation()
+                Package = new PackageInformation(),
+                ContingentId = Guid.Empty.ToString(),
+                TeamId = Guid.Empty.ToString()
             });
         }
 
@@ -88,18 +90,18 @@ namespace MBACNationals.ReadModels
 
         public void Handle(ParticipantAssignedToContingent e)
         {
-            Update<Participant>(e.Id, x => { x.ContingentId = e.ContingentId; });
+            Update<Participant>(e.Id, x => { x.ContingentId = e.ContingentId.ToString(); });
         }
 
         public void Handle(ParticipantAssignedToTeam e)
         {
-            Update<Participant>(e.Id, x => { x.TeamId = e.TeamId; });
+            Update<Participant>(e.Id, x => { x.TeamId = e.TeamId.ToString(); });
         }
 
         public void Handle(CoachAssignedToTeam e)
         {
-            Update<Participant>(e.Id, x => { 
-                x.TeamId = e.TeamId; 
+            Update<Participant>(e.Id, x => {
+                x.TeamId = e.TeamId.ToString(); 
                 x.IsCoach = true; 
             });
         }
@@ -131,6 +133,8 @@ namespace MBACNationals.ReadModels
                 x.LeaguePinfall = e.LeaguePinfall;
                 x.TournamentGames = e.TournamentGames;
                 x.TournamentPinfall = e.TournamentPinfall;
+                if (e.Average > 0)
+                    System.Diagnostics.Debugger.Break();
                 x.Average = e.Average;
             });
         }
