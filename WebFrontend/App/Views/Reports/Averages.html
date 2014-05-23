@@ -9,7 +9,7 @@
                     <th>Average</th>
                 </tr>
             </thead>
-            <tbody data-ng-repeat="participant in model.Participants | orderBy:'Name' | filter:{ Name: filter.Name }" data-ng-if="participant.Name">
+            <tbody data-ng-repeat="participant in model.Participants | orderBy:'Name' | filter:{ Name: filter.Name, IsGuest: false }" data-ng-if="participant.Name">
                 <tr>
                     <td>{{participant.Name}}</td>
                     <td>{{participant.Average}}</td>
