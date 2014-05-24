@@ -21,7 +21,7 @@
 		};
 
 		function plaqueFilter(participant) {
-		    return (participant.YearsQualifying);//TODO: && (participant.YearsQualifying % 5 === 0);
+		    return (participant.YearsQualifying) && (participant.YearsQualifying % 5 === 0);
 		}
 	};
 
