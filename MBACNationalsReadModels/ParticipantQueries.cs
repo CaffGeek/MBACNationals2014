@@ -1,4 +1,5 @@
 ﻿using Edument.CQRS;
+using Events.Contingent;
 using Events.Participant;
 using NDatabase;
 using System;
@@ -20,7 +21,9 @@ namespace MBACNationals.ReadModels
         ISubscribeTo<ParticipantYearsQualifyingChanged>,
         ISubscribeTo<ParticipantAverageChanged>,
         ISubscribeTo<ParticipantGuestPackageChanged>,
-        ISubscribeTo<ParticipantShirtSizeChanged>
+        ISubscribeTo<ParticipantShirtSizeChanged>,
+        ISubscribeTo<TeamCreated>,
+        ISubscribeTo<ContingentCreated>
     {
         public ParticipantQueries(string readModelFilePath)
             : base(readModelFilePath) 
@@ -34,6 +37,7 @@ namespace MBACNationals.ReadModels
             public string Name { get; internal set; }
             public string Gender { get; internal set; }
             public string ContingentId { get; internal set; }
+            public string Province { get; internal set; }
             public string TeamId { get; internal set; }
             public string TeamName { get; internal set; }
             public bool IsDelegate { get; internal set; }
@@ -48,6 +52,19 @@ namespace MBACNationals.ReadModels
             public bool IsGuest { get; internal set; }
             public PackageInformation Package { get; internal set; }
             public string ShirtSize { get; internal set; }
+        }
+
+        public class Contingent : AEntity
+        {
+            public Contingent(Guid id) : base(id) { }
+            public string Province { get; internal set; }
+        }
+
+        public class Team : AEntity
+        {
+            public Team(Guid id) : base(id) { }
+            public string Name { get; internal set; }
+            public Guid ContingentId { get; internal set; }
         }
 
         public class PackageInformation
@@ -67,7 +84,24 @@ namespace MBACNationals.ReadModels
         {
             return Read<Participant>(x => x.Id.Equals(id)).FirstOrDefault();
         }
-        
+
+        public void Handle(ContingentCreated e)
+        {
+            Create(new Contingent(e.Id)
+            {
+                Province = e.Province
+            });
+        }
+
+        public void Handle(TeamCreated e)
+        {
+            Create(new Team(e.TeamId)
+            {
+                ContingentId = e.Id,
+                Name = e.Name
+            });
+        }
+
         public void Handle(ParticipantCreated e)
         {
             Create(new Participant(e.Id)
@@ -90,19 +124,50 @@ namespace MBACNationals.ReadModels
 
         public void Handle(ParticipantAssignedToContingent e)
         {
-            Update<Participant>(e.Id, x => { x.ContingentId = e.ContingentId.ToString(); });
+            var contingent = Read<Contingent>(x => x.Id == e.ContingentId).FirstOrDefault();
+            if (contingent == null)
+                return;
+
+            Update<Participant>(e.Id, x => { 
+                x.ContingentId = contingent.Id.ToString();
+                x.Province = contingent.Province;
+            });
         }
 
         public void Handle(ParticipantAssignedToTeam e)
         {
-            Update<Participant>(e.Id, x => { x.TeamId = e.TeamId.ToString(); });
+            var team = Read<Team>(x => x.Id == e.TeamId).FirstOrDefault();
+            if (team == null)
+                return;
+
+            var contingent = Read<Contingent>(x => x.Id == team.ContingentId).FirstOrDefault();
+            if (contingent == null)
+                return;
+
+            Update<Participant>(e.Id, x => { 
+                x.TeamId = team.Id.ToString();
+                x.TeamName = team.Name;
+                x.ContingentId = team.ContingentId.ToString();
+                x.Province = contingent.Province;
+            });
         }
 
         public void Handle(CoachAssignedToTeam e)
         {
+            var team = Read<Team>(x => x.Id == e.TeamId).FirstOrDefault();
+            if (team == null)
+                return;
+
+            var contingent = Read<Contingent>(x => x.Id == team.ContingentId).FirstOrDefault();
+            if (contingent == null)
+                return;
+
             Update<Participant>(e.Id, x => {
-                x.TeamId = e.TeamId.ToString(); 
-                x.IsCoach = true; 
+                x.IsCoach = true;
+                x.TeamId = team.Id.ToString();
+                x.TeamName = team.Name;
+                x.ContingentId = team.ContingentId.ToString();
+                x.Province = contingent.Province;
             });
         }
 
@@ -133,8 +198,6 @@ namespace MBACNationals.ReadModels
                 x.LeaguePinfall = e.LeaguePinfall;
                 x.TournamentGames = e.TournamentGames;
                 x.TournamentPinfall = e.TournamentPinfall;
-                if (e.Average > 0)
-                    System.Diagnostics.Debugger.Break();
                 x.Average = e.Average;
             });
         }
