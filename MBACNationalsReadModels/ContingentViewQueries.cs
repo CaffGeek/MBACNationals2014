@@ -21,7 +21,8 @@ namespace MBACNationals.ReadModels
         ISubscribeTo<ParticipantRenamed>,
         ISubscribeTo<ParticipantDelegateStatusGranted>,
         ISubscribeTo<ParticipantDelegateStatusRevoked>,
-        ISubscribeTo<ParticipantYearsQualifyingChanged>
+        ISubscribeTo<ParticipantYearsQualifyingChanged>,
+        ISubscribeTo<ParticipantAverageChanged>
     {
         public ContingentViewQueries(string readModelFilePath)
             : base(readModelFilePath) 
@@ -62,6 +63,7 @@ namespace MBACNationals.ReadModels
             public bool IsRookie { get; internal set; }
             public bool IsDelegate { get; internal set; }
             public bool IsGuest { get; internal set; }
+            public int Average { get; internal set; }
         }
 
         public Contingent GetContingent(Guid id)
@@ -216,6 +218,11 @@ namespace MBACNationals.ReadModels
         public void Handle(ParticipantYearsQualifyingChanged e)
         {
             Update<Participant>(e.Id, x => { x.IsRookie = e.YearsQualifying == 1; });
+        }
+
+        public void Handle(ParticipantAverageChanged e)
+        {
+            Update<Participant>(e.Id, x => { x.Average = e.Average; });
         }
     }
 }
