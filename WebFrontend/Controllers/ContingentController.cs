@@ -13,7 +13,8 @@ namespace WebFrontend.Controllers
             return View();
         }
 
-        [RestrictAccessByRouteId] //Province
+        //[RestrictAccessByRouteId] //Province
+        [Authorize(Roles = "Admin")]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult Reservation(string province)
         {
