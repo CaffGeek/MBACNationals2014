@@ -172,6 +172,7 @@
     <Compile Include="Controllers\ContingentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ParticipantController.cs" />
+    <Compile Include="Controllers\ScoresController.cs" />
     <Compile Include="Domain.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -201,6 +202,7 @@
     <Content Include="App\Controllers\controller.arrivals.js" />
     <Content Include="App\Controllers\controller.practice.js" />
     <Content Include="App\Controllers\controller.participant.js" />
+    <Content Include="App\Controllers\controller.scoreentry.js" />
     <Content Include="App\Directives\directive.exportable.js" />
     <Content Include="App\Directives\directive.activemenu.js" />
     <Content Include="App\Directives\directive.droppable.js" />
@@ -214,10 +216,13 @@
     <Content Include="App\Views\History.html" />
     <Content Include="App\Views\Guests.html" />
     <Content Include="App\Views\Reports\Averages.html" />
+    <Content Include="App\Views\Reports\Alternates.html" />
     <Content Include="App\Views\Reports\Transportation.html" />
     <Content Include="App\Views\Reports\Practices.html" />
     <Content Include="App\Views\Reports\ParticipationPlaques.html" />
     <Content Include="App\Views\Reports\SinglesProfiles.html" />
+    <Content Include="App\Views\ScoreEntry\Game.html" />
+    <Content Include="App\Views\ScoreEntry\Division.html" />
     <Content Include="app_offline.bak">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -391,6 +396,8 @@
     <Content Include="Views\Shared\_ProvinceSelector.cshtml" />
     <Content Include="Views\Contingent\Profiles.cshtml" />
     <Content Include="Views\Admin\Reports.cshtml" />
+    <Content Include="Views\Scores\Entry.cshtml" />
+    <Content Include="Views\Shared\_BlankLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\Entities\" />

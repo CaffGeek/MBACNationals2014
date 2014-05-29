@@ -60,6 +60,14 @@ namespace WebFrontend.Controllers
             return Json(participantProfile, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+        public JsonResult Profiles()
+        {
+            var participantProfile = Domain.ParticipantProfileQueries.GetProfiles();
+            return Json(participantProfile, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         [RestrictAccessByRouteId]
         public JsonResult Create(CreateParticipant command)

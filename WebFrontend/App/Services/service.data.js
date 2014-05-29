@@ -25,7 +25,8 @@
             LoadPracticePlan: loadPracticePlan,
             SavePracticePlan: savePracticePlan,
             SaveParticipantProfile: saveParticipantProfile,
-            LoadParticipantProfile: loadParticipantProfile
+            LoadParticipantProfile: loadParticipantProfile,
+            LoadProfiles: loadProfiles
         };
 
         function saveTeam(team, contingent) {
@@ -176,6 +177,10 @@
             return $http.get('/Participant/Profile', {
                 params: { id: participant.Id }
             });
+        };
+
+        function loadProfiles() {
+            return $http.get('/Participant/Profiles');
         };
     };
 

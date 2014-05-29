@@ -40,6 +40,7 @@
             @if (User.IsInRole("Admin"))
             {
                 @Html.ActionLink("Reports", "Reports", "Admin")
+                @Html.ActionLink("Score Entry", "Entry", "Scores")
             }
             @if (User.Identity.Name.Equals("Chad"))
             {
