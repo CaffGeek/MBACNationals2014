@@ -1,1 +1,5 @@
 ﻿{{model.Division}}
+
+<div data-ng-repeat="game in model.Schedule.Games | unique: 'Number'">
+    <button type="button" class="btn btn-lg btn-block btn-primary" data-ng-click="Page('Match', { Game: game.Number })">{{game.Number}}</button>
+</div>

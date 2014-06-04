@@ -13,4 +13,4 @@
             else
                 return (input - 12) + ' pm';
         };
-    })
+    });

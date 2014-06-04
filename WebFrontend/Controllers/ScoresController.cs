@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace WebFrontend.Controllers
 {
@@ -16,6 +12,14 @@ namespace WebFrontend.Controllers
         public ActionResult Entry()
         {
             return View();
+        }
+
+        [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+        public JsonResult Schedule(string division)
+        {
+            var schedule = Domain.ScheduleQueries.GetSchedule(division);
+            return Json(schedule, JsonRequestBehavior.AllowGet);
         }
     }
 }

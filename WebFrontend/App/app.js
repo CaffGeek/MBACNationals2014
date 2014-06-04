@@ -2,5 +2,6 @@
 
 var app = angular.module('app', [
     'ui.bootstrap',
-    'numberFilters'
+    'numberFilters',
+    'repeatFilters'
 ]);

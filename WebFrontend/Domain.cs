@@ -21,6 +21,7 @@ namespace WebFrontend
         public static IContingentPracticePlanQueries ContingentPracticePlanQueries;
         public static IContingentEventHistoryQueries ContingentEventHistoryQueries;
         public static IReservationQueries ReservationQueries;
+        public static IScheduleQueries ScheduleQueries;
 
         public static void Setup()
         {
@@ -54,6 +55,9 @@ namespace WebFrontend
 
             ReservationQueries = new ReservationQueries(ReadModelFolder);
             Dispatcher.ScanInstance(ReservationQueries);
+
+            ScheduleQueries = new ScheduleQueries(ReadModelFolder);
+            Dispatcher.ScanInstance(ScheduleQueries);
 
             if (!Directory.Exists(ReadModelFolder))
             {

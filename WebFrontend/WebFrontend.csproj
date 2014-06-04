@@ -210,6 +210,7 @@
     <Content Include="App\Directives\directive.draggable.js" />
     <Content Include="App\Factories\factory.modal.js" />
     <Content Include="App\Filters\filter.numbers.js" />
+    <Content Include="App\Filters\filter.repeat.js" />
     <Content Include="App\Services\service.data.js" />
     <Content Include="App\Views\Contingent.html" />
     <Content Include="App\Views\Alternates.html" />
@@ -221,6 +222,8 @@
     <Content Include="App\Views\Reports\Practices.html" />
     <Content Include="App\Views\Reports\ParticipationPlaques.html" />
     <Content Include="App\Views\Reports\SinglesProfiles.html" />
+    <Content Include="App\Views\ScoreEntry\Score.html" />
+    <Content Include="App\Views\ScoreEntry\Match.html" />
     <Content Include="App\Views\ScoreEntry\Game.html" />
     <Content Include="App\Views\ScoreEntry\Division.html" />
     <Content Include="app_offline.bak">

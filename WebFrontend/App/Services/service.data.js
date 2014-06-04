@@ -26,7 +26,8 @@
             SavePracticePlan: savePracticePlan,
             SaveParticipantProfile: saveParticipantProfile,
             LoadParticipantProfile: loadParticipantProfile,
-            LoadProfiles: loadProfiles
+            LoadProfiles: loadProfiles,
+            LoadSchedule: loadSchedule
         };
 
         function saveTeam(team, contingent) {
@@ -181,6 +182,12 @@
 
         function loadProfiles() {
             return $http.get('/Participant/Profiles');
+        };
+
+        function loadSchedule(division) {
+            return $http.get('/Scores/Schedule', {
+                params: { division: division }
+            });
         };
     };
 

@@ -12,7 +12,20 @@
         $scope.Page = function (page, data) {
             switch (page) {
                 case 'Game': {
+                    dataService.LoadSchedule(data.Division).
+                        success(function (divisionSchedule) {
+                            $scope.model.Schedule = divisionSchedule;
+                        });
                     $scope.model.Division = data.Division;
+                    break;
+                }
+                case 'Match': {
+                    $scope.model.Game = data.Game;
+                    break;
+                }
+                case 'Score': {
+                    $scope.model.Away = data.Away;
+                    $scope.model.Home = data.Home;
                     break;
                 }
             }
