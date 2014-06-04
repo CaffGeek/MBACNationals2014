@@ -7,12 +7,20 @@
             <thead>
                 <tr>
                     <th>Participant</th>
+                    <th>Tournament<br/>Pinfall</th>
+                    <th>Tournament<br/>Games</th>
+                    <th>League<br/>Pinfall</th>
+                    <th>League<br/>Games</th>
                     <th>Average</th>
                 </tr>
             </thead>
             <tbody data-ng-repeat="participant in model.Participants | orderBy:'Name' | filter:{ Name: filter.Name }" data-ng-if="participant.Name">
                 <tr>
                     <td>{{participant.Name}}</td>
+                    <td>{{participant.TournamentPinfall}}</td>
+                    <td>{{participant.TournamentGames}}</td>
+                    <td>{{participant.LeaguePinfall}}</td>
+                    <td>{{participant.LeagueGames}}</td>
                     <td>{{participant.Average}}</td>
                 </tr>
             </tbody>
