@@ -15,6 +15,7 @@ namespace WebFrontend.Attributes
             if (httpContext.User.IsInRole("Admin"))
                 return true;
 
+            return false;
             var handler = httpContext.Handler as MvcHandler;
             var contingent = handler.RequestContext.RouteData.Values["province"] as string;
 
