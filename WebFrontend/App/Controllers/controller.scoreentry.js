@@ -24,14 +24,30 @@
                     break;
                 }
                 case 'Score': {
-                    $scope.model.Away = data.Away;
-                    $scope.model.Home = data.Home;
+                    $scope.model.AwayProvince = data.Away;
+                    $scope.model.HomeProvince = data.Home;
+
+                    dataService.LoadTeam(data.Away, $scope.model.Division).success(function (awayTeam) {
+                        $scope.model.Away = awayTeam;
+                    });
+                    dataService.LoadTeam(data.Home, $scope.model.Division).success(function (homeTeam) {
+                        $scope.model.Home = homeTeam;
+                    });
+
                     break;
                 }
-            }
+                case 'Result': {
+                    
+                    break;
+                }
+            };
+
+            $scope.ValidForm = function () {
+
+            };
 
             $scope.viewUrl = '/App/Views/ScoreEntry/' + page + '.html';
-        }
+        };
     };
 
     app.controller("ScoreEntryController", ["$scope", "$http", "$q", "$location", "modalFactory", "dataService", scoreEntryController]);

@@ -1,6 +1,7 @@
 ﻿using MBACNationals.Contingent.Commands;
 using MBACNationals.Participant.Commands;
 using System;
+using System.Linq;
 using System.Web.Mvc;
 using WebFrontend.Attributes;
 
@@ -86,6 +87,19 @@ namespace WebFrontend.Controllers
             contingent = Domain.ContingentViewQueries.GetContingent(province);
 
             return Json(contingent, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+        public JsonResult Team(string contingent, string teamName)
+        {
+            Response.AppendHeader("Access-Control-Allow-Origin", "*");
+
+            var theContingent = Domain.ContingentViewQueries.GetContingent(contingent);
+            if (theContingent == null)
+                return null; //TODO: Return an error???
+
+            return Json(theContingent.Teams.SingleOrDefault(x => x.Name.Equals(teamName, StringComparison.OrdinalIgnoreCase)), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

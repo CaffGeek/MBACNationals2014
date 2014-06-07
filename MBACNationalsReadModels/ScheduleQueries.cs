@@ -14,6 +14,8 @@ namespace MBACNationals.ReadModels
             Create(ScheduleBuilder.Singles("Tournament Men Single"));
             Create(ScheduleBuilder.Singles("Tournament Ladies Single"));
             Create(ScheduleBuilder.TournamentLadies());
+            Create(ScheduleBuilder.TournamentMens());
+            Create(ScheduleBuilder.TeachingLadies());
         }
 
         public enum BowlingCentre

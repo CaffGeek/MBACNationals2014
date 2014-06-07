@@ -1,2 +1,25 @@
-﻿{{model.Division}} - Game {{model.Game}} - {{model.Away}} vs {{model.Home}}
+﻿{{model.Division}} - Game {{model.Game}} - {{model.AwayProvince}} vs {{model.HomeProvince}}
 
+<form name="form" class="css-form" novalidate>
+    <div data-ng-repeat="bowler in model.Away.Bowlers" class="row">
+        <div class="col-xs-4">{{bowler.Name}}</div>
+        <div class="col-xs-4">
+            <select name="position" class="form-control input-lg" data-ng-model="bowler.Position" data-ng-if="model.Away.Bowlers.length > 1" required >
+                <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+            </select>
+        </div>
+        <div class="col-xs-4"><input name="score" class="form-control input-lg" type="number" min="0" max="450" data-ng-model="bowler.Score" required /></div>
+    </div>
+
+    <div data-ng-repeat="bowler in model.Home.Bowlers" class="row">
+        <div class="col-xs-4">{{bowler.Name}}</div>
+        <div class="col-xs-4">
+            <select name="position" class="form-control input-lg" data-ng-model="bowler.Position" data-ng-if="model.Away.Bowlers.length > 1" required >
+                <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+            </select>
+        </div>
+        <div class="col-xs-4"><input name="score" class="form-control input-lg" type="number" min="0" max="450" data-ng-model="bowler.Score" required /></div>
+    </div>
+
+    <button type="button" class="btn btn-lg btn-block btn-primary" data-ng-disabled="form.$invalid || !ValidForm()" data-ng-click="Page('Result')">Next</button>
+</form>

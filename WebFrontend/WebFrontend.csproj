@@ -222,6 +222,7 @@
     <Content Include="App\Views\Reports\Practices.html" />
     <Content Include="App\Views\Reports\ParticipationPlaques.html" />
     <Content Include="App\Views\Reports\SinglesProfiles.html" />
+    <Content Include="App\Views\ScoreEntry\Result.html" />
     <Content Include="App\Views\ScoreEntry\Score.html" />
     <Content Include="App\Views\ScoreEntry\Match.html" />
     <Content Include="App\Views\ScoreEntry\Game.html" />
