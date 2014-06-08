@@ -2,8 +2,8 @@
 
 <form name="form" class="css-form" novalidate>
     <div data-ng-repeat="bowler in model.Away.Bowlers" class="row">
-        <div class="col-xs-4">{{bowler.Name}}</div>
-        <div class="col-xs-4">
+        <div class="col-xs-5">{{bowler.Name}}</div>
+        <div class="col-xs-3">
             <select name="position" class="form-control input-lg" data-ng-model="bowler.Position" data-ng-if="model.Away.Bowlers.length > 1" required >
                 <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
             </select>
@@ -12,8 +12,8 @@
     </div>
 
     <div data-ng-repeat="bowler in model.Home.Bowlers" class="row">
-        <div class="col-xs-4">{{bowler.Name}}</div>
-        <div class="col-xs-4">
+        <div class="col-xs-5">{{bowler.Name}}</div>
+        <div class="col-xs-3">
             <select name="position" class="form-control input-lg" data-ng-model="bowler.Position" data-ng-if="model.Away.Bowlers.length > 1" required >
                 <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
             </select>

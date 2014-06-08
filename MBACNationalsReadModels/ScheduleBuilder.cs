@@ -145,5 +145,75 @@ namespace MBACNationals.ReadModels
                 }
             };
         }
+
+        public static ScheduleQueries.Schedule TeachingMens()
+        {
+            return new ScheduleQueries.Schedule(Guid.NewGuid())
+            {
+                Division = "Teaching Mens",
+                Games = new List<Game>
+                {
+                     new Game(01,  "MB", "NO",  23, BowlingCentre.Academy), new Game(01,  "SK", "AB",  25, BowlingCentre.Academy), new Game(01,  "BC", "SO",  27, BowlingCentre.Academy), new Game(01,  "QC", "NL",  29, BowlingCentre.Academy),
+                     new Game(02,  "BC", "QC",  23, BowlingCentre.Academy), new Game(02,  "SO", "NL",  25, BowlingCentre.Academy), new Game(02,  "AB", "MB",  27, BowlingCentre.Academy), new Game(02,  "NO", "SK",  29, BowlingCentre.Academy),
+                     new Game(03,  "SO", "SK",  23, BowlingCentre.Academy), new Game(03,  "QC", "MB",  25, BowlingCentre.Academy), new Game(03,  "NL", "NO",  27, BowlingCentre.Academy), new Game(03,  "AB", "BC",  29, BowlingCentre.Academy),
+                     new Game(04,  "NL", "AB",  23, BowlingCentre.Academy), new Game(04,  "NO", "BC",  25, BowlingCentre.Academy), new Game(04,  "SK", "QC",  27, BowlingCentre.Academy), new Game(04,  "MB", "SO",  29, BowlingCentre.Academy),
+                     new Game(05,  "QC", "NO",  15, BowlingCentre.Academy), new Game(05,  "AB", "SO",  17, BowlingCentre.Academy), new Game(05,  "MB", "NL",  19, BowlingCentre.Academy), new Game(05,  "BC", "SK",  21, BowlingCentre.Academy),
+                     new Game(06,  "NL", "BC",  15, BowlingCentre.Academy), new Game(06,  "SK", "MB",  17, BowlingCentre.Academy), new Game(06,  "SO", "QC",  19, BowlingCentre.Academy), new Game(06,  "NO", "AB",  21, BowlingCentre.Academy),
+                     new Game(07,  "NO", "SO",  15, BowlingCentre.Academy), new Game(07,  "AB", "QC",  17, BowlingCentre.Academy), new Game(07,  "NL", "SK",  19, BowlingCentre.Academy), new Game(07,  "BC", "MB",  21, BowlingCentre.Academy),
+
+                     new Game(08,  "BC", "AB",  3, BowlingCentre.Academy), new Game(08,  "NO", "NL",  5, BowlingCentre.Academy), new Game(08,  "MB", "QC",  09, BowlingCentre.Academy), new Game(08,  "SK", "SO",  13, BowlingCentre.Academy), 
+                     new Game(09,  "NO", "SK",  3, BowlingCentre.Academy), new Game(09,  "AB", "MB",  7, BowlingCentre.Academy), new Game(09,  "SO", "NL",  11, BowlingCentre.Academy), new Game(09,  "BC", "QC",  13, BowlingCentre.Academy), 
+                     new Game(10,  "QC", "NL",  3, BowlingCentre.Academy), new Game(10,  "SO", "BC",  5, BowlingCentre.Academy), new Game(10,  "SK", "AB",  09, BowlingCentre.Academy), new Game(10,  "MB", "NO",  13, BowlingCentre.Academy), 
+                     new Game(11,  "SO", "MB",  3, BowlingCentre.Academy), new Game(11,  "NO", "BC",  7, BowlingCentre.Academy), new Game(11,  "SK", "QC",  11, BowlingCentre.Academy), new Game(11,  "NL", "AB",  13, BowlingCentre.Academy), 
+                     new Game(12,  "QC", "AB",  5, BowlingCentre.Academy), new Game(12,  "NL", "SK",  7, BowlingCentre.Academy), new Game(12,  "NO", "SO",  09, BowlingCentre.Academy), new Game(12,  "MB", "BC",  11, BowlingCentre.Academy), 
+                     new Game(13,  "MB", "SK",  5, BowlingCentre.Academy), new Game(13,  "QC", "SO",  7, BowlingCentre.Academy), new Game(13,  "BC", "NL",  09, BowlingCentre.Academy), new Game(13,  "AB", "NO",  11, BowlingCentre.Academy), 
+
+                     new Game(14,  "NO", "QC",  13, BowlingCentre.Rossmere), new Game(14,  "NL", "MB",  15, BowlingCentre.Rossmere), new Game(14,  "SO", "AB",  17, BowlingCentre.Rossmere), new Game(14,  "SK", "BC",  19, BowlingCentre.Rossmere), 
+                     new Game(15,  "SO", "MB",  13, BowlingCentre.Rossmere), new Game(15,  "QC", "SK",  15, BowlingCentre.Rossmere), new Game(15,  "BC", "NO",  17, BowlingCentre.Rossmere), new Game(15,  "AB", "NL",  19, BowlingCentre.Rossmere),
+                     new Game(16,  "AB", "SK",  13, BowlingCentre.Rossmere), new Game(16,  "BC", "SO",  15, BowlingCentre.Rossmere), new Game(16,  "NL", "QC",  17, BowlingCentre.Rossmere), new Game(16,  "NO", "MB",  19, BowlingCentre.Rossmere),
+                     new Game(17,  "NL", "SO",  1, BowlingCentre.Rossmere), new Game(17,  "SK", "NO",  3, BowlingCentre.Rossmere), new Game(17,  "QC", "BC",  5, BowlingCentre.Rossmere), new Game(17,  "MB", "AB",  7, BowlingCentre.Rossmere),
+                     new Game(18,  "QC", "AB",  3, BowlingCentre.Rossmere), new Game(18,  "SO", "NO",  5, BowlingCentre.Rossmere), new Game(18,  "SK", "NL",  7, BowlingCentre.Rossmere), new Game(18,  "MB", "BC",  9, BowlingCentre.Rossmere),
+
+                     new Game(19,  "NO", "AB",  1, BowlingCentre.Rossmere), new Game(19,  "SK", "MB",  5, BowlingCentre.Rossmere), new Game(19,  "SO", "QC",  7, BowlingCentre.Rossmere), new Game(19,  "NL", "BC",  9, BowlingCentre.Rossmere),
+                     new Game(20,  "QC", "MB",  1, BowlingCentre.Rossmere), new Game(20,  "NL", "NO",  5, BowlingCentre.Rossmere), new Game(20,  "AB", "BC",  7, BowlingCentre.Rossmere), new Game(20,  "SK", "SO",  9, BowlingCentre.Rossmere),
+                     new Game(21,  "BC", "SK",  1, BowlingCentre.Rossmere), new Game(21,  "MB", "NL",  3, BowlingCentre.Rossmere), new Game(21,  "AB", "SO",  5, BowlingCentre.Rossmere), new Game(21,  "QC", "NO",  9, BowlingCentre.Rossmere),
+                }
+            };
+        }
+
+        public static ScheduleQueries.Schedule Seniors()
+        {
+            return new ScheduleQueries.Schedule(Guid.NewGuid())
+            {
+                Division = "Seniors",
+                Games = new List<Game>
+                {
+                     new Game(01,  "BC", "SK",  1, BowlingCentre.Coronation), new Game(01,  "NO", "AB",  3, BowlingCentre.Coronation), new Game(01,  "QC", "SO",  5, BowlingCentre.Coronation), new Game(01,  "NL", "MB",  7, BowlingCentre.Coronation),
+                     new Game(02,  "QC", "NL",  1, BowlingCentre.Coronation), new Game(02,  "SO", "MB",  3, BowlingCentre.Coronation), new Game(02,  "AB", "BC",  5, BowlingCentre.Coronation), new Game(02,  "SK", "NO",  7, BowlingCentre.Coronation),
+                     new Game(03,  "SO", "NO",  1, BowlingCentre.Coronation), new Game(03,  "NL", "BC",  3, BowlingCentre.Coronation), new Game(03,  "MB", "SK",  5, BowlingCentre.Coronation), new Game(03,  "AB", "QC",  7, BowlingCentre.Coronation),
+                     new Game(04,  "MB", "AB",  1, BowlingCentre.Coronation), new Game(04,  "SK", "QC",  3, BowlingCentre.Coronation), new Game(04,  "NO", "NL",  5, BowlingCentre.Coronation), new Game(04,  "BC", "SO",  7, BowlingCentre.Coronation),
+                     new Game(05,  "NL", "SK",  1, BowlingCentre.Coronation), new Game(05,  "AB", "SO",  3, BowlingCentre.Coronation), new Game(05,  "BC", "MB",  5, BowlingCentre.Coronation), new Game(05,  "QC", "NO",  7, BowlingCentre.Coronation),
+                     new Game(06,  "MB", "QC",  1, BowlingCentre.Coronation), new Game(06,  "NO", "BC",  3, BowlingCentre.Coronation), new Game(06,  "SO", "NL",  5, BowlingCentre.Coronation), new Game(06,  "SK", "AB",  7, BowlingCentre.Coronation),
+                     new Game(07,  "SK", "SO",  1, BowlingCentre.Coronation), new Game(07,  "NL", "AB",  3, BowlingCentre.Coronation), new Game(07,  "MB", "NO",  5, BowlingCentre.Coronation), new Game(07,  "BC", "QC",  7, BowlingCentre.Coronation),
+
+                     new Game(08,  "SO", "BC",  13, BowlingCentre.Rossmere), new Game(08,  "NL", "NO",  15, BowlingCentre.Rossmere), new Game(08,  "QC", "SK",  17, BowlingCentre.Rossmere), new Game(08,  "AB", "MB",  19, BowlingCentre.Rossmere), 
+                     new Game(09,  "QC", "MB",  13, BowlingCentre.Rossmere), new Game(09,  "AB", "SK",  15, BowlingCentre.Rossmere), new Game(09,  "BC", "NO",  17, BowlingCentre.Rossmere), new Game(09,  "NL", "SO",  19, BowlingCentre.Rossmere), 
+                     new Game(10,  "SK", "NL",  13, BowlingCentre.Rossmere), new Game(10,  "MB", "BC",  15, BowlingCentre.Rossmere), new Game(10,  "SO", "AB",  17, BowlingCentre.Rossmere), new Game(10,  "NO", "QC",  19, BowlingCentre.Rossmere), 
+                     new Game(11,  "AB", "NO",  13, BowlingCentre.Rossmere), new Game(11,  "QC", "SO",  15, BowlingCentre.Rossmere), new Game(11,  "MB", "NL",  17, BowlingCentre.Rossmere), new Game(11,  "SK", "BC",  19, BowlingCentre.Rossmere), 
+                     new Game(12,  "MB", "SO",  03, BowlingCentre.Rossmere), new Game(12,  "BC", "AB",  05, BowlingCentre.Rossmere), new Game(12,  "NO", "SK",  07, BowlingCentre.Rossmere), new Game(12,  "NL", "QC",  09, BowlingCentre.Rossmere), 
+                     new Game(13,  "AB", "NL",  03, BowlingCentre.Rossmere), new Game(13,  "SO", "SK",  05, BowlingCentre.Rossmere), new Game(13,  "QC", "BC",  07, BowlingCentre.Rossmere), new Game(13,  "NO", "MB",  09, BowlingCentre.Rossmere), 
+
+                     new Game(14,  "QC", "AB",  15, BowlingCentre.Academy), new Game(14,  "NO", "SO",  17, BowlingCentre.Academy), new Game(14,  "BC", "NL",  19, BowlingCentre.Academy), new Game(14,  "SK", "MB",  21, BowlingCentre.Academy), 
+                     new Game(15,  "SK", "NO",  15, BowlingCentre.Academy), new Game(15,  "QC", "NL",  17, BowlingCentre.Academy), new Game(15,  "SO", "MB",  19, BowlingCentre.Academy), new Game(15,  "AB", "BC",  21, BowlingCentre.Academy),
+                     new Game(16,  "BC", "SO",  15, BowlingCentre.Academy), new Game(16,  "MB", "AB",  17, BowlingCentre.Academy), new Game(16,  "SK", "QC",  19, BowlingCentre.Academy), new Game(16,  "NO", "NL",  21, BowlingCentre.Academy),
+                     new Game(17,  "NL", "MB",  15, BowlingCentre.Academy), new Game(17,  "BC", "SK",  17, BowlingCentre.Academy), new Game(17,  "NO", "AB",  19, BowlingCentre.Academy), new Game(17,  "SO", "QC",  21, BowlingCentre.Academy),
+                     new Game(18,  "NO", "BC",  15, BowlingCentre.Academy), new Game(18,  "SO", "NL",  17, BowlingCentre.Academy), new Game(18,  "MB", "QC",  19, BowlingCentre.Academy), new Game(18,  "SK", "AB",  21, BowlingCentre.Academy),
+
+                     new Game(19,  "SK", "SO",  05, BowlingCentre.Academy), new Game(19,  "NO", "MB",  07, BowlingCentre.Academy), new Game(19,  "NL", "AB",  09, BowlingCentre.Academy), new Game(19,  "BC", "QC",  11, BowlingCentre.Academy),
+                     new Game(20,  "QC", "NO",  05, BowlingCentre.Academy), new Game(20,  "SK", "NL",  07, BowlingCentre.Academy), new Game(20,  "BC", "MB",  09, BowlingCentre.Academy), new Game(20,  "AB", "SO",  11, BowlingCentre.Academy),
+                     new Game(21,  "NL", "BC",  05, BowlingCentre.Academy), new Game(21,  "AB", "QC",  07, BowlingCentre.Academy), new Game(21,  "SO", "NO",  09, BowlingCentre.Academy), new Game(21,  "MB", "SK",  11, BowlingCentre.Academy),
+                }
+            };
+        }
     }
 }
