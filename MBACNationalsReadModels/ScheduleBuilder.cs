@@ -76,11 +76,11 @@ namespace MBACNationals.ReadModels
             };
         }
 
-        public static ScheduleQueries.Schedule TournamentMens()
+        public static ScheduleQueries.Schedule TournamentMen()
         {
             return new ScheduleQueries.Schedule(Guid.NewGuid())
             {
-                Division = "Tournament Mens",
+                Division = "Tournament Men",
                 Games = new List<Game>
                 {
                      new Game(01, "NO", "BC", 09, BowlingCentre.Rossmere), new Game(01, "MB", "AB", 11, BowlingCentre.Rossmere), new Game(01, "QC", "SK", 13, BowlingCentre.Rossmere), new Game(01, "NL", "SO", 19, BowlingCentre.Rossmere),
@@ -146,11 +146,11 @@ namespace MBACNationals.ReadModels
             };
         }
 
-        public static ScheduleQueries.Schedule TeachingMens()
+        public static ScheduleQueries.Schedule TeachingMen()
         {
             return new ScheduleQueries.Schedule(Guid.NewGuid())
             {
-                Division = "Teaching Mens",
+                Division = "Teaching Men",
                 Games = new List<Game>
                 {
                      new Game(01,  "MB", "NO",  23, BowlingCentre.Academy), new Game(01,  "SK", "AB",  25, BowlingCentre.Academy), new Game(01,  "BC", "SO",  27, BowlingCentre.Academy), new Game(01,  "QC", "NL",  29, BowlingCentre.Academy),

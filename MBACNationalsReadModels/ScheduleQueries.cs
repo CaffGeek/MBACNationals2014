@@ -14,9 +14,9 @@ namespace MBACNationals.ReadModels
             Create(ScheduleBuilder.Singles("Tournament Men Single"));
             Create(ScheduleBuilder.Singles("Tournament Ladies Single"));
             Create(ScheduleBuilder.TournamentLadies());
-            Create(ScheduleBuilder.TournamentMens());
+            Create(ScheduleBuilder.TournamentMen());
             Create(ScheduleBuilder.TeachingLadies());
-            Create(ScheduleBuilder.TeachingMens());
+            Create(ScheduleBuilder.TeachingMen());
             Create(ScheduleBuilder.Seniors());
         }
 
