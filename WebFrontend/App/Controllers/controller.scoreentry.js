@@ -43,7 +43,24 @@
             };
 
             $scope.ValidForm = function () {
+                var isValid = true;
 
+                isValid = isValid && !!$scope.model.Away.Bowlers.length;
+                isValid = isValid && !!$scope.model.Home.Bowlers.length;
+                if (!isValid)
+                    return false;
+
+                isValid = isValid && !$.grep($scope.model.Away.Bowlers, function (o) { return o.Score < 0 || o.Score > 450; }).length;
+                isValid = isValid && !$.grep($scope.model.Home.Bowlers, function (o) { return o.Score < 0 || o.Score > 450; }).length;
+                if (!isValid)
+                    return false;
+
+                for (var i = 1; i <= 5; i++) {
+                    isValid = isValid && !!$.grep($scope.model.Away.Bowlers, function (o) { return o.Position == i; }).length;
+                    isValid = isValid && !!$.grep($scope.model.Home.Bowlers, function (o) { return o.Position == i; }).length;
+                }
+
+                return isValid;
             };
 
             $scope.viewUrl = '/App/Views/ScoreEntry/' + page + '.html';
