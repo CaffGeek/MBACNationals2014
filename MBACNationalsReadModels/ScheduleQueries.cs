@@ -41,6 +41,7 @@ namespace MBACNationals.ReadModels
             public string Home { get; private set; }
             public int Lane { get; private set; }
             public BowlingCentre Centre { get; private set; }
+            public string CentreName { get; private set; }
 
             public Game(int number, string away, string home, int lane, BowlingCentre centre)
                 : base(Guid.NewGuid())
@@ -50,6 +51,7 @@ namespace MBACNationals.ReadModels
                 Home = home;
                 Lane = lane;
                 Centre = centre;
+                CentreName = centre.ToString();
             }
         }
 
