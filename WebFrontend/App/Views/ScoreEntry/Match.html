@@ -1,4 +1,7 @@
-﻿{{model.Division}} - Game {{model.Game}}
+﻿<button type="button" class="back btn btn-lg" data-ng-click="Back()">Back</button>
+
+<h2>{{model.Division}} - Game {{model.Game}}</h2>
+<h4>Pick the match</h4>
 
 <div data-ng-repeat="game in model.Schedule.Games | filter: {Number: model.Game} :true">
     <button type="button" class="btn btn-lg btn-block btn-primary" data-ng-click="Page('Score', { Away: game.Away, Home: game.Home })">{{game.Away}} vs {{game.Home}}</button>

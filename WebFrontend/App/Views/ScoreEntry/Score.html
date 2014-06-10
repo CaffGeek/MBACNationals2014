@@ -1,6 +1,9 @@
-﻿{{model.Division}} - Game {{model.Game}} - {{model.AwayProvince}} vs {{model.HomeProvince}}
+﻿<button type="button" class="back btn btn-lg" data-ng-click="Back()">Back</button>
+
+<h2>{{model.Division}} - Game {{model.Game}}</h2>
 
 <form name="form" class="css-form" novalidate>
+    <h4>{{model.AwayProvince}} {{model.Away.Name}}</h4>
     <div data-ng-repeat="bowler in model.Away.Bowlers" class="row">
         <div class="col-xs-4">{{bowler.Name}}</div>
         <div class="col-xs-4">
@@ -11,6 +14,7 @@
         <div class="col-xs-4"><input name="score" class="form-control input-lg" type="number" min="0" max="450" data-ng-model="bowler.Score" required /></div>
     </div>
 
+    <h4>{{model.HomeProvince}} {{model.Home.Name}}</h4>
     <div data-ng-repeat="bowler in model.Home.Bowlers" class="row">
         <div class="col-xs-4">{{bowler.Name}}</div>
         <div class="col-xs-4">
