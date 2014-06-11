@@ -4,32 +4,44 @@
 
 <h4 class="col-xs-9">{{model.AwayProvince}} {{model.Away.Name}}</h4>
 <h4 class="col-xs-3">{{model.Away.TotalPoints}}</h4>
-<div data-ng-repeat="bowler in model.Away.Bowlers" class="row">
-    <div class="col-xs-3">{{bowler.Name}}</div>
-    <div class="col-xs-3">{{bowler.Score}}</div>
-    <div class="col-xs-3">{{bowler.POA}}</div>
-    <div class="col-xs-3">{{bowler.Point}}</div>
-</div>
-<div class="row">
-    <div class="col-xs-3">Total</div>
-    <div class="col-xs-3">{{model.Away.Score}}</div>
-    <div class="col-xs-3">{{model.Away.POA}}</div>
-    <div class="col-xs-3">{{model.Away.Point}}</div>
-</div>
+<table class="table table-bordered table-striped">
+    <tbody data-ng-repeat="bowler in model.Away.Bowlers | orderBy:'Position'">
+        <tr>
+            <td class="col-xs-6">{{bowler.Name}}</td>
+            <td class="col-xs-2 text-right">{{bowler.Score}}</td>
+            <td class="col-xs-2 text-right">{{bowler.POA}}</td>
+            <td class="col-xs-2 text-right">{{bowler.Point}}</td>
+        </tr>
+    </tbody>
+    <tbody>
+        <tr>
+            <td class="col-xs-6">Total</td>
+            <td class="col-xs-2 text-right">{{model.Away.Score}}</td>
+            <td class="col-xs-2 text-right">{{model.Away.POA}}</td>
+            <td class="col-xs-2 text-right">{{model.Away.Point}}</td>
+        </tr>
+    </tbody>
+</table>
 
 <h4 class="col-xs-9">{{model.HomeProvince}} {{model.Home.Name}}</h4>
 <h4 class="col-xs-3">{{model.Home.TotalPoints}}</h4>
-<div data-ng-repeat="bowler in model.Home.Bowlers" class="row">
-    <div class="col-xs-3">{{bowler.Name}}</div>
-    <div class="col-xs-3">{{bowler.Score}}</div>
-    <div class="col-xs-3">{{bowler.POA}}</div>
-    <div class="col-xs-3">{{bowler.Point}}</div>
-</div>
-<div class="row">
-    <div class="col-xs-3">Total</div>
-    <div class="col-xs-3">{{model.Home.Score}}</div>
-    <div class="col-xs-3">{{model.Home.POA}}</div>
-    <div class="col-xs-3">{{model.Home.Point}}</div>
-</div>
+<table class="table table-bordered table-striped">
+    <tbody data-ng-repeat="bowler in model.Home.Bowlers | orderBy:'Position'">
+        <tr>
+            <td class="col-xs-6">{{bowler.Name}}</td>
+            <td class="col-xs-2 text-right">{{bowler.Score}}</td>
+            <td class="col-xs-2 text-right">{{bowler.POA}}</td>
+            <td class="col-xs-2 text-right">{{bowler.Point}}</td>
+        </tr>
+    </tbody>
+    <tbody>
+        <tr>
+            <td class="col-xs-6">Total</td>
+            <td class="col-xs-2 text-right">{{model.Home.Score}}</td>
+            <td class="col-xs-2 text-right">{{model.Home.POA}}</td>
+            <td class="col-xs-2 text-right">{{model.Home.Point}}</td>
+        </tr>
+    </tbody>
+</table>
 
 <button type="button" class="btn btn-lg btn-block btn-primary" data-ng-click="Page('Submit')">Save</button>
