@@ -43,12 +43,12 @@ namespace MBACNationals.ReadModels
             public BowlingCentre Centre { get; private set; }
             public string CentreName { get; private set; }
 
-            public Game(int number, string home, string away, int lane, BowlingCentre centre)
+            public Game(int number, string away, string home, int lane, BowlingCentre centre)
                 : base(Guid.NewGuid())
             {
                 Number = number;
-                Home = home;
                 Away = away;
+                Home = home;
                 Lane = lane;
                 Centre = centre;
                 CentreName = centre.ToString();
