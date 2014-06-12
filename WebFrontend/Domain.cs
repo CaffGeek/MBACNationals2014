@@ -64,18 +64,43 @@ namespace WebFrontend
                 RebuildReadModels();
             }
         }
+        
+        //TODO: How do we just republish events to a single read model?
+        //public static void RebuildReadModel(string readModelName)
+        //{
+        //    GoOffline();
+
+        //    var modelFile = Path.Combine(ReadModelFolder, readModelName);
+        //    if (File.Exists(modelFile))
+        //        File.Delete(modelFile);
+
+        //    Dispatcher.RepublishEvents(readModelName);
+
+        //    GoOnline();
+        //}
 
         public static void RebuildReadModels()
         {
-            var bakFile = HttpContext.Current.Server.MapPath("~/app_offline.bak");
-            var htmFile = HttpContext.Current.Server.MapPath("~/app_offline.htm");
-            File.Copy(bakFile, htmFile, true);
+            GoOffline();
 
             if (Directory.Exists(ReadModelFolder))
                 Directory.Delete(ReadModelFolder, true);
             
             Dispatcher.RepublishEvents();
 
+            GoOnline();
+        }
+
+        private static void GoOffline()
+        {
+            var bakFile = HttpContext.Current.Server.MapPath("~/app_offline.bak");
+            var htmFile = HttpContext.Current.Server.MapPath("~/app_offline.htm");
+            File.Copy(bakFile, htmFile, true);
+        }
+
+        private static void GoOnline()
+        {
+            var htmFile = HttpContext.Current.Server.MapPath("~/app_offline.htm");
             File.Delete(htmFile);
         }
     }

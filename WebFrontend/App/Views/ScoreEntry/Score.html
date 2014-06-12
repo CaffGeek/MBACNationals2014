@@ -18,7 +18,7 @@
     <div data-ng-repeat="bowler in model.Home.Bowlers" class="row">
         <h5 class="col-xs-5 padding-0">{{bowler.Name}}</h5>
         <div class="col-xs-3 padding-0">
-            <select name="position" class="form-control input-lg" data-ng-model="bowler.Position" data-ng-if="model.Away.Bowlers.length > 1" required >
+            <select name="position" class="form-control input-lg" data-ng-model="bowler.Position" data-ng-if="model.Home.Bowlers.length > 1" required >
                 <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
             </select>
         </div>
