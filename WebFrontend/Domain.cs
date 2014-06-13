@@ -4,6 +4,7 @@ using MBACNationals.Participant;
 using MBACNationals.Contingent;
 using System.IO;
 using System.Web;
+//using MBACNationals.Scores;
 
 namespace WebFrontend
 {
@@ -22,15 +23,18 @@ namespace WebFrontend
         public static IContingentEventHistoryQueries ContingentEventHistoryQueries;
         public static IReservationQueries ReservationQueries;
         public static IScheduleQueries ScheduleQueries;
+        //public static IScoreQueries ScoreQueries;
 
         public static void Setup()
         {
             ReadModelFolder = HttpContext.Current.Server.MapPath("~/App_Data/ReadModels/");
+            File.WriteAllText(Path.Combine(ReadModelFolder, "_ReadModelFolder.txt"), ReadModelFolder);
 
             Dispatcher = new MessageDispatcher(new SqlEventStore(Properties.Settings.Default.DefaultConnection));
 
             Dispatcher.ScanInstance(new ParticipantCommandHandlers());
             Dispatcher.ScanInstance(new ContingentCommandHandlers());
+            //Dispatcher.ScanInstance(new ScoresCommandHandlers());
 
             ParticipantQueries = new ParticipantQueries(ReadModelFolder);
             Dispatcher.ScanInstance(ParticipantQueries);
@@ -59,26 +63,15 @@ namespace WebFrontend
             ScheduleQueries = new ScheduleQueries(ReadModelFolder);
             Dispatcher.ScanInstance(ScheduleQueries);
 
+            //ScoreQueries = new ScoreQueries(ReadModelFolder);
+            //Dispatcher.ScanInstance(ScoreQueries);
+
             if (!Directory.Exists(ReadModelFolder))
             {
                 RebuildReadModels();
             }
         }
         
-        //TODO: How do we just republish events to a single read model?
-        //public static void RebuildReadModel(string readModelName)
-        //{
-        //    GoOffline();
-
-        //    var modelFile = Path.Combine(ReadModelFolder, readModelName);
-        //    if (File.Exists(modelFile))
-        //        File.Delete(modelFile);
-
-        //    Dispatcher.RepublishEvents(readModelName);
-
-        //    GoOnline();
-        //}
-
         public static void RebuildReadModels()
         {
             GoOffline();
