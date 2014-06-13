@@ -30,13 +30,13 @@ namespace MBACNationals.ReadModels
                      new Game(13, "NO", "NL", 1, BowlingCentre.Coronation), new Game(13, "SO", "SK", 3, BowlingCentre.Coronation), new Game(13, "AB", "QC", 5, BowlingCentre.Coronation), new Game(13, "BC", "MB", 7, BowlingCentre.Coronation), 
                      new Game(14, "AB", "SO", 1, BowlingCentre.Coronation), new Game(14, "MB", "NO", 3, BowlingCentre.Coronation), new Game(14, "NL", "BC", 5, BowlingCentre.Coronation), new Game(14, "SK", "QC", 7, BowlingCentre.Coronation), 
  
-                     new Game(15, "SK", "AB", 1, BowlingCentre.Academy), new Game(15, "MB", "NL", 3, BowlingCentre.Academy), new Game(15, "QC", "SO", 5, BowlingCentre.Academy), new Game(15, "BC", "NO", 7, BowlingCentre.Academy), 
-                     new Game(16, "SO", "BC", 1, BowlingCentre.Academy), new Game(16, "QC", "NO", 3, BowlingCentre.Academy), new Game(16, "MB", "SK", 5, BowlingCentre.Academy), new Game(16, "NL", "AB", 7, BowlingCentre.Academy), 
-                     new Game(17, "NO", "MB", 1, BowlingCentre.Academy), new Game(17, "SO", "AB", 3, BowlingCentre.Academy), new Game(17, "BC", "NL", 5, BowlingCentre.Academy), new Game(17, "SK", "QC", 7, BowlingCentre.Academy), 
-                     new Game(18, "NL", "SK", 1, BowlingCentre.Academy), new Game(18, "BC", "QC", 3, BowlingCentre.Academy), new Game(18, "AB", "MB", 5, BowlingCentre.Academy), new Game(18, "NO", "SO", 7, BowlingCentre.Academy), 
-                     new Game(19, "AB", "BC", 1, BowlingCentre.Academy), new Game(19, "SK", "NO", 3, BowlingCentre.Academy), new Game(19, "NL", "SO", 5, BowlingCentre.Academy), new Game(19, "QC", "MB", 7, BowlingCentre.Academy), 
-                     new Game(20, "NO", "NL", 1, BowlingCentre.Academy), new Game(20, "MB", "BC", 3, BowlingCentre.Academy), new Game(20, "QC", "AB", 5, BowlingCentre.Academy), new Game(20, "SO", "SK", 7, BowlingCentre.Academy), 
-                     new Game(21, "MB", "SO", 1, BowlingCentre.Academy), new Game(21, "NL", "QC", 3, BowlingCentre.Academy), new Game(21, "BC", "SK", 5, BowlingCentre.Academy), new Game(21, "AB", "NO", 7, BowlingCentre.Academy), 
+                     new Game(15, "SK", "AB", 23, BowlingCentre.Academy), new Game(15, "MB", "NL", 25, BowlingCentre.Academy), new Game(15, "QC", "SO", 27, BowlingCentre.Academy), new Game(15, "BC", "NO", 29, BowlingCentre.Academy), 
+                     new Game(16, "SO", "BC", 23, BowlingCentre.Academy), new Game(16, "QC", "NO", 25, BowlingCentre.Academy), new Game(16, "MB", "SK", 27, BowlingCentre.Academy), new Game(16, "NL", "AB", 29, BowlingCentre.Academy), 
+                     new Game(17, "NO", "MB", 23, BowlingCentre.Academy), new Game(17, "SO", "AB", 25, BowlingCentre.Academy), new Game(17, "BC", "NL", 27, BowlingCentre.Academy), new Game(17, "SK", "QC", 29, BowlingCentre.Academy), 
+                     new Game(18, "NL", "SK", 23, BowlingCentre.Academy), new Game(18, "BC", "QC", 25, BowlingCentre.Academy), new Game(18, "AB", "MB", 27, BowlingCentre.Academy), new Game(18, "NO", "SO", 29, BowlingCentre.Academy), 
+                     new Game(19, "AB", "BC", 23, BowlingCentre.Academy), new Game(19, "SK", "NO", 25, BowlingCentre.Academy), new Game(19, "NL", "SO", 27, BowlingCentre.Academy), new Game(19, "QC", "MB", 29, BowlingCentre.Academy), 
+                     new Game(20, "NO", "NL", 23, BowlingCentre.Academy), new Game(20, "MB", "BC", 25, BowlingCentre.Academy), new Game(20, "QC", "AB", 27, BowlingCentre.Academy), new Game(20, "SO", "SK", 29, BowlingCentre.Academy), 
+                     new Game(21, "MB", "SO", 23, BowlingCentre.Academy), new Game(21, "NL", "QC", 25, BowlingCentre.Academy), new Game(21, "BC", "SK", 27, BowlingCentre.Academy), new Game(21, "AB", "NO", 29, BowlingCentre.Academy), 
                 }
             };
         }
