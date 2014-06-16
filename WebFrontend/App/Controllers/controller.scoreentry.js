@@ -35,7 +35,7 @@
                     break;
                 }
                 case 'Match': {
-                    $scope.model.Game = data.Game;
+                    $scope.model.Game = data.Game;                    
                     break;
                 }
                 case 'Score': {
@@ -73,7 +73,13 @@
                     break;
                 }
                 case 'Submit': {
-
+                    dataService.SaveMatchResult({
+                        Id: $scope.model.Game.Id,
+                        Division: $scope.model.Division,
+                        Game: $scope.model.Game,
+                        Home: $scope.model.Home,
+                        Away: $scope.model.Away
+                    });
                     break;
                 }
             };

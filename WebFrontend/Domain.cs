@@ -4,7 +4,8 @@ using MBACNationals.Participant;
 using MBACNationals.Contingent;
 using System.IO;
 using System.Web;
-//using MBACNationals.Scores;
+using MBACNationals.Scores;
+using MBACNationals;
 
 namespace WebFrontend
 {
@@ -23,7 +24,6 @@ namespace WebFrontend
         public static IContingentEventHistoryQueries ContingentEventHistoryQueries;
         public static IReservationQueries ReservationQueries;
         public static IScheduleQueries ScheduleQueries;
-        //public static IScoreQueries ScoreQueries;
 
         public static void Setup()
         {
@@ -34,7 +34,7 @@ namespace WebFrontend
 
             Dispatcher.ScanInstance(new ParticipantCommandHandlers());
             Dispatcher.ScanInstance(new ContingentCommandHandlers());
-            //Dispatcher.ScanInstance(new ScoresCommandHandlers());
+            Dispatcher.ScanInstance(new ScoresCommandHandlers(Dispatcher));
 
             ParticipantQueries = new ParticipantQueries(ReadModelFolder);
             Dispatcher.ScanInstance(ParticipantQueries);
@@ -63,9 +63,6 @@ namespace WebFrontend
             ScheduleQueries = new ScheduleQueries(ReadModelFolder);
             Dispatcher.ScanInstance(ScheduleQueries);
 
-            //ScoreQueries = new ScoreQueries(ReadModelFolder);
-            //Dispatcher.ScanInstance(ScoreQueries);
-
             if (!Directory.Exists(ReadModelFolder))
             {
                 RebuildReadModels();
@@ -82,6 +79,17 @@ namespace WebFrontend
             Dispatcher.RepublishEvents();
 
             GoOnline();
+        }
+
+        public static void RebuildSchedule()
+        {
+            ScheduleBuilder.TournamentMenSingle(Domain.Dispatcher);
+            ScheduleBuilder.TournamentLadiesSingle(Domain.Dispatcher);
+            ScheduleBuilder.TournamentLadies(Domain.Dispatcher);
+            ScheduleBuilder.TournamentMen(Domain.Dispatcher);
+            ScheduleBuilder.TeachingLadies(Domain.Dispatcher);
+            ScheduleBuilder.TeachingMen(Domain.Dispatcher);
+            ScheduleBuilder.Seniors(Domain.Dispatcher);
         }
 
         private static void GoOffline()

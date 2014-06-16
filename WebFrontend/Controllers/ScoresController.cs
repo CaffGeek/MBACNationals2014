@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using MBACNationals.Scores.Commands;
+using System;
+using System.Web.Mvc;
 
 namespace WebFrontend.Controllers
 {
@@ -22,6 +24,13 @@ namespace WebFrontend.Controllers
 
             var schedule = Domain.ScheduleQueries.GetSchedule(division);
             return Json(schedule, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]//TODO: Security
+        public JsonResult SaveMatchResult(SaveMatchResult command)
+        {
+            Domain.Dispatcher.SendCommand(command);
+            return Json(command);
         }
     }
 }

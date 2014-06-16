@@ -215,5 +215,14 @@ namespace Edument.CQRS
             foreach (var e in eventStore.LoadAllEvents())
                 PublishEvent(e);
         }
+
+        public TAggregate Load<TAggregate>(Guid id)
+            where TAggregate : Aggregate, new()
+        {
+            var agg = new TAggregate();
+            agg.Id = id;
+            agg.ApplyEvents(eventStore.LoadEventsFor<TAggregate>(id));
+            return agg;
+        }
     }
 }

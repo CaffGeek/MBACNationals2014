@@ -48,6 +48,7 @@
     <Compile Include="ContingentTravelPlanQueries.cs" />
     <Compile Include="ContingentViewQueries.cs" />
     <Compile Include="ContingentEventHistoryQueries.cs" />
+    <Compile Include="IMatchQueries.cs" />
     <Compile Include="IScheduleQueries.cs" />
     <Compile Include="IContingentEventHistoryQueries.cs" />
     <Compile Include="IParticipantProfileQueries.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="IContingentQueries.cs" />
     <Compile Include="IParticipantQueries.cs" />
     <Compile Include="IReservationQueries.cs" />
+    <Compile Include="MatchQueries.cs" />
     <Compile Include="ParticipantProfileQueries.cs" />
     <Compile Include="ParticipantQueries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,7 +69,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="ReservationQueries.cs" />
-    <Compile Include="ScheduleBuilder.cs" />
     <Compile Include="ScheduleQueries.cs" />
   </ItemGroup>
   <ItemGroup>

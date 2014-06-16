@@ -28,7 +28,8 @@
             SaveParticipantProfile: saveParticipantProfile,
             LoadParticipantProfile: loadParticipantProfile,
             LoadProfiles: loadProfiles,
-            LoadSchedule: loadSchedule
+            LoadSchedule: loadSchedule,
+            SaveMatchResult: saveMatchResult
         };
 
         function saveTeam(team, contingent) {
@@ -198,6 +199,10 @@
             return $http.get('/Scores/Schedule', {
                 params: { division: division }
             });
+        };
+
+        function saveMatchResult(match) {
+            return $http.post('/Scores/SaveMatchResult', match);
         };
     };
 

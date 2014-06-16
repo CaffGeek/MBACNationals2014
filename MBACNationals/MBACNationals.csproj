@@ -65,6 +65,13 @@
     <Compile Include="Contingent\Commands\CreateTeam.cs" />
     <Compile Include="Contingent\Exceptions\TeamAlreadyExists.cs" />
     <Compile Include="Contingent\Commands\SaveReservationInstructions.cs" />
+    <Compile Include="Scores\Commands\SaveMatch.cs" />
+    <Compile Include="Scores\Commands\SaveMatchResult.cs" />
+    <Compile Include="Scores\Exceptions\MatchAlreadyCreated.cs" />
+    <Compile Include="Scores\Exceptions\MatchAlreadyEntered.cs" />
+    <Compile Include="Scores\ScheduleBuilder.cs" />
+    <Compile Include="Scores\ScoresAggregate.cs" />
+    <Compile Include="Scores\ScoresCommandHandlers.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Edument.CQRS\Edument.CQRS.csproj">

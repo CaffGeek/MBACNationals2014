@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BowlingCentre.cs" />
     <Compile Include="Contingent\ReservationInstructionsChanged.cs" />
     <Compile Include="Contingent\TeamPracticeRescheduled.cs" />
     <Compile Include="Contingent\RoomTypeChanged.cs" />
@@ -63,6 +64,10 @@
     <Compile Include="Participant\ParticipantCreated.cs" />
     <Compile Include="Participant\ParticipantAssignedToTeam.cs" />
     <Compile Include="Contingent\TeamCreated.cs" />
+    <Compile Include="Scores\MatchCreated.cs" />
+    <Compile Include="Scores\MatchCompleted.cs" />
+    <Compile Include="Scores\ParticipantGameCompleted.cs" />
+    <Compile Include="Scores\TeamGameCompleted.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Edument.CQRS\Edument.CQRS.csproj">
