@@ -30,6 +30,7 @@ namespace MBACNationals.ReadModels
 
         public class Match
         {
+            public Guid Id { get; internal set; }
             public int Number { get; internal set; }
             public string Opponent { get; internal set; }
             public int Score { get; internal set; }
@@ -67,6 +68,7 @@ namespace MBACNationals.ReadModels
                 x.RunningPoints += e.TotalPoints;
                 x.Matches.Add(new Match
                 {
+                    Id = e.Id,
                     Number = e.Number,
                     Opponent = e.Opponent,
                     Score = e.Score,

@@ -36,6 +36,16 @@ namespace WebFrontend.Controllers
             return Json(standings, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+        public JsonResult Match(Guid matchId)
+        {
+            Response.AppendHeader("Access-Control-Allow-Origin", "*");
+
+            var match = Domain.MatchQueries.GetMatch(matchId);
+            return Json(match, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]//TODO: Security
         public JsonResult SaveMatchResult(SaveMatchResult command)
         {

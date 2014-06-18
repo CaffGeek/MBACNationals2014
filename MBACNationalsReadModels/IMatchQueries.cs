@@ -1,7 +1,9 @@
-﻿namespace MBACNationals.ReadModels
+﻿using System;
+
+namespace MBACNationals.ReadModels
 {
     public interface IMatchQueries
     {
-        MatchQueries.Match GetMatch(string division);
+        MatchQueries.Match GetMatch(Guid matchId);
     }
 }
