@@ -10,6 +10,7 @@ namespace MBACNationals.ReadModels
     public class StandingQueries : AReadModel,
         IStandingQueries,
         ISubscribeTo<TeamCreated>,
+        ISubscribeTo<TeamRemoved>,
         ISubscribeTo<TeamGameCompleted>
     {
         public StandingQueries(string readModelFilePath)
@@ -39,7 +40,7 @@ namespace MBACNationals.ReadModels
 
         public List<Team> GetDivision(string division)
         {
-            return Read<Team>(x => x.Division == division).ToList();
+            return Read<Team>(x => x.Division == division && !string.IsNullOrWhiteSpace(x.Province)).ToList();
         }
 
         public void Handle(TeamCreated e)
@@ -51,6 +52,11 @@ namespace MBACNationals.ReadModels
                 RunningPoints = 0,
                 Matches = new List<Match>()
             });
+        }
+
+        public void Handle(TeamRemoved e)
+        {
+            Delete<Team>(e.TeamId);
         }
 
         public void Handle(TeamGameCompleted e)

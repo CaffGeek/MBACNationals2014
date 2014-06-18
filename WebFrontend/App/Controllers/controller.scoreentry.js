@@ -35,18 +35,19 @@
                     break;
                 }
                 case 'Match': {
-                    $scope.model.Game = data.Game;                    
+                    $scope.model.Number = data.Number;
                     break;
                 }
                 case 'Score': {
-                    $scope.model.AwayProvince = data.Away;
-                    $scope.model.HomeProvince = data.Home;
+                    $scope.model.Game = data.Game;
+                    $scope.model.AwayProvince = data.Game.Away;
+                    $scope.model.HomeProvince = data.Game.Home;
 
-                    dataService.LoadTeam(data.Away, $scope.model.Division).success(function (awayTeam) {
+                    dataService.LoadTeam($scope.model.AwayProvince, $scope.model.Division).success(function (awayTeam) {
                         $scope.model.Away = awayTeam;
                         if ($scope.model.Away.Bowlers.length == 1) $scope.model.Away.Bowlers[0].Position = 1;
                     });
-                    dataService.LoadTeam(data.Home, $scope.model.Division).success(function (homeTeam) {
+                    dataService.LoadTeam($scope.model.HomeProvince, $scope.model.Division).success(function (homeTeam) {
                         $scope.model.Home = homeTeam;
                         if ($scope.model.Home.Bowlers.length == 1) $scope.model.Home.Bowlers[0].Position = 1;
                     });
@@ -81,6 +82,9 @@
                         Away: $scope.model.Away
                     });
                     break;
+                }
+                default: {
+                    page = 'Division';
                 }
             };
 
