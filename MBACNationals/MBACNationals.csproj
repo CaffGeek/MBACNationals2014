@@ -70,7 +70,7 @@
     <Compile Include="Scores\Exceptions\MatchAlreadyCreated.cs" />
     <Compile Include="Scores\Exceptions\MatchAlreadyEntered.cs" />
     <Compile Include="Scores\ScheduleBuilder.cs" />
-    <Compile Include="Scores\ScoresAggregate.cs" />
+    <Compile Include="Scores\MatchAggregate.cs" />
     <Compile Include="Scores\ScoresCommandHandlers.cs" />
   </ItemGroup>
   <ItemGroup>

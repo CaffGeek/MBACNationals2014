@@ -3,6 +3,7 @@ using Events.Scores;
 using MBACNationals.Participant;
 using MBACNationals.Scores.Commands;
 using System;
+using System.Linq;
 using System.Collections;
 
 namespace MBACNationals.Scores
@@ -29,12 +30,14 @@ namespace MBACNationals.Scores
             var awayTeamPoints = 0m;
             var homeTeamPoints = 0m;
             
-            for (var i = 0; i < command.Away.Bowlers.Length; i++)
+            var match = _dispatcher.Load<MatchAggregate>(command.Id);
+
+            for (var i = 1; i <= command.Away.Bowlers.Length; i++)
             {
-                var awayBowler = command.Away.Bowlers[i];
+                var awayBowler = command.Away.Bowlers.Single(x=>x.Position == i);
                 var awayParticipant = _dispatcher.Load<ParticipantAggregate>(awayBowler.Id);
-                
-                var homeBowler = command.Home.Bowlers[i];
+
+                var homeBowler = command.Home.Bowlers.Single(x => x.Position == i);
                 var homeParticipant = _dispatcher.Load<ParticipantAggregate>(homeBowler.Id);
 
                 var awayPOA = awayBowler.Score - awayParticipant.Average;
@@ -70,9 +73,12 @@ namespace MBACNationals.Scores
                 {
                     Id = command.Id,
                     ParticipantId = awayBowler.Id,
+                    Number = match.Number,
                     Name = awayParticipant.Name,
                     Gender = awayParticipant.Gender,
                     Division = agg.Division,
+                    Contingent = match.Away,
+                    Opponent = match.Home,
                     Score = awayBowler.Score,
                     Position = awayBowler.Position,
                     POA = awayPOA,
@@ -84,9 +90,12 @@ namespace MBACNationals.Scores
                 {
                     Id = command.Id,
                     ParticipantId = homeBowler.Id,
+                    Number = match.Number,
                     Name = homeParticipant.Name,
                     Gender = homeParticipant.Gender,
                     Division = agg.Division,
+                    Contingent = match.Home,
+                    Opponent = match.Away,
                     Score = homeBowler.Score,
                     Position = homeBowler.Position,
                     POA = homePOA,
@@ -113,6 +122,10 @@ namespace MBACNationals.Scores
             yield return new TeamGameCompleted
             {
                 Id = command.Id,
+                Number = match.Number,
+                Division = agg.Division,
+                Contingent = match.Away,
+                Opponent = match.Home,
                 TeamId = command.Away.Id,
                 Score = awayTeamScore,
                 POA = awayTeamPOA,
@@ -124,6 +137,10 @@ namespace MBACNationals.Scores
             yield return new TeamGameCompleted
             {
                 Id = command.Id,
+                Number = match.Number,
+                Division = agg.Division,
+                Contingent = match.Home,
+                Opponent = match.Away,
                 TeamId = command.Home.Id,
                 Score = homeTeamScore,
                 POA = homeTeamPOA,
@@ -134,7 +151,10 @@ namespace MBACNationals.Scores
             yield return new MatchCompleted
             {
                 Id = command.Id,
-                //TODO:
+                Number = match.Number,
+                Division = agg.Division,
+                Home = match.Home,
+                Away = match.Away
             };
         }
 

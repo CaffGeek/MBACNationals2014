@@ -26,6 +26,16 @@ namespace WebFrontend.Controllers
             return Json(schedule, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+        public JsonResult Standings(string division)
+        {
+            Response.AppendHeader("Access-Control-Allow-Origin", "*");
+
+            var standings = Domain.StandingQueries.GetDivision(division);
+            return Json(standings, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]//TODO: Security
         public JsonResult SaveMatchResult(SaveMatchResult command)
         {

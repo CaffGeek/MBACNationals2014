@@ -4,5 +4,13 @@
 <h4>Pick the match</h4>
 
 <div data-ng-repeat="game in model.Schedule.Games | filter: {Number: model.Game.Number} :true">
-    <button type="button" class="btn btn-lg btn-block btn-primary" data-ng-click="Page('Score', { Away: game.Away, Home: game.Home })">{{game.Away}} vs {{game.Home}}</button>
+    <button type="button" class="btn btn-lg btn-block btn-primary" 
+        data-ng-class="{'btn-success':game.IsComplete}"
+        data-ng-click="Page('Score', { Away: game.Away, Home: game.Home })"
+        data-ng-hide="game.IsComplete && !showCompleted" 
+        >{{game.Away}} vs {{game.Home}}</button>
 </div>
+
+<h4>
+    <label><input type="checkbox" data-ng-model="showCompleted" />Show Completed</label>
+</h4>

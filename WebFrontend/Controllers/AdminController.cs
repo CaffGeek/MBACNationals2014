@@ -16,6 +16,12 @@ namespace WebFrontend.Controllers
         }
 
         [Authorize(Users = "Chad")]
+        public void RebuildModel(string id)
+        {
+            Domain.RebuildReadModel(id);
+        }
+
+        [Authorize(Users = "Chad")]
         public void RebuildSchedule()
         {
             Domain.RebuildSchedule();

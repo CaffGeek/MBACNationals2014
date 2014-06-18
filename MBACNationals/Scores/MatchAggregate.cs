@@ -6,7 +6,9 @@ namespace MBACNationals.Scores
 {
     public class MatchAggregate : Aggregate,
         IApplyEvent<MatchCreated>,
-        IApplyEvent<MatchCompleted>
+        IApplyEvent<MatchCompleted>,
+        IApplyEvent<TeamGameCompleted>,
+        IApplyEvent<ParticipantGameCompleted>
     {
         public string Division { get; private set; }
         public bool IsPOA { get; private set; }
@@ -34,6 +36,16 @@ namespace MBACNationals.Scores
             Lane = e.Lane;
             Number = e.Number;
             IsComplete = false;
+        }
+
+        public void Apply(TeamGameCompleted e)
+        {
+            //TODO:
+        }
+
+        public void Apply(ParticipantGameCompleted e)
+        {
+            //TODO:
         }
     }
 }

@@ -57,6 +57,19 @@ namespace Edument.CQRS
                     sub(e);
         }
 
+        private void PublishEvent(object e, string readmodel)
+        {
+            var eventType = e.GetType();
+
+            if (eventSubscribers.ContainsKey(eventType))
+                foreach (var sub in eventSubscribers[eventType])
+                {
+                    dynamic target = sub.Target;
+                    if ((target.subscriber.GetType().Name as string).Equals(readmodel, StringComparison.OrdinalIgnoreCase))
+                        sub(e);
+                }
+        }
+
         /// <summary>
         /// Adds an object that handles the specified command, by virtue of implementing
         /// the IHandleCommand interface.
@@ -214,6 +227,12 @@ namespace Edument.CQRS
         {
             foreach (var e in eventStore.LoadAllEvents())
                 PublishEvent(e);
+        }
+
+        public void RepublishEvents(string readmodel)
+        {
+            foreach (var e in eventStore.LoadAllEvents())
+                PublishEvent(e, readmodel);
         }
 
         public TAggregate Load<TAggregate>(Guid id)

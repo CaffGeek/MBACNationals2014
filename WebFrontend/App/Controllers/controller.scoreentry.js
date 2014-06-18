@@ -109,6 +109,10 @@
             return isValid;
         };
 
+        $scope.AllGamesComplete = function (number) {
+            return !$.grep($scope.model.Schedule.Games, function (o) { return o.Number == number && !o.IsComplete; }).length;
+        };
+
         function updateScoreInfo(position) {
             var homeBowler = ($.grep($scope.model.Home.Bowlers, function (o) { return o.Position == position; }) || [])[0];
             var awayBowler = ($.grep($scope.model.Away.Bowlers, function (o) { return o.Position == position; }) || [])[0];

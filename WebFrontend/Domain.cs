@@ -24,12 +24,13 @@ namespace WebFrontend
         public static IContingentEventHistoryQueries ContingentEventHistoryQueries;
         public static IReservationQueries ReservationQueries;
         public static IScheduleQueries ScheduleQueries;
+        public static IMatchQueries MatchQueries;
+        public static IStandingQueries StandingQueries;
 
         public static void Setup()
         {
             ReadModelFolder = HttpContext.Current.Server.MapPath("~/App_Data/ReadModels/");
-            File.WriteAllText(Path.Combine(ReadModelFolder, "_ReadModelFolder.txt"), ReadModelFolder);
-
+            
             Dispatcher = new MessageDispatcher(new SqlEventStore(Properties.Settings.Default.DefaultConnection));
 
             Dispatcher.ScanInstance(new ParticipantCommandHandlers());
@@ -63,6 +64,12 @@ namespace WebFrontend
             ScheduleQueries = new ScheduleQueries(ReadModelFolder);
             Dispatcher.ScanInstance(ScheduleQueries);
 
+            MatchQueries = new MatchQueries(ReadModelFolder);
+            Dispatcher.ScanInstance(MatchQueries);
+
+            StandingQueries = new StandingQueries(ReadModelFolder);
+            Dispatcher.ScanInstance(StandingQueries);
+
             if (!Directory.Exists(ReadModelFolder))
             {
                 RebuildReadModels();
@@ -75,8 +82,22 @@ namespace WebFrontend
 
             if (Directory.Exists(ReadModelFolder))
                 Directory.Delete(ReadModelFolder, true);
-            
+
+            RebuildSchedule();
             Dispatcher.RepublishEvents();
+
+            GoOnline();
+        }
+
+        public static void RebuildReadModel(string readmodel)
+        {
+            GoOffline();
+
+            var readModel = Path.Combine(ReadModelFolder, readmodel);
+            if (File.Exists(readModel))
+                File.Delete(readModel);
+
+            Dispatcher.RepublishEvents(readmodel);
 
             GoOnline();
         }

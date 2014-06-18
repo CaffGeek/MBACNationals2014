@@ -67,7 +67,6 @@ namespace MBACNationals.ReadModels
         protected void Update<T>(Guid id, Action<T, NDatabase.Api.IOdb> func)
             where T : AEntity
         {
-            var p1 = Read<T>(x => x.Id == id).FirstOrDefault();
             using (var odb = OdbFactory.Open(_readModelFilePath))
             {
                 var entity = odb.AsQueryable<T>()
@@ -79,7 +78,21 @@ namespace MBACNationals.ReadModels
                 func(entity, odb);
                 odb.Store(entity);
             }
-            var p2 = Read<T>(x => x.Id == id).FirstOrDefault();
+        }
+
+        protected void Delete<T>(Guid id)
+            where T : AEntity
+        {
+            using (var odb = OdbFactory.Open(_readModelFilePath))
+            {
+                var entity = odb.AsQueryable<T>()
+                    .FirstOrDefault(p => p.Id.Equals(id));
+
+                if (entity == null)
+                    return;
+
+                odb.Delete(entity);
+            }
         }
     }
 }

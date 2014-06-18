@@ -4,6 +4,10 @@
     {
         public System.Guid Id;
         public System.Guid TeamId;
+        public string Division;
+        public string Contingent;
+        public string Opponent;
+        public int Number;
         public int Score;
         public int POA;
         public decimal Points;

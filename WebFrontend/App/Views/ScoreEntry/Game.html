@@ -4,7 +4,7 @@
 <h4>Pick the game</h4>
 
 <div data-ng-repeat="game in model.Schedule.Games | unique: 'Number'">
-    <button type="button" class="col-xs-4 btn btn-lg btn-primary" data-ng-class="{'btn-success':game.IsComplete}" data-ng-hide="game.IsComplete && !showCompleted" data-ng-click="Page('Match', { Game: game })">{{game.Number}}</button>
+    <button type="button" class="col-xs-4 btn btn-lg btn-primary" data-ng-class="{'btn-success':AllGamesComplete(game.Number)}" data-ng-hide="AllGamesComplete(game.Number) && !showCompleted" data-ng-click="Page('Match', { Game: game })">{{game.Number}}</button>
 </div>
 
 <h4>
