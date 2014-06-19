@@ -48,11 +48,13 @@
     <Compile Include="ContingentTravelPlanQueries.cs" />
     <Compile Include="ContingentViewQueries.cs" />
     <Compile Include="ContingentEventHistoryQueries.cs" />
+    <Compile Include="IParticipantScoreQueries.cs" />
     <Compile Include="HighScoreQueries.cs" />
     <Compile Include="IHighScoreQueries.cs" />
     <Compile Include="IStandingQueries.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ParticipantScoreQueries.cs" />
     <Compile Include="StandingQueries.cs" />
     <Compile Include="IMatchQueries.cs" />
     <Compile Include="IScheduleQueries.cs" />

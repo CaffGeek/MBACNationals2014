@@ -27,6 +27,7 @@ namespace WebFrontend
         public static IMatchQueries MatchQueries;
         public static IStandingQueries StandingQueries;
         public static IHighScoreQueries HighScoreQueries;
+        public static IParticipantScoreQueries ParticipantScoreQueries;
 
         public static void Setup()
         {
@@ -73,6 +74,9 @@ namespace WebFrontend
 
             HighScoreQueries = new HighScoreQueries(ReadModelFolder);
             Dispatcher.ScanInstance(HighScoreQueries);
+
+            ParticipantScoreQueries = new ParticipantScoreQueries(ReadModelFolder);
+            Dispatcher.ScanInstance(ParticipantScoreQueries);
 
             if (!Directory.Exists(ReadModelFolder))
             {

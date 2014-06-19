@@ -48,6 +48,16 @@ namespace WebFrontend.Controllers
 
         [HttpGet]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+        public JsonResult Participant(Guid participantId)
+        {
+            Response.AppendHeader("Access-Control-Allow-Origin", "*");
+
+            var participant = Domain.ParticipantScoreQueries.GetParticipant(participantId);
+            return Json(participant, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public JsonResult HighScores(string division)
         {
             Response.AppendHeader("Access-Control-Allow-Origin", "*");
