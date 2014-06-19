@@ -80,6 +80,7 @@ namespace MBACNationals.ReadModels
                 {
                     MatchId = e.Id.ToString(),
                     OpponentProvince = e.Opponent,
+                    OpponentName= e.OpponentName,
                     Number = e.Number,
                     Scratch = e.Score,
                     POA = e.POA,
