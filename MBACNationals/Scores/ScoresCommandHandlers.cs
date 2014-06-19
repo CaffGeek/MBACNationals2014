@@ -79,10 +79,13 @@ namespace MBACNationals.Scores
                     Division = agg.Division,
                     Contingent = match.Away,
                     Opponent = match.Home,
+                    OpponentName = homeParticipant.Name,
                     Score = awayBowler.Score,
                     Position = awayBowler.Position,
                     POA = awayPOA,
-                    Points = awayBowlerPoint
+                    Points = awayBowlerPoint,
+                    Lane = match.Lane,
+                    Centre = match.CentreName
                 };
 
                 //Home
@@ -96,10 +99,13 @@ namespace MBACNationals.Scores
                     Division = agg.Division,
                     Contingent = match.Home,
                     Opponent = match.Away,
+                    OpponentName = awayParticipant.Name,
                     Score = homeBowler.Score,
                     Position = homeBowler.Position,
                     POA = homePOA,
-                    Points = homeBowlerPoint
+                    Points = homeBowlerPoint,
+                    Lane = match.Lane + 1,
+                    Centre = match.CentreName
                 };
             }
 
@@ -130,7 +136,9 @@ namespace MBACNationals.Scores
                 Score = awayTeamScore,
                 POA = awayTeamPOA,
                 Points = awayTeamPoint,
-                TotalPoints = awayTeamPoints + awayTeamPoint
+                TotalPoints = awayTeamPoints + awayTeamPoint,
+                Lane = match.Lane + 1,
+                Centre = match.CentreName
             };
 
             //Home
@@ -145,7 +153,9 @@ namespace MBACNationals.Scores
                 Score = homeTeamScore,
                 POA = homeTeamPOA,
                 Points = homeTeamPoint,
-                TotalPoints = homeTeamPoints + homeTeamPoint
+                TotalPoints = homeTeamPoints + homeTeamPoint,
+                Lane = match.Lane + 1,
+                Centre = match.CentreName
             };
 
             yield return new MatchCompleted

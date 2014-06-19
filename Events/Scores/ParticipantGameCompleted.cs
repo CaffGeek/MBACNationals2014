@@ -7,6 +7,7 @@
         public string Division;
         public string Contingent;
         public string Opponent;
+        public string OpponentName;
         public int Number;
         public string Name;
         public string Gender;
@@ -14,5 +15,7 @@
         public int Position;
         public int POA;
         public decimal Points;
+        public int Lane;
+        public string Centre;
     }
 }
