@@ -24,7 +24,6 @@ namespace MBACNationals.ReadModels
             public Participant(Guid id) : base(id) { }
             public string Name { get; internal set; }
             public string Province { get; internal set; }
-            public string OpponentProvince { get; internal set; }
             public string Division { get; internal set; }
             public int Average { get; internal set; }
             public int NationalGames { get; internal set; }
@@ -36,6 +35,7 @@ namespace MBACNationals.ReadModels
         public class Score
         {
             public string MatchId { get; internal set; }
+            public string OpponentProvince { get; internal set; }
             public int Number { get; internal set; }
             public int Scratch { get; internal set; }
             public int POA { get; internal set; }
@@ -70,13 +70,13 @@ namespace MBACNationals.ReadModels
                 x.Name = e.Name;
                 x.Division = e.Division;
                 x.Province = e.Contingent;
-                x.OpponentProvince = e.Opponent;
                 x.NationalGames++;
                 x.NationalTotal += e.Score;
                 x.NationalAverage = x.NationalTotal / x.NationalGames;
                 x.Scores.Add(new Score
                 {
                     MatchId = e.Id.ToString(),
+                    OpponentProvince = e.Opponent,
                     Number = e.Number,
                     Scratch = e.Score,
                     POA = e.POA
