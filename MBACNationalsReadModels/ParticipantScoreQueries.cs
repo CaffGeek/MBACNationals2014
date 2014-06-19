@@ -35,10 +35,13 @@ namespace MBACNationals.ReadModels
         public class Score
         {
             public string MatchId { get; internal set; }
+            public string OpponentName { get; internal set; }
             public string OpponentProvince { get; internal set; }
             public int Number { get; internal set; }
             public int Scratch { get; internal set; }
             public int POA { get; internal set; }
+            public int Lane { get; internal set; }
+            public string Centre { get; internal set; }
         }
 
         public ParticipantScoreQueries.Participant GetParticipant(Guid id)
@@ -79,7 +82,9 @@ namespace MBACNationals.ReadModels
                     OpponentProvince = e.Opponent,
                     Number = e.Number,
                     Scratch = e.Score,
-                    POA = e.POA
+                    POA = e.POA,
+                    Lane = e.Lane,
+                    Centre = e.Centre
                 });
             });
         }
