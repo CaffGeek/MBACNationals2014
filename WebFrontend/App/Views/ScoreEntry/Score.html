@@ -11,7 +11,7 @@
                 <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
             </select>
         </div>
-        <div class="col-xs-4 padding-0"><input name="score" class="form-control input-lg" type="number" min="0" max="450" data-ng-model="bowler.Score" required /></div>
+        <div class="col-xs-4 padding-0"><input name="score" class="form-control input-lg" type="number" pattern="\d*" min="0" max="450" data-ng-model="bowler.Score" required /></div>
     </div>
 
     <h4>{{model.HomeProvince}} {{model.Home.Name}}</h4>
