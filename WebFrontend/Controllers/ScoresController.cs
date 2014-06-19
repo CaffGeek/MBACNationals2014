@@ -46,6 +46,16 @@ namespace WebFrontend.Controllers
             return Json(match, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+        public JsonResult HighScores(string division)
+        {
+            Response.AppendHeader("Access-Control-Allow-Origin", "*");
+
+            var hightScores = Domain.HighScoreQueries.GetDivision(division);
+            return Json(hightScores, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]//TODO: Security
         public JsonResult SaveMatchResult(SaveMatchResult command)
         {

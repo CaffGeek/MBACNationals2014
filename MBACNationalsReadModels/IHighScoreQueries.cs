@@ -2,5 +2,6 @@
 {
     public interface IHighScoreQueries
     {
+        HighScoreQueries.Division GetDivision(string division);
     }
 }
