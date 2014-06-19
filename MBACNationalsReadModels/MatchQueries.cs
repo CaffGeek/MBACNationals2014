@@ -97,22 +97,22 @@ namespace MBACNationals.ReadModels
 
         public void Handle(TeamGameCompleted e)
         {
-            //var match = Read<Match>(x => x.Id == e.Id).FirstOrDefault();
-            //if (match == null)
-            //    return;
-
-            //var teamId = (match.Away.Province == e.Contingent)
-            //    ? match.Away.Id
-            //    : match.Home.Id;
-
-            //Update<Match.Team>(e.Id, x =>
-            //{
-            //    x.TeamId = e.TeamId;
-            //    x.Score = e.Score;
-            //    x.POA = e.POA;
-            //    x.Points = e.Points;
-            //    x.TotalPoints = e.TotalPoints;
-            //});
+            Update<Match>(e.Id, x =>
+            {
+                if (x.Away.Province == e.Contingent){
+                    x.Away.Id = e.TeamId.ToString();
+                    x.Away.Score = e.Score;
+                    x.Away.POA = e.POA;
+                    x.Away.Points = e.Points;
+                    x.Away.TotalPoints = e.TotalPoints;
+                } else {
+                    x.Home.Id = e.TeamId.ToString();
+                    x.Home.Score = e.Score;
+                    x.Home.POA = e.POA;
+                    x.Home.Points = e.Points;
+                    x.Home.TotalPoints = e.TotalPoints;
+                }
+            });
         }
 
         public void Handle(MatchCompleted e)
