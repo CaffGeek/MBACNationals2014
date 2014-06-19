@@ -24,6 +24,7 @@ namespace MBACNationals.ReadModels
             public Participant(Guid id) : base(id) { }
             public string Name { get; internal set; }
             public string Province { get; internal set; }
+            public string OpponentProvince { get; internal set; }
             public string Division { get; internal set; }
             public int Average { get; internal set; }
             public int NationalGames { get; internal set; }
@@ -66,8 +67,10 @@ namespace MBACNationals.ReadModels
         {
             Update<Participant>(e.ParticipantId, x =>
             {
+                x.Name = e.Name;
                 x.Division = e.Division;
                 x.Province = e.Contingent;
+                x.OpponentProvince = e.Opponent;
                 x.NationalGames++;
                 x.NationalTotal += e.Score;
                 x.NationalAverage = x.NationalTotal / x.NationalGames;
