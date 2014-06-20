@@ -19,6 +19,7 @@ namespace MBACNationals.ReadModels
         public class Team : AEntity
         {
             public Team(Guid id) : base(id) { }
+            public string TeamId { get; internal set; }
             public string Division { get; internal set; }
             public string Province { get; internal set; }
             public decimal RunningPoints { get; internal set; }
@@ -43,10 +44,12 @@ namespace MBACNationals.ReadModels
         
         public void Handle(TeamGameCompleted e)
         {
-            var team = Read<Team>(x => x.Id == e.TeamId).FirstOrDefault();
+            var team = Read<Team>(x => x.TeamId == e.TeamId.ToString() && x.Division == e.Division).FirstOrDefault();
+
             if (team == null)
-                Create(new Team(e.TeamId)
+                Create(new Team(Guid.NewGuid())
                 {
+                    TeamId = e.TeamId.ToString(),
                     Division = e.Division,
                     Province = e.Contingent,
                     RunningPoints = e.TotalPoints,
@@ -65,7 +68,7 @@ namespace MBACNationals.ReadModels
                     }
                 });
             else
-                Update<Team>(e.TeamId, x =>
+                Update<Team>(team.Id, x =>
                 {
                     x.Province = e.Contingent;
                     x.RunningPoints += e.TotalPoints;
