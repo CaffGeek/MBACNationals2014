@@ -1,5 +1,4 @@
 ﻿using Edument.CQRS;
-using Events.Contingent;
 using Events.Scores;
 using System;
 using System.Collections.Generic;
@@ -9,8 +8,6 @@ namespace MBACNationals.ReadModels
 {
     public class StandingQueries : AReadModel,
         IStandingQueries,
-        ISubscribeTo<TeamCreated>,
-        ISubscribeTo<TeamRemoved>,
         ISubscribeTo<TeamGameCompleted>
     {
         public StandingQueries(string readModelFilePath)
@@ -43,40 +40,46 @@ namespace MBACNationals.ReadModels
         {
             return Read<Team>(x => x.Division == division && !string.IsNullOrWhiteSpace(x.Province)).ToList();
         }
-
-        public void Handle(TeamCreated e)
-        {
-            Create(new Team(e.TeamId)
-            {
-                Division = e.Name,
-                Province = "",
-                RunningPoints = 0,
-                Matches = new List<Match>()
-            });
-        }
-
-        public void Handle(TeamRemoved e)
-        {
-            Delete<Team>(e.TeamId);
-        }
-
+        
         public void Handle(TeamGameCompleted e)
         {
-            Update<Team>(e.TeamId, x =>
-            {
-                x.Province = e.Contingent;
-                x.RunningPoints += e.TotalPoints;
-                x.Matches.Add(new Match
+            var team = Read<Team>(x => x.Id == e.TeamId).FirstOrDefault();
+            if (team == null)
+                Create(new Team(e.TeamId)
                 {
-                    Id = e.Id,
-                    Number = e.Number,
-                    Opponent = e.Opponent,
-                    Score = e.Score,
-                    POA = e.POA,
-                    Points = e.Points,
-                    TotalPoints = e.TotalPoints
+                    Division = e.Division,
+                    Province = e.Contingent,
+                    RunningPoints = e.TotalPoints,
+                    Matches = new List<Match>
+                    {
+                        new Match
+                        {
+                            Id = e.Id,
+                            Number = e.Number,
+                            Opponent = e.Opponent,
+                            Score = e.Score,
+                            POA = e.POA,
+                            Points = e.Points,
+                            TotalPoints = e.TotalPoints
+                        }
+                    }
                 });
-            });
+            else
+                Update<Team>(e.TeamId, x =>
+                {
+                    x.Province = e.Contingent;
+                    x.RunningPoints += e.TotalPoints;
+                    x.Matches.Add(new Match
+                    {
+                        Id = e.Id,
+                        Number = e.Number,
+                        Opponent = e.Opponent,
+                        Score = e.Score,
+                        POA = e.POA,
+                        Points = e.Points,
+                        TotalPoints = e.TotalPoints
+                    });
+                });
         }
     }
 }
