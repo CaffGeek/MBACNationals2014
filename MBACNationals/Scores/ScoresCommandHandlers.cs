@@ -22,6 +22,61 @@ namespace MBACNationals.Scores
         public IEnumerable Handle(Func<Guid, MatchAggregate> al, SaveMatchResult command)
         {
             var agg = al(command.Id);
+            
+            var match = _dispatcher.Load<MatchAggregate>(command.Id);
+
+            if (match.IsPOA)
+            {
+                var awayBowler = command.Away.Bowlers.First();
+                var homeBowler = command.Home.Bowlers.First();
+
+                var awayParticipant = _dispatcher.Load<ParticipantAggregate>(awayBowler.Id);
+                var homeParticipant = _dispatcher.Load<ParticipantAggregate>(homeBowler.Id);
+
+                var awayPOA = awayBowler.Score - awayParticipant.Average;
+                var homePOA = homeBowler.Score - homeParticipant.Average;
+
+                //Away
+                var awaySinglePoints = awayPOA > homePOA ? 2m
+                            : awayPOA == homePOA ? 1m
+                            : 0m;
+                yield return new TeamGameCompleted
+                {
+                    Id = command.Id,
+                    Number = match.Number,
+                    Division = agg.Division + " Single",
+                    Contingent = match.Away,
+                    Opponent = match.Home,
+                    TeamId = command.Away.Id,
+                    Score = awayBowler.Score,
+                    POA = awayPOA,
+                    Points = awaySinglePoints,
+                    TotalPoints = awaySinglePoints,
+                    Lane = match.Lane + 1,
+                    Centre = match.CentreName
+                };
+
+                //Home
+                var homeSinglePoints = homePOA > awayPOA ? 2m
+                            : homePOA == awayPOA ? 1m
+                            : 0m;
+                yield return new TeamGameCompleted
+                {
+                    Id = command.Id,
+                    Number = match.Number,
+                    Division = agg.Division + " Single",
+                    Contingent = match.Home,
+                    Opponent = match.Away,
+                    TeamId = command.Home.Id,
+                    Score = homeBowler.Score,
+                    POA = homePOA,
+                    Points = homeSinglePoints,
+                    TotalPoints = homeSinglePoints,
+                    Lane = match.Lane + 1,
+                    Centre = match.CentreName
+                };
+            }
+
 
             var awayTeamScore = 0;
             var homeTeamScore = 0;
@@ -29,8 +84,6 @@ namespace MBACNationals.Scores
             var homeTeamPOA = 0;
             var awayTeamPoints = 0m;
             var homeTeamPoints = 0m;
-            
-            var match = _dispatcher.Load<MatchAggregate>(command.Id);
 
             for (var i = 1; i <= command.Away.Bowlers.Length; i++)
             {
