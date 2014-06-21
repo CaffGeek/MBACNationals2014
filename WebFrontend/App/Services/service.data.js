@@ -29,7 +29,8 @@
             LoadParticipantProfile: loadParticipantProfile,
             LoadProfiles: loadProfiles,
             LoadSchedule: loadSchedule,
-            SaveMatchResult: saveMatchResult
+            SaveMatchResult: saveMatchResult,
+            LoadMatch: loadMatch
         };
 
         function saveTeam(team, contingent) {
@@ -203,6 +204,12 @@
 
         function saveMatchResult(match) {
             return $http.post('/Scores/SaveMatchResult', match);
+        };
+
+        function loadMatch(match) {
+            return $http.get('/Scores/Match', {
+                params: { matchId: match.Id }
+            });
         };
     };
 

@@ -71,7 +71,7 @@ namespace MBACNationals.ReadModels
                 Update<Team>(team.Id, x =>
                 {
                     x.Province = e.Contingent;
-                    x.RunningPoints += e.TotalPoints;
+                    x.Matches.RemoveAll(m => m.Id == e.Id);
                     x.Matches.Add(new Match
                     {
                         Id = e.Id,
@@ -82,6 +82,7 @@ namespace MBACNationals.ReadModels
                         Points = e.Points,
                         TotalPoints = e.TotalPoints
                     });
+                    x.RunningPoints = x.Matches.Sum(m => m.TotalPoints);
                 });
         }
     }

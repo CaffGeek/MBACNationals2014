@@ -73,9 +73,7 @@ namespace MBACNationals.ReadModels
                 x.Name = e.Name;
                 x.Division = e.Division;
                 x.Province = e.Contingent;
-                x.NationalGames++;
-                x.NationalTotal += e.Score;
-                x.NationalAverage = x.NationalTotal / x.NationalGames;
+                x.Scores.RemoveAll(m => m.MatchId == e.Id.ToString());
                 x.Scores.Add(new Score
                 {
                     MatchId = e.Id.ToString(),
@@ -87,6 +85,9 @@ namespace MBACNationals.ReadModels
                     Lane = e.Lane,
                     Centre = e.Centre
                 });
+                x.NationalGames = x.Scores.Count;
+                x.NationalTotal = x.Scores.Sum(s => s.Scratch);
+                x.NationalAverage = x.NationalTotal / x.NationalGames;
             });
         }
     }

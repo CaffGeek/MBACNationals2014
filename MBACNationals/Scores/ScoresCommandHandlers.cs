@@ -37,9 +37,7 @@ namespace MBACNationals.Scores
                 var homePOA = homeBowler.Score - homeParticipant.Average;
 
                 //Away
-                var awaySinglePoints = awayPOA > homePOA ? 2m
-                            : awayPOA == homePOA ? 1m
-                            : 0m;
+                var awaySinglePoints = CalculatePoint(awayPOA, homePOA, 2);
                 yield return new TeamGameCompleted
                 {
                     Id = command.Id,
@@ -57,9 +55,7 @@ namespace MBACNationals.Scores
                 };
 
                 //Home
-                var homeSinglePoints = homePOA > awayPOA ? 2m
-                            : homePOA == awayPOA ? 1m
-                            : 0m;
+                var homeSinglePoints = CalculatePoint(homePOA, awayPOA, 2);
                 yield return new TeamGameCompleted
                 {
                     Id = command.Id,
@@ -76,7 +72,6 @@ namespace MBACNationals.Scores
                     Centre = match.CentreName
                 };
             }
-
 
             var awayTeamScore = 0;
             var homeTeamScore = 0;
@@ -103,21 +98,13 @@ namespace MBACNationals.Scores
                 homeTeamPOA += homePOA;
 
                 var awayBowlerPoint = agg.IsPOA
-                        ? (awayPOA > homePOA ? 1m 
-                            : awayPOA == homePOA ? .5m
-                            : 0m)
-                        : (awayBowler.Score > homeBowler.Score ? 1m
-                            : awayBowler.Score == homeBowler.Score ? .5m
-                            :0m);
+                    ? CalculatePoint(awayPOA, homePOA, 3)
+                    : CalculatePoint(awayBowler.Score, homeBowler.Score, 3);
 
                 var homeBowlerPoint = agg.IsPOA
-                        ? (homePOA > awayPOA ? 1m 
-                            : homePOA == awayPOA ? .5m
-                            : 0m)
-                        : (homeBowler.Score > awayBowler.Score ? 1m
-                            : homeBowler.Score == awayBowler.Score ? .5m
-                            : 0m);
-
+                    ? CalculatePoint(homePOA, awayPOA, 3)
+                    : CalculatePoint(homeBowler.Score, awayBowler.Score, 3);
+                
                 awayTeamPoints += awayBowlerPoint;
                 homeTeamPoints += homeBowlerPoint;
 
@@ -163,19 +150,12 @@ namespace MBACNationals.Scores
             }
 
             var awayTeamPoint = agg.IsPOA
-                        ? (awayTeamPOA > homeTeamPOA ? 3m 
-                            : awayTeamPOA == homeTeamPOA ? 1.5m
-                            : 0m)
-                        : (awayTeamScore > homeTeamScore ? 1m
-                            : awayTeamScore == homeTeamScore ? .5m
-                            : 0m);
+                ? CalculatePoint(awayTeamPOA, homeTeamPOA, 3)
+                : CalculatePoint(awayTeamScore, homeTeamScore, 3);
+
             var homeTeamPoint = agg.IsPOA
-                        ? (homeTeamPOA > awayTeamPOA ? 3m 
-                            : homeTeamPOA == awayTeamPOA ? 1.5m
-                            : 0m)
-                        : (homeTeamScore > awayTeamScore ? 1m
-                            : homeTeamScore == awayTeamScore ? .5m
-                            : 0m);
+                ? CalculatePoint(homeTeamPOA, awayTeamPOA, 3)
+                : CalculatePoint(homeTeamScore, awayTeamScore, 3);
 
             //Away
             yield return new TeamGameCompleted
@@ -240,6 +220,13 @@ namespace MBACNationals.Scores
                 Lane = command.Lane,
                 Number = command.Number
             };            
+        }
+
+        public decimal CalculatePoint(int score, int opponentScore, decimal maxPoint)
+        {
+            return score > opponentScore ? maxPoint
+                        : score == opponentScore ? maxPoint / 2m
+                        : 0m;
         }
     }
 }

@@ -5,7 +5,12 @@
 
 <div class="row">
     <div data-ng-repeat="game in model.Schedule.Games | unique: 'Number'">
-        <button type="button" class="col-xs-4 btn btn-lg btn-primary" data-ng-class="{'btn-success':AllGamesComplete(game.Number)}" data-ng-hide="AllGamesComplete(game.Number) && !showCompleted" data-ng-click="Page('Match', { Number: game.Number })">{{game.Number}}</button>
+        <button type="button" class="col-xs-4 btn btn-lg btn-primary" 
+            data-ng-class="{'btn-success':AllGamesComplete(game.Number)}" 
+            data-ng-hide="AllGamesComplete(game.Number) && !showCompleted" 
+            data-ng-click="Page('Match', { Number: game.Number })"
+            data-ng-if="game.Number <= model.CurrentGame"
+            >{{game.Number}}</button>
     </div>
 </div>
 

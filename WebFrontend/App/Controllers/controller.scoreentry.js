@@ -30,6 +30,9 @@
                     dataService.LoadSchedule(data.Division).
                         success(function (divisionSchedule) {
                             $scope.model.Schedule = divisionSchedule;
+                            var currentGame = 1;
+                            while ($scope.AllGamesComplete(currentGame) && currentGame++ <= 21) { }
+                            $scope.model.CurrentGame = currentGame;
                         });
                     $scope.model.Division = data.Division;
                     break;
@@ -40,18 +43,33 @@
                 }
                 case 'Score': {
                     $scope.model.Game = data.Game;
+
                     $scope.model.AwayProvince = data.Game.Away;
                     $scope.model.HomeProvince = data.Game.Home;
+                    
+                    $q.all([
+                        dataService.LoadTeam($scope.model.AwayProvince, $scope.model.Division),
+                        dataService.LoadTeam($scope.model.HomeProvince, $scope.model.Division),
+                        dataService.LoadMatch(data.Game)
+                    ]).then(function (results) {
+                        $scope.model.Away = results[0].data;
+                        $scope.model.Home = results[1].data;
+                        var match = results[2].data;
 
-                    dataService.LoadTeam($scope.model.AwayProvince, $scope.model.Division).success(function (awayTeam) {
-                        $scope.model.Away = awayTeam;
                         if ($scope.model.Away.Bowlers.length == 1) $scope.model.Away.Bowlers[0].Position = 1;
-                    });
-                    dataService.LoadTeam($scope.model.HomeProvince, $scope.model.Division).success(function (homeTeam) {
-                        $scope.model.Home = homeTeam;
                         if ($scope.model.Home.Bowlers.length == 1) $scope.model.Home.Bowlers[0].Position = 1;
-                    });
 
+                        if (!data.Game.IsComplete) 
+                            return;
+
+                        for (var i = 0; i < $scope.model.Away.Bowlers.length; i++) {
+                            $scope.model.Away.Bowlers[i].Score = match.Away.Bowlers[i].Score;
+                            $scope.model.Away.Bowlers[i].Position = match.Away.Bowlers[i].Position;
+                            $scope.model.Home.Bowlers[i].Score = match.Home.Bowlers[i].Score;
+                            $scope.model.Home.Bowlers[i].Position = match.Home.Bowlers[i].Position;
+                        }
+                    });
+                                        
                     break;
                 }
                 case 'Result': {

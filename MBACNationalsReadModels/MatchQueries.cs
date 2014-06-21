@@ -83,6 +83,8 @@ namespace MBACNationals.ReadModels
             Update<Match>(e.Id, x =>
             {
                 var team = x.Away.Province == e.Contingent ? x.Away : x.Home;
+                team.Bowlers.RemoveAll(b => b.Id == e.ParticipantId.ToString());
+
                 team.Bowlers.Add(new Bowler
                 {
                     Id = e.ParticipantId.ToString(),

@@ -65,6 +65,8 @@ namespace MBACNationals.ReadModels
 
                 Update<Division>(division.Id, x =>
                 {
+                    x.Scores.RemoveAll(s => s.MatchId == e.Id.ToString());
+
                     x.Scores.Add(new Score
                     {
                         MatchId = e.Id.ToString(),
