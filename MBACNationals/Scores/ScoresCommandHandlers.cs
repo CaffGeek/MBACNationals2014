@@ -98,12 +98,12 @@ namespace MBACNationals.Scores
                 homeTeamPOA += homePOA;
 
                 var awayBowlerPoint = agg.IsPOA
-                    ? CalculatePoint(awayPOA, homePOA, 3)
-                    : CalculatePoint(awayBowler.Score, homeBowler.Score, 3);
+                    ? CalculatePoint(awayPOA, homePOA, 1)
+                    : CalculatePoint(awayBowler.Score, homeBowler.Score, 1);
 
                 var homeBowlerPoint = agg.IsPOA
-                    ? CalculatePoint(homePOA, awayPOA, 3)
-                    : CalculatePoint(homeBowler.Score, awayBowler.Score, 3);
+                    ? CalculatePoint(homePOA, awayPOA, 1)
+                    : CalculatePoint(homeBowler.Score, awayBowler.Score, 1);
                 
                 awayTeamPoints += awayBowlerPoint;
                 homeTeamPoints += homeBowlerPoint;
