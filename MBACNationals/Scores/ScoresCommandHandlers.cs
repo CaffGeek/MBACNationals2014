@@ -149,13 +149,14 @@ namespace MBACNationals.Scores
                 };
             }
 
+            var maxTeamPoints = agg.Division.Contains("Single") ? 1 : 3;
             var awayTeamPoint = agg.IsPOA
-                ? CalculatePoint(awayTeamPOA, homeTeamPOA, 3)
-                : CalculatePoint(awayTeamScore, homeTeamScore, 3);
+                ? CalculatePoint(awayTeamPOA, homeTeamPOA, maxTeamPoints)
+                : CalculatePoint(awayTeamScore, homeTeamScore, maxTeamPoints);
 
             var homeTeamPoint = agg.IsPOA
-                ? CalculatePoint(homeTeamPOA, awayTeamPOA, 3)
-                : CalculatePoint(homeTeamScore, awayTeamScore, 3);
+                ? CalculatePoint(homeTeamPOA, awayTeamPOA, maxTeamPoints)
+                : CalculatePoint(homeTeamScore, awayTeamScore, maxTeamPoints);
 
             //Away
             yield return new TeamGameCompleted
