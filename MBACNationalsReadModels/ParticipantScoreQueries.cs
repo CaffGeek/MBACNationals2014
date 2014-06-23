@@ -35,13 +35,15 @@ namespace MBACNationals.ReadModels
         public class Score
         {
             public string MatchId { get; internal set; }
-            public string OpponentName { get; internal set; }
-            public string OpponentProvince { get; internal set; }
             public int Number { get; internal set; }
             public int Scratch { get; internal set; }
             public int POA { get; internal set; }
             public int Lane { get; internal set; }
             public string Centre { get; internal set; }
+            public string OpponentName { get; internal set; }
+            public string OpponentProvince { get; internal set; }
+            public int OpponentScratch { get; internal set; }
+            public int OpponentPOA { get; internal set; }
         }
 
         public ParticipantScoreQueries.Participant GetParticipant(Guid id)
@@ -77,13 +79,15 @@ namespace MBACNationals.ReadModels
                 x.Scores.Add(new Score
                 {
                     MatchId = e.Id.ToString(),
-                    OpponentProvince = e.Opponent,
-                    OpponentName= e.OpponentName,
                     Number = e.Number,
                     Scratch = e.Score,
                     POA = e.POA,
                     Lane = e.Lane,
-                    Centre = e.Centre
+                    Centre = e.Centre,
+                    OpponentProvince = e.Opponent,
+                    OpponentName = e.OpponentName,
+                    OpponentScratch = e.OpponentScore,
+                    OpponentPOA = e.OpponentPOA,
                 });
                 x.NationalGames = x.Scores.Count;
                 x.NationalTotal = x.Scores.Sum(s => s.Scratch);
