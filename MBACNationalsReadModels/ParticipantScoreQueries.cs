@@ -46,6 +46,7 @@ namespace MBACNationals.ReadModels
             public string OpponentProvince { get; internal set; }
             public int OpponentScratch { get; internal set; }
             public int OpponentPOA { get; internal set; }
+            public bool IsPOA { get; internal set; }
         }
 
         public ParticipantScoreQueries.Participant GetParticipant(Guid id)
@@ -91,6 +92,7 @@ namespace MBACNationals.ReadModels
                     OpponentName = e.OpponentName,
                     OpponentScratch = e.OpponentScore,
                     OpponentPOA = e.OpponentPOA,
+                    IsPOA = e.IsPOA
                 });
                 x.NationalGames = x.Scores.Count;
                 x.NationalTotal = x.Scores.Sum(s => s.Scratch);
