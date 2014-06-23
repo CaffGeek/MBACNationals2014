@@ -14,5 +14,6 @@
         public decimal TotalPoints;
         public int Lane;
         public string Centre;
+        public bool IsPOA;
     }
 }

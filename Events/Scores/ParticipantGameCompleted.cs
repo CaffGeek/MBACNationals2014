@@ -19,5 +19,6 @@
         public string OpponentName;
         public int OpponentScore;
         public int OpponentPOA;
+        public bool IsPOA;
     }
 }

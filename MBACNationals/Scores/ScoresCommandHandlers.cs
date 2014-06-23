@@ -51,7 +51,8 @@ namespace MBACNationals.Scores
                     Points = awaySinglePoints,
                     TotalPoints = awaySinglePoints,
                     Lane = match.Lane + 1,
-                    Centre = match.CentreName
+                    Centre = match.CentreName,
+                    IsPOA = match.IsPOA
                 };
 
                 //Home
@@ -69,7 +70,8 @@ namespace MBACNationals.Scores
                     Points = homeSinglePoints,
                     TotalPoints = homeSinglePoints,
                     Lane = match.Lane + 1,
-                    Centre = match.CentreName
+                    Centre = match.CentreName,
+                    IsPOA = match.IsPOA
                 };
             }
 
@@ -128,7 +130,8 @@ namespace MBACNationals.Scores
                     POA = awayPOA,
                     Points = awayBowlerPoint,
                     Lane = match.Lane,
-                    Centre = match.CentreName
+                    Centre = match.CentreName,
+                    IsPOA = match.IsPOA
                 };
 
                 //Home
@@ -150,7 +153,8 @@ namespace MBACNationals.Scores
                     POA = homePOA,
                     Points = homeBowlerPoint,
                     Lane = match.Lane + 1,
-                    Centre = match.CentreName
+                    Centre = match.CentreName,
+                    IsPOA = match.IsPOA
                 };
             }
 
@@ -177,7 +181,8 @@ namespace MBACNationals.Scores
                 Points = awayTeamPoint,
                 TotalPoints = awayTeamPoints + awayTeamPoint,
                 Lane = match.Lane,
-                Centre = match.CentreName
+                Centre = match.CentreName,
+                IsPOA = match.IsPOA
             };
 
             //Home
@@ -194,7 +199,8 @@ namespace MBACNationals.Scores
                 Points = homeTeamPoint,
                 TotalPoints = homeTeamPoints + homeTeamPoint,
                 Lane = match.Lane + 1,
-                Centre = match.CentreName
+                Centre = match.CentreName,
+                IsPOA = match.IsPOA
             };
 
             yield return new MatchCompleted
