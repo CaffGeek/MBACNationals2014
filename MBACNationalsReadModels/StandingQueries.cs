@@ -35,6 +35,7 @@ namespace MBACNationals.ReadModels
             public int POA { get; internal set; }
             public decimal Points { get; internal set; }
             public decimal TotalPoints { get; internal set; }
+            public bool IsPOA { get; internal set; }
         }
 
         public List<Team> GetDivision(string division)
@@ -63,7 +64,8 @@ namespace MBACNationals.ReadModels
                             Score = e.Score,
                             POA = e.POA,
                             Points = e.Points,
-                            TotalPoints = e.TotalPoints
+                            TotalPoints = e.TotalPoints,
+                            IsPOA = e.IsPOA,
                         }
                     }
                 });
@@ -80,7 +82,8 @@ namespace MBACNationals.ReadModels
                         Score = e.Score,
                         POA = e.POA,
                         Points = e.Points,
-                        TotalPoints = e.TotalPoints
+                        TotalPoints = e.TotalPoints,
+                        IsPOA = e.IsPOA,
                     });
                     x.RunningPoints = x.Matches.Sum(m => m.TotalPoints);
                 });
