@@ -97,13 +97,14 @@ namespace MBACNationals.Scores
                 awayTeamPOA += awayPOA;
                 homeTeamPOA += homePOA;
 
+                var maxIndividualPoints = agg.Division.Contains("Single") ? 2 : 1;
                 var awayBowlerPoint = agg.IsPOA
-                    ? CalculatePoint(awayPOA, homePOA, 1)
-                    : CalculatePoint(awayBowler.Score, homeBowler.Score, 1);
+                    ? CalculatePoint(awayPOA, homePOA, maxIndividualPoints)
+                    : CalculatePoint(awayBowler.Score, homeBowler.Score, maxIndividualPoints);
 
                 var homeBowlerPoint = agg.IsPOA
-                    ? CalculatePoint(homePOA, awayPOA, 1)
-                    : CalculatePoint(homeBowler.Score, awayBowler.Score, 1);
+                    ? CalculatePoint(homePOA, awayPOA, maxIndividualPoints)
+                    : CalculatePoint(homeBowler.Score, awayBowler.Score, maxIndividualPoints);
                 
                 awayTeamPoints += awayBowlerPoint;
                 homeTeamPoints += homeBowlerPoint;
@@ -149,7 +150,7 @@ namespace MBACNationals.Scores
                 };
             }
 
-            var maxTeamPoints = agg.Division.Contains("Single") ? 1 : 3;
+            var maxTeamPoints = agg.Division.Contains("Single") ? 0 : 3;
             var awayTeamPoint = agg.IsPOA
                 ? CalculatePoint(awayTeamPOA, homeTeamPOA, maxTeamPoints)
                 : CalculatePoint(awayTeamScore, homeTeamScore, maxTeamPoints);
@@ -171,7 +172,7 @@ namespace MBACNationals.Scores
                 POA = awayTeamPOA,
                 Points = awayTeamPoint,
                 TotalPoints = awayTeamPoints + awayTeamPoint,
-                Lane = match.Lane + 1,
+                Lane = match.Lane,
                 Centre = match.CentreName
             };
 
