@@ -29,6 +29,7 @@ namespace MBACNationals.ReadModels
             public int NationalGames { get; internal set; }
             public int NationalTotal { get; internal set; }
             public int NationalAverage { get; internal set; }
+            public int NationalWins { get; internal set; }
             public List<Score> Scores { get; internal set; }
         }
 
@@ -38,6 +39,7 @@ namespace MBACNationals.ReadModels
             public int Number { get; internal set; }
             public int Scratch { get; internal set; }
             public int POA { get; internal set; }
+            public bool IsWin { get; internal set; }
             public int Lane { get; internal set; }
             public string Centre { get; internal set; }
             public string OpponentName { get; internal set; }
@@ -82,6 +84,7 @@ namespace MBACNationals.ReadModels
                     Number = e.Number,
                     Scratch = e.Score,
                     POA = e.POA,
+                    IsWin = e.Points > 0,
                     Lane = e.Lane,
                     Centre = e.Centre,
                     OpponentProvince = e.Opponent,
@@ -92,6 +95,7 @@ namespace MBACNationals.ReadModels
                 x.NationalGames = x.Scores.Count;
                 x.NationalTotal = x.Scores.Sum(s => s.Scratch);
                 x.NationalAverage = x.NationalTotal / x.NationalGames;
+                x.NationalWins = x.Scores.Count(s => s.IsWin);
             });
         }
     }
