@@ -48,6 +48,7 @@
     <Compile Include="ContingentTravelPlanQueries.cs" />
     <Compile Include="ContingentViewQueries.cs" />
     <Compile Include="ContingentEventHistoryQueries.cs" />
+    <Compile Include="ITeamScoreQueries.cs" />
     <Compile Include="IParticipantScoreQueries.cs" />
     <Compile Include="HighScoreQueries.cs" />
     <Compile Include="IHighScoreQueries.cs" />
@@ -78,6 +79,7 @@
     </Compile>
     <Compile Include="ReservationQueries.cs" />
     <Compile Include="ScheduleQueries.cs" />
+    <Compile Include="TeamScoreQueries.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Edument.CQRS\Edument.CQRS.csproj">
