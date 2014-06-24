@@ -46,11 +46,10 @@ namespace MBACNationals.ReadModels
             public bool IsWin { get; internal set; }
             public int Lane { get; internal set; }
             public string Centre { get; internal set; }
-            public string Opponent { get; internal set; }
+            public string OpponentProvince { get; internal set; }
             public int OpponentScratch { get; internal set; }
             public int OpponentPOA { get; internal set; }
             public bool IsPOA { get; internal set; }
-            public decimal Points { get; internal set; }
         }
 
         public Team GetTeam(Guid id)
@@ -97,11 +96,10 @@ namespace MBACNationals.ReadModels
                     IsWin = e.Points > 0,
                     Lane = e.Lane,
                     Centre = e.Centre,
-                    Opponent = e.Opponent,
+                    OpponentProvince = e.Opponent,
                     //TODO: OpponentScratch = e.OpponentScore,
                     //TODO: OpponentPOA = e.OpponentPOA,
-                    IsPOA = e.IsPOA,
-                    Points = e.TotalPoints
+                    IsPOA = e.IsPOA
                 });
             });
         }
