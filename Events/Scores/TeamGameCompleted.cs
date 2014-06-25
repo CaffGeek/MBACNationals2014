@@ -17,5 +17,6 @@
         public bool IsPOA;
         public int OpponentScore;
         public int OpponentPOA;
+        public decimal OpponentPoints;
     }
 }

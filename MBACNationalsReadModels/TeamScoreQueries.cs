@@ -51,6 +51,7 @@ namespace MBACNationals.ReadModels
             public int OpponentPOA { get; internal set; }
             public bool IsPOA { get; internal set; }
             public decimal Points { get; internal set; }
+            public decimal OpponentPoints { get; internal set; }
         }
 
         public Team GetTeam(Guid id)
@@ -100,6 +101,7 @@ namespace MBACNationals.ReadModels
                     Opponent = e.Opponent,
                     OpponentScratch = e.OpponentScore,
                     OpponentPOA = e.OpponentPOA,
+                    OpponentPoints = e.OpponentPoints,
                     IsPOA = e.IsPOA,
                     Points = e.TotalPoints
                 });

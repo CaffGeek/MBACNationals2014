@@ -36,8 +36,10 @@ namespace MBACNationals.Scores
                 var awayPOA = awayBowler.Score - awayParticipant.Average;
                 var homePOA = homeBowler.Score - homeParticipant.Average;
 
-                //Away
                 var awaySinglePoints = CalculatePoint(awayPOA, homePOA, 2);
+                var homeSinglePoints = CalculatePoint(homePOA, awayPOA, 2);
+
+                //Away
                 yield return new TeamGameCompleted
                 {
                     Id = command.Id,
@@ -49,6 +51,7 @@ namespace MBACNationals.Scores
                     Score = awayBowler.Score,
                     POA = awayPOA,
                     Points = awaySinglePoints,
+                    OpponentPoints = homeSinglePoints,
                     TotalPoints = awaySinglePoints,
                     OpponentScore = homeBowler.Score,
                     OpponentPOA = homePOA,
@@ -58,7 +61,6 @@ namespace MBACNationals.Scores
                 };
 
                 //Home
-                var homeSinglePoints = CalculatePoint(homePOA, awayPOA, 2);
                 yield return new TeamGameCompleted
                 {
                     Id = command.Id,
@@ -70,6 +72,7 @@ namespace MBACNationals.Scores
                     Score = homeBowler.Score,
                     POA = homePOA,
                     Points = homeSinglePoints,
+                    OpponentPoints = awaySinglePoints,
                     TotalPoints = homeSinglePoints,
                     OpponentScore = awayBowler.Score,
                     OpponentPOA = awayPOA,
@@ -184,6 +187,7 @@ namespace MBACNationals.Scores
                 POA = awayTeamPOA,
                 Points = awayTeamPoint,
                 TotalPoints = awayTeamPoints + awayTeamPoint,
+                OpponentPoints = homeTeamPoints + homeTeamPoint,
                 OpponentScore = homeTeamScore,
                 OpponentPOA = homeTeamPOA,
                 Lane = match.Lane,
@@ -204,6 +208,7 @@ namespace MBACNationals.Scores
                 POA = homeTeamPOA,
                 Points = homeTeamPoint,
                 TotalPoints = homeTeamPoints + homeTeamPoint,
+                OpponentPoints = awayTeamPoints + awayTeamPoint,
                 OpponentScore = awayTeamScore,
                 OpponentPOA = awayTeamPOA,
                 Lane = match.Lane + 1,
