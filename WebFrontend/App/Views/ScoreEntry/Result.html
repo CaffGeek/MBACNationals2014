@@ -8,7 +8,7 @@
     <tbody data-ng-repeat="bowler in model.Away.Bowlers | orderBy:'1*Position'">
         <tr>
             <td class="col-xs-5">{{bowler.Name}}</td>
-            <td class="col-xs-1 text-right">{{bowler.Position}}</td>
+            <td class="col-xs-1 text-right">{{bowler.Average}}</td>
             <td class="col-xs-2 text-right">{{bowler.Score}}</td>
             <td class="col-xs-2 text-right" data-ng-if="model.IsPOA">{{bowler.POA}}</td>
             <td class="col-xs-2 text-right">{{bowler.Point}}</td>
@@ -31,7 +31,7 @@
     <tbody data-ng-repeat="bowler in model.Home.Bowlers | orderBy:'1*Position'">
         <tr>
             <td class="col-xs-5">{{bowler.Name}}</td>
-            <td class="col-xs-1">{{bowler.Position}}</td>
+            <td class="col-xs-1 text-right">{{bowler.Average}}</td>
             <td class="col-xs-2 text-right">{{bowler.Score}}</td>
             <td class="col-xs-2 text-right" data-ng-if="model.IsPOA">{{bowler.POA}}</td>
             <td class="col-xs-2 text-right">{{bowler.Point}}</td>
