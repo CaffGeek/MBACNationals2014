@@ -50,6 +50,8 @@ namespace MBACNationals.Scores
                     POA = awayPOA,
                     Points = awaySinglePoints,
                     TotalPoints = awaySinglePoints,
+                    OpponentScore = homeBowler.Score,
+                    OpponentPOA = homePOA,
                     Lane = match.Lane + 1,
                     Centre = match.CentreName,
                     IsPOA = match.IsPOA
@@ -69,6 +71,8 @@ namespace MBACNationals.Scores
                     POA = homePOA,
                     Points = homeSinglePoints,
                     TotalPoints = homeSinglePoints,
+                    OpponentScore = awayBowler.Score,
+                    OpponentPOA = awayPOA,
                     Lane = match.Lane + 1,
                     Centre = match.CentreName,
                     IsPOA = match.IsPOA
@@ -180,6 +184,8 @@ namespace MBACNationals.Scores
                 POA = awayTeamPOA,
                 Points = awayTeamPoint,
                 TotalPoints = awayTeamPoints + awayTeamPoint,
+                OpponentScore = homeTeamScore,
+                OpponentPOA = homeTeamPOA,
                 Lane = match.Lane,
                 Centre = match.CentreName,
                 IsPOA = match.IsPOA
@@ -198,6 +204,8 @@ namespace MBACNationals.Scores
                 POA = homeTeamPOA,
                 Points = homeTeamPoint,
                 TotalPoints = homeTeamPoints + homeTeamPoint,
+                OpponentScore = awayTeamScore,
+                OpponentPOA = awayTeamPOA,
                 Lane = match.Lane + 1,
                 Centre = match.CentreName,
                 IsPOA = match.IsPOA

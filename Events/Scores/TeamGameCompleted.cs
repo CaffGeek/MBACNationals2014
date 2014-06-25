@@ -15,5 +15,7 @@
         public int Lane;
         public string Centre;
         public bool IsPOA;
+        public int OpponentScore;
+        public int OpponentPOA;
     }
 }

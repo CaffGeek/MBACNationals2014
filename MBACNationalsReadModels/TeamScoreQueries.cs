@@ -98,8 +98,8 @@ namespace MBACNationals.ReadModels
                     Lane = e.Lane,
                     Centre = e.Centre,
                     Opponent = e.Opponent,
-                    //TODO: OpponentScratch = e.OpponentScore,
-                    //TODO: OpponentPOA = e.OpponentPOA,
+                    OpponentScratch = e.OpponentScore,
+                    OpponentPOA = e.OpponentPOA,
                     IsPOA = e.IsPOA,
                     Points = e.TotalPoints
                 });
