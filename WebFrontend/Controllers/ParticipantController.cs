@@ -129,5 +129,14 @@ namespace WebFrontend.Controllers
 
             return Json(command);
         }
+
+        [HttpPost]
+        [RestrictAccessByRouteId]
+        public JsonResult UseAlternate(ReplaceParticipant command)
+        {
+            Domain.Dispatcher.SendCommand(command);
+
+            return Json(command);
+        }
     }
 }

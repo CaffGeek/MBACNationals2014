@@ -22,7 +22,8 @@ namespace MBACNationals.ReadModels
         ISubscribeTo<ParticipantDelegateStatusGranted>,
         ISubscribeTo<ParticipantDelegateStatusRevoked>,
         ISubscribeTo<ParticipantYearsQualifyingChanged>,
-        ISubscribeTo<ParticipantAverageChanged>
+        ISubscribeTo<ParticipantAverageChanged>,
+        ISubscribeTo<ParticipantReplacedWithAlternate>
     {
         public ContingentViewQueries(string readModelFilePath)
             : base(readModelFilePath) 
@@ -223,6 +224,27 @@ namespace MBACNationals.ReadModels
         public void Handle(ParticipantAverageChanged e)
         {
             Update<Participant>(e.Id, x => { x.Average = e.Average; });
+        }
+
+        public void Handle(ParticipantReplacedWithAlternate e)
+        {
+            Update<Contingent>(e.ContingentId, (contingent, odb) =>
+            {
+                var team = contingent.Teams.FirstOrDefault(t => t.Id.Equals(e.TeamId));
+                if (team == null)
+                    return;
+
+                var participant = Read<Participant>(x => x.Id.Equals(e.Id), odb).FirstOrDefault();
+                if (participant == null)
+                    return;
+
+                var alternate = Read<Participant>(x => x.Id.Equals(e.AlternateId), odb).FirstOrDefault();
+                if (alternate == null)
+                    return;
+
+                team.Bowlers.Add(alternate);
+                team.Bowlers.Remove(participant);
+            });
         }
     }
 }

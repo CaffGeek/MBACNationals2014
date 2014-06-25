@@ -5,9 +5,10 @@
 <h4 class="col-xs-9">{{model.AwayProvince}} {{model.Away.Name}}</h4>
 <h4 class="col-xs-3">{{model.Away.TotalPoints}}</h4>
 <table class="table table-bordered table-striped">
-    <tbody data-ng-repeat="bowler in model.Away.Bowlers | orderBy:'Position'">
+    <tbody data-ng-repeat="bowler in model.Away.Bowlers | orderBy:'1*Position'">
         <tr>
-            <td class="col-xs-6">{{bowler.Name}}</td>
+            <td class="col-xs-5">{{bowler.Name}}</td>
+            <td class="col-xs-1 text-right">{{bowler.Position}}</td>
             <td class="col-xs-2 text-right">{{bowler.Score}}</td>
             <td class="col-xs-2 text-right" data-ng-if="model.IsPOA">{{bowler.POA}}</td>
             <td class="col-xs-2 text-right">{{bowler.Point}}</td>
@@ -15,7 +16,8 @@
     </tbody>
     <tbody data-ng-if="model.IsTeam">
         <tr>
-            <td class="col-xs-6">Total</td>
+            <td class="col-xs-5">Total</td>
+            <td class="col-xs-1 text-right"></td>
             <td class="col-xs-2 text-right">{{model.Away.Score}}</td>
             <td class="col-xs-2 text-right" data-ng-if="model.IsPOA">{{model.Away.POA}}</td>
             <td class="col-xs-2 text-right">{{model.Away.Point}}</td>
@@ -26,9 +28,10 @@
 <h4 class="col-xs-9">{{model.HomeProvince}} {{model.Home.Name}}</h4>
 <h4 class="col-xs-3">{{model.Home.TotalPoints}}</h4>
 <table class="table table-bordered table-striped">
-    <tbody data-ng-repeat="bowler in model.Home.Bowlers | orderBy:'Position'">
+    <tbody data-ng-repeat="bowler in model.Home.Bowlers | orderBy:'1*Position'">
         <tr>
-            <td class="col-xs-6">{{bowler.Name}}</td>
+            <td class="col-xs-5">{{bowler.Name}}</td>
+            <td class="col-xs-1">{{bowler.Position}}</td>
             <td class="col-xs-2 text-right">{{bowler.Score}}</td>
             <td class="col-xs-2 text-right" data-ng-if="model.IsPOA">{{bowler.POA}}</td>
             <td class="col-xs-2 text-right">{{bowler.Point}}</td>
@@ -36,7 +39,8 @@
     </tbody>
     <tbody data-ng-if="model.IsTeam">
         <tr>
-            <td class="col-xs-6">Total</td>
+            <td class="col-xs-5">Total</td>
+            <td class="col-xs-1 text-right"></td>
             <td class="col-xs-2 text-right">{{model.Home.Score}}</td>
             <td class="col-xs-2 text-right" data-ng-if="model.IsPOA">{{model.Home.POA}}</td>
             <td class="col-xs-2 text-right">{{model.Home.Point}}</td>

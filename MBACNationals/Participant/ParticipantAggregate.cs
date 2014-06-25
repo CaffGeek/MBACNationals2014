@@ -20,7 +20,8 @@ namespace MBACNationals.Participant
         IApplyEvent<ParticipantRemovedFromRoom>,
         IApplyEvent<ParticipantGuestPackageChanged>,
         IApplyEvent<ParticipantShirtSizeChanged>,
-        IApplyEvent<ParticipantProfileChanged>
+        IApplyEvent<ParticipantProfileChanged>,
+        IApplyEvent<ParticipantReplacedWithAlternate>
     {
         public Guid TeamId { get; private set; }
         public Guid ContingentId { get; private set; }
@@ -41,6 +42,7 @@ namespace MBACNationals.Participant
         public PackageInformation Package { get; private set; }
         public string ShirtSize { get; private set; }
         public ProfileDetails Profile { get; private set; }
+        public Guid ReplacedBy { get; private set; }
 
         public class PackageInformation
         {
@@ -189,6 +191,11 @@ namespace MBACNationals.Participant
             Profile.OpenYears = e.OpenYears;
             Profile.OtherAchievements = e.OtherAchievements;
             Profile.Hobbies = e.Hobbies;
+        }
+
+        public void Apply(ParticipantReplacedWithAlternate e)
+        {
+            ReplacedBy = e.AlternateId;
         }
     }
 }

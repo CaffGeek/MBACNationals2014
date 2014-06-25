@@ -1,8 +1,10 @@
 ﻿using Edument.CQRS;
 using Events.Participant;
+using MBACNationals.Contingent;
 using MBACNationals.Participant.Commands;
 using System;
 using System.Collections;
+using System.Linq;
 
 namespace MBACNationals.Participant
 {
@@ -16,8 +18,16 @@ namespace MBACNationals.Participant
         IHandleCommand<AddCoachToTeam, ParticipantAggregate>,
         IHandleCommand<AssignParticipantToRoom, ParticipantAggregate>,
         IHandleCommand<RemoveParticipantFromRoom, ParticipantAggregate>,
-        IHandleCommand<UpdateParticipantProfile, ParticipantAggregate>
+        IHandleCommand<UpdateParticipantProfile, ParticipantAggregate>,
+        IHandleCommand<ReplaceParticipant, ParticipantAggregate>
     {
+        private MessageDispatcher _dispatcher;
+
+        public ParticipantCommandHandlers(MessageDispatcher dispatcher)
+        {
+            _dispatcher = dispatcher;
+        }
+
         public IEnumerable Handle(Func<Guid, ParticipantAggregate> al, CreateParticipant command)
         {
             var agg = al(command.Id);
@@ -252,6 +262,23 @@ namespace MBACNationals.Participant
 
                 OtherAchievements = command.OtherAchievements,
                 Hobbies = command.Hobbies,
+            };
+        }
+
+        public IEnumerable Handle(Func<Guid, ParticipantAggregate> al, ReplaceParticipant command)
+        {
+            var agg = al(command.Id);
+            var alternate = _dispatcher.Load<ParticipantAggregate>(command.AlternateId);
+
+            yield return new ParticipantReplacedWithAlternate
+            {
+                Id = command.Id,
+                ContingentId = alternate.ContingentId,
+                TeamId = alternate.TeamId,
+                Name = agg.Name,
+                AlternateId = command.AlternateId,
+                AlternateName = alternate.Name,
+                Average = alternate.Average
             };
         }
     }

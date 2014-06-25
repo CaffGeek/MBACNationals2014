@@ -1,5 +1,6 @@
 ﻿using Edument.CQRS;
 using Events.Contingent;
+using Events.Participant;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,8 @@ namespace MBACNationals.Contingent
         IApplyEvent<RoomTypeChanged>,
         IApplyEvent<TravelPlansChanged>,
         IApplyEvent<TeamPracticeRescheduled>,
-        IApplyEvent<ReservationInstructionsChanged>
+        IApplyEvent<ReservationInstructionsChanged>,
+        IApplyEvent<ParticipantDesignatedAsAlternate>
     {
         public string Province { get; private set; }
         public List<Team> Teams { get; private set; }
@@ -71,6 +73,15 @@ namespace MBACNationals.Contingent
         {
             Instructions = e.Instructions;
         }
+
+        public void Apply(ParticipantDesignatedAsAlternate e)
+        {
+            var team = Teams.FirstOrDefault(x => x.Id.Equals(e.TeamId));
+            if (team == null)
+                return;
+
+            team.Apply(e);
+        }
     }
 
     public class Team
@@ -87,6 +98,7 @@ namespace MBACNationals.Contingent
         public bool RequiresGender { get; private set; }
         public bool IncludesSinglesRep { get; private set; }
         public PracticePlan PracticePlan { get; private set; }
+        public Guid AlternateId { get; private set; }
 
         public Team(TeamCreated e, Guid contingentId)
         {
@@ -113,6 +125,11 @@ namespace MBACNationals.Contingent
         {
             PracticePlan.PracticeLocation = e.PracticeLocation;
             PracticePlan.PracticeTime = e.PracticeTime;
+        }
+
+        public void Apply(ParticipantDesignatedAsAlternate e)
+        {
+            AlternateId = e.Id;
         }
     }
 

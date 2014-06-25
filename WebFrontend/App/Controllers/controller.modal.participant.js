@@ -36,6 +36,12 @@
             $scope.model.participant.Package.FinalBanquet = isCompletePackage;
             $scope.model.participant.Package.Transportation = isCompletePackage;
         };
+
+        $scope.useAlternate = function (participant, team) {
+            dataService.UseAlternate(participant, team).then(function (response) {
+                debugger;
+            });
+        };
     };
 
     app.controller("ModalParticipantController", ["$scope", "$q", "$modalInstance", "dataService", "participant", "team", modalParticipantController]);

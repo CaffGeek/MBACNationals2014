@@ -30,9 +30,10 @@
                     dataService.LoadSchedule(data.Division).
                         success(function (divisionSchedule) {
                             $scope.model.Schedule = divisionSchedule;
-                            var currentGame = 1;
-                            while ($scope.AllGamesComplete(currentGame) && currentGame++ <= 21) { }
-                            $scope.model.CurrentGame = currentGame;
+                            //var currentGame = 1;
+                            //while ($scope.AllGamesComplete(currentGame) && currentGame++ <= 21) { }
+                            //$scope.model.CurrentGame = currentGame;
+                            $scope.model.CurrentGame = 21;
                         });
                     $scope.model.Division = data.Division;
                     break;
@@ -63,10 +64,17 @@
                             return;
 
                         for (var i = 0; i < $scope.model.Away.Bowlers.length; i++) {
-                            $scope.model.Away.Bowlers[i].Score = match.Away.Bowlers[i].Score;
-                            $scope.model.Away.Bowlers[i].Position = match.Away.Bowlers[i].Position;
-                            $scope.model.Home.Bowlers[i].Score = match.Home.Bowlers[i].Score;
-                            $scope.model.Home.Bowlers[i].Position = match.Home.Bowlers[i].Position;
+                            var awayBowlerResult = $.grep(match.Away.Bowlers, function (x) { return x.Id == $scope.model.Away.Bowlers[i].Id });
+                            if (awayBowlerResult.length) {
+                                $scope.model.Away.Bowlers[i].Score = awayBowlerResult[0].Score;
+                                $scope.model.Away.Bowlers[i].Position = awayBowlerResult[0].Position;
+                            }
+
+                            var homeBowlerResult = $.grep(match.Home.Bowlers, function (x) { return x.Id == $scope.model.Home.Bowlers[i].Id });
+                            if (homeBowlerResult.length) {
+                                $scope.model.Home.Bowlers[i].Score = homeBowlerResult[0].Score;
+                                $scope.model.Home.Bowlers[i].Position = homeBowlerResult[0].Position;
+                            }
                         }
                     });
                                         

@@ -36,7 +36,7 @@ namespace WebFrontend
             
             Dispatcher = new MessageDispatcher(new SqlEventStore(Properties.Settings.Default.DefaultConnection));
 
-            Dispatcher.ScanInstance(new ParticipantCommandHandlers());
+            Dispatcher.ScanInstance(new ParticipantCommandHandlers(Dispatcher));
             Dispatcher.ScanInstance(new ContingentCommandHandlers());
             Dispatcher.ScanInstance(new ScoresCommandHandlers(Dispatcher));
 
