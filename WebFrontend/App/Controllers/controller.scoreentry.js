@@ -30,10 +30,9 @@
                     dataService.LoadSchedule(data.Division).
                         success(function (divisionSchedule) {
                             $scope.model.Schedule = divisionSchedule;
-                            //var currentGame = 1;
-                            //while ($scope.AllGamesComplete(currentGame) && currentGame++ <= 21) { }
-                            //$scope.model.CurrentGame = currentGame;
-                            $scope.model.CurrentGame = 21;
+                            var currentGame = 1;
+                            while ($scope.AllGamesComplete(currentGame) && currentGame++ <= 21) { }
+                            $scope.model.CurrentGame = currentGame;
                         });
                     $scope.model.Division = data.Division;
                     break;
