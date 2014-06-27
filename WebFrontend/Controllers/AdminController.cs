@@ -10,7 +10,7 @@ namespace WebFrontend.Controllers
     public class AdminController : Controller
     {
         [Authorize(Users = "Chad")]
-        public void Rebuild()
+        public ActionResult Rebuild()
         {
             //Domain.RebuildReadModels();
             return View();
