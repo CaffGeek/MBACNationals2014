@@ -76,7 +76,8 @@ namespace WebFrontend.Controllers
             return Json(hightScores, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]//TODO: Security
+        [HttpPost]
+        [Authorize(Roles = "ScoreEntry, Admin")]
         public JsonResult SaveMatchResult(SaveMatchResult command)
         {
             Domain.Dispatcher.SendCommand(command);
