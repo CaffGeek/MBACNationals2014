@@ -125,3 +125,7 @@ div.noHotelRoom {
 .hotelRooms .over {
   background: #ddd;
 }
+
+.strike {
+  text-decoration: line-through;
+}

@@ -68,7 +68,9 @@
                                 $scope.model.Away.Bowlers[i].Score = awayBowlerResult[0].Score;
                                 $scope.model.Away.Bowlers[i].Position = awayBowlerResult[0].Position;
                             }
-
+                        }
+                        
+                        for (var i = 0; i < $scope.model.Home.Bowlers.length; i++) {
                             var homeBowlerResult = $.grep(match.Home.Bowlers, function (x) { return x.Id == $scope.model.Home.Bowlers[i].Id });
                             if (homeBowlerResult.length) {
                                 $scope.model.Home.Bowlers[i].Score = homeBowlerResult[0].Score;
@@ -80,7 +82,7 @@
                     break;
                 }
                 case 'Result': {
-                    var teamSize = Math.max($scope.model.Away.Bowlers.length, $scope.model.Home.Bowlers.length) || 0;
+                    var teamSize = Math.max($scope.model.Away.SizeLimit, $scope.model.Home.SizeLimit) || 0;
                     $scope.model.Away.Score = $scope.model.Away.POA = $scope.model.Away.TotalPoints = 0;
                     $scope.model.Home.Score = $scope.model.Home.POA = $scope.model.Home.TotalPoints = 0;
 
@@ -117,11 +119,11 @@
         };
 
         $scope.ValidForm = function () {
-            var teamSize = Math.max($scope.model.Away.Bowlers.length, $scope.model.Home.Bowlers.length) || 0;
+            var teamSize = Math.max($scope.model.Away.SizeLimit || 1, $scope.model.Home.SizeLimit || 1) || 1;
             var isValid = true;
 
-            isValid = isValid && !!$scope.model.Away.Bowlers.length;
-            isValid = isValid && !!$scope.model.Home.Bowlers.length;
+            isValid = isValid && $scope.model.Away.Bowlers && !!$scope.model.Away.Bowlers.length;
+            isValid = isValid && $scope.model.Home.Bowlers && !!$scope.model.Home.Bowlers.length;
             if (!isValid)
                 return false;
 

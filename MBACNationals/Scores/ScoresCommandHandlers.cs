@@ -91,10 +91,14 @@ namespace MBACNationals.Scores
 
             for (var i = 1; i <= command.Away.Bowlers.Length; i++)
             {
-                var awayBowler = command.Away.Bowlers.Single(x=>x.Position == i);
+                var awayBowler = command.Away.Bowlers.SingleOrDefault(x=>x.Position == i);
+                if (awayBowler == null)
+                    continue;
                 var awayParticipant = _dispatcher.Load<ParticipantAggregate>(awayBowler.Id);
 
-                var homeBowler = command.Home.Bowlers.Single(x => x.Position == i);
+                var homeBowler = command.Home.Bowlers.SingleOrDefault(x => x.Position == i);
+                if (homeBowler == null)
+                    continue;
                 var homeParticipant = _dispatcher.Load<ParticipantAggregate>(homeBowler.Id);
 
                 var awayPOA = awayBowler.Score - awayParticipant.Average;

@@ -16,7 +16,7 @@
             </span>
             <ol>
                 <li data-ng-repeat="bowler in team.Bowlers">
-                    <a data-ng-click="editParticipant(bowler, team);" title="{{bowler.Id}}">{{bowler.Name || 'Vacancy'}}</a>
+                    <a data-ng-class="{strike: bowler.ReplacedBy}" data-ng-click="editParticipant(bowler, team);" title="{{bowler.Id}}">{{bowler.Name || 'Vacancy'}}</a>
                     <span data-ng-if="bowler.Average">- {{bowler.Average}}</span>
                     <span data-ng-show="bowler.IsRookie"><sup>R</sup></span>
                     <span data-ng-show="bowler.IsDelegate"><sup>D</sup></span>

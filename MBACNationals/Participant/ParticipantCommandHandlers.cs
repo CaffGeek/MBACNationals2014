@@ -269,7 +269,7 @@ namespace MBACNationals.Participant
         {
             var agg = al(command.Id);
             var alternate = _dispatcher.Load<ParticipantAggregate>(command.AlternateId);
-
+            
             yield return new ParticipantReplacedWithAlternate
             {
                 Id = command.Id,

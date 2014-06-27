@@ -39,7 +39,7 @@
 
         $scope.useAlternate = function (participant, team) {
             dataService.UseAlternate(participant, team).then(function (response) {
-                debugger;
+                $modalInstance.dismiss('cancel');
             });
         };
     };

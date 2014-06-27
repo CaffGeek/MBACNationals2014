@@ -65,6 +65,7 @@ namespace MBACNationals.ReadModels
             public bool IsDelegate { get; internal set; }
             public bool IsGuest { get; internal set; }
             public int Average { get; internal set; }
+            public string ReplacedBy { get; internal set; }
         }
 
         public Contingent GetContingent(Guid id)
@@ -228,9 +229,16 @@ namespace MBACNationals.ReadModels
 
         public void Handle(ParticipantReplacedWithAlternate e)
         {
-            Update<Contingent>(e.ContingentId, (contingent, odb) =>
+            var contingentId = e.ContingentId;
+            if (contingentId == Guid.Empty)
             {
-                var team = contingent.Teams.FirstOrDefault(t => t.Id.Equals(e.TeamId));
+                var team = Read<Team>(x => x.Id == e.TeamId).FirstOrDefault();
+                contingentId = team.ContingentId;
+            }
+
+            Update<Contingent>(contingentId, (contingent, odb) =>
+            {
+                var team = contingent.Teams.FirstOrDefault(t => t.Alternate == e.AlternateId.ToString());
                 if (team == null)
                     return;
 
@@ -243,7 +251,7 @@ namespace MBACNationals.ReadModels
                     return;
 
                 team.Bowlers.Add(alternate);
-                team.Bowlers.Remove(participant);
+                participant.ReplacedBy = e.AlternateId.ToString();
             });
         }
     }
