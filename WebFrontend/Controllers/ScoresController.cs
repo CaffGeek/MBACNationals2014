@@ -11,6 +11,7 @@ namespace WebFrontend.Controllers
             return RedirectToAction("Entry");
         }
 
+        [Authorize(Roles = "ScoreEntry, Admin")]
         public ActionResult Entry()
         {
             return View();
