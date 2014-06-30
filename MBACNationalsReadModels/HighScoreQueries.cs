@@ -60,12 +60,12 @@ namespace MBACNationals.ReadModels
                 if (!e.Division.Contains(division.Name))
                     continue;
 
-                //if (!(e.Score < 250 || e.POA > 75))
-                //    continue;
+                if (!(e.Score < 250 || e.POA > 75))
+                    continue;
 
                 Update<Division>(division.Id, x =>
                 {
-                    x.Scores.RemoveAll(s => s.MatchId == e.Id.ToString());
+                    x.Scores.RemoveAll(s => s.MatchId == e.Id.ToString() && s.ParticipantId == e.ParticipantId.ToString());
 
                     x.Scores.Add(new Score
                     {
