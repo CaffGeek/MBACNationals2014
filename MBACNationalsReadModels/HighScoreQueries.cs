@@ -60,8 +60,8 @@ namespace MBACNationals.ReadModels
                 if (!e.Division.Contains(division.Name))
                     continue;
 
-                if (!(e.Score > 250 || e.POA > 75))
-                    continue;
+                //if (!(e.Score < 250 || e.POA > 75))
+                //    continue;
 
                 Update<Division>(division.Id, x =>
                 {
