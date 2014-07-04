@@ -95,7 +95,7 @@ namespace MBACNationals.ReadModels
                     Number = e.Number,
                     Scratch = e.Score,
                     POA = e.POA,
-                    IsWin = e.Points > 0,
+                    IsWin = e.Points > 0 || e.TotalPoints > e.OpponentPoints,
                     Lane = e.Lane,
                     Centre = e.Centre,
                     Opponent = e.Opponent,
